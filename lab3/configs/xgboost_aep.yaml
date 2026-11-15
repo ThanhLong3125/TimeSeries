@@ -1,0 +1,59 @@
+project:
+  name: "lab3_xgboost_time_series"
+  version: "1.0.0"
+  description: "End-to-end Machine Learning Pipeline for Hourly Electricity Demand Forecasting (AEP PJM)"
+
+data:
+  raw_path: "lab3/data/raw/AEP_hourly.csv"
+  clean_path: "lab3/data/processed/AEP_clean.csv"
+  features_path: "lab3/data/processed/AEP_features.csv"
+  target_column: "AEP_MW"
+  datetime_column: "Datetime"
+  freq: "h"
+
+features:
+  lags: [1, 2, 3, 24, 48, 168]
+  rolling_windows:
+    - window: 24
+      metrics: ["mean", "std"]
+    - window: 168
+      metrics: ["mean", "std"]
+  calendar:
+    - "hour"
+    - "dayofweek"
+    - "quarter"
+    - "month"
+    - "year"
+    - "dayofyear"
+    - "is_weekend"
+
+split:
+  split_date: "2017-01-01"
+
+models:
+  linear_regression:
+    fit_intercept: true
+  random_forest:
+    n_estimators: 100
+    max_depth: 12
+    random_state: 42
+    n_jobs: -1
+  xgboost:
+    n_estimators: 500
+    learning_rate: 0.03
+    max_depth: 6
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+    n_jobs: -1
+
+forecasting:
+  recursive_horizon: 24
+  start_forecast_time: "2018-01-01 00:00:00"
+
+outputs:
+  models_dir: "lab3/artifacts/models"
+  metrics_dir: "lab3/artifacts/metrics"
+  figures_dir: "lab3/artifacts/figures"
+  logs_dir: "lab3/logs"
+  audit_file: "lab3/logs/audit_trail.jsonl"

@@ -1,0 +1,13 @@
+# Configuration defaults for Time Series Pipeline
+general:
+  random_seed: 42
+  log_level: "INFO"
+
+stationarity:
+  alpha: 0.05
+  autolag: "AIC"
+  max_diff_order: 2
+
+evaluation:
+  diagnostic_lags: [10, 12, 24]
+  metrics: ["mae", "rmse", "mape"]

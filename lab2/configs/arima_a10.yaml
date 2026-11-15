@@ -1,0 +1,19 @@
+experiment_name: "a10_arima_baseline"
+dataset_name: "a10_drug_sales"
+data_path: "lab2/data/raw/a10.csv"
+date_col: "date"
+target_col: "value"
+date_format: "%Y-%m-%d"
+frequency: "MS"
+train_ratio: 0.8
+apply_log: false
+
+model:
+  type: "ARIMA"
+  order: [1, 1, 1]
+  seasonal_order: null
+
+evaluation:
+  plot_title: "Australian Monthly Drug Sales — ARIMA(1,1,1) Forecast"
+  unit: "Million USD"
+  diagnostic_lags: [10, 12, 24]

@@ -1,0 +1,19 @@
+experiment_name: "airpassengers_sarima"
+dataset_name: "international_airline_passengers"
+data_path: "lab2/data/raw/AirPassengers.csv"
+date_col: "Month"
+target_col: "Passengers"
+date_format: "%Y-%m"
+frequency: "MS"
+train_ratio: 0.8
+apply_log: true  # Áp dụng log tự nhiên để ổn định phương sai trước khi fit SARIMA
+
+model:
+  type: "SARIMAX"
+  order: [0, 1, 1]
+  seasonal_order: [0, 1, 1, 12]
+
+evaluation:
+  plot_title: "AirPassengers — SARIMA(0,1,1)(0,1,1)[12] Forecast"
+  unit: "Thousand Passengers"
+  diagnostic_lags: [10, 12, 24]

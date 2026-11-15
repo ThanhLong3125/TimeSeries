@@ -1,0 +1,69 @@
+{
+  "experiment": "airpassengers_sarima",
+  "model": {
+    "type": "SARIMAX",
+    "order": [
+      0,
+      1,
+      1
+    ],
+    "seasonal_order": [
+      0,
+      1,
+      1,
+      12
+    ]
+  },
+  "aic": -323.7491794868034,
+  "bic": -316.31716904336884,
+  "test_performance": {
+    "MAE": 12.954,
+    "RMSE": 16.1601,
+    "MAPE": 2.89,
+    "max_error": {
+      "value": 32.1475,
+      "timestamp": "1960-07-01",
+      "actual": 621.9999999999999,
+      "predicted": 589.8524890530327
+    }
+  },
+  "residual_diagnostics": {
+    "mean": 0.0147,
+    "std": 0.5343,
+    "skewness": 4.197,
+    "kurtosis": 64.142,
+    "jarque_bera": {
+      "stat": 18355.42,
+      "p_value": 0.0
+    },
+    "ljung_box": {
+      "10": {
+        "stat": 0.28,
+        "p_value": 1.0
+      },
+      "12": {
+        "stat": 28.68,
+        "p_value": 0.0044
+      },
+      "24": {
+        "stat": 28.84,
+        "p_value": 0.2262
+      }
+    }
+  },
+  "stationarity_tests": {
+    "raw_adf": {
+      "adf_stat": -1.5740271016488934,
+      "p_value": 0.4966260517086126,
+      "used_lag": 13,
+      "nobs": 101,
+      "crit_vals": {
+        "1%": -3.4968181663902103,
+        "5%": -2.8906107514600103,
+        "10%": -2.5822770483285953
+      },
+      "ic_best": -339.6528774152817,
+      "is_stationary": false
+    }
+  }
+}

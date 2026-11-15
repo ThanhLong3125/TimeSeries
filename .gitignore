@@ -68,11 +68,9 @@ topic/
 *.pdf
 
 # ==========================================
-# Pipeline Logs & Runtime Traces
+# Pipeline Logs & Runtime Traces (Tracked for team audit)
 # ==========================================
-*.log
-*/logs/*
-!*/logs/.gitkeep
+
 
 # ==========================================
 # Model Weights & Binary Checkpoints (>10MB)

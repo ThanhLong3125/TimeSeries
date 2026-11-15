@@ -1,0 +1,181 @@
+2026-11-15 23:50:21 [INFO] [AEP_XGBoost_Pipeline] ======================================================================
+2026-11-15 23:50:21 [INFO] [AEP_XGBoost_Pipeline] BẮT ĐẦU CHẠY PIPELINE LAB 3: MACHINE LEARNING DỰ BÁO PHỤ TẢI ĐIỆN
+2026-11-15 23:50:21 [INFO] [AEP_XGBoost_Pipeline] ======================================================================
+2026-11-15 23:50:21 [INFO] [AEP_XGBoost_Pipeline] Checksum dữ liệu gốc (MD5): 821dc3f29e9b22c5bdbaa519fdab7bfe
+2026-11-15 23:50:21 [INFO] [AEP_XGBoost_Pipeline] Bắt đầu đọc dữ liệu từ: lab3/data/raw/AEP_hourly.csv
+2026-11-15 23:50:21 [INFO] [AEP_XGBoost_Pipeline] Kích thước ban đầu: 121,273 dòng, 2 cột
+2026-11-15 23:50:21 [WARNING] [AEP_XGBoost_Pipeline] Phát hiện 4 mốc thời gian bị trùng lặp (do đổi giờ DST). Đang khử trùng...
+2026-11-15 23:50:21 [INFO] [AEP_XGBoost_Pipeline] Phát hiện 27 mốc giờ khuyết (0.022%). Đang nội suy chuỗi...
+2026-11-15 23:50:21 [INFO] [AEP_XGBoost_Pipeline] Đã lưu dữ liệu làm sạch tại: lab3/data/processed/AEP_clean.csv
+2026-11-15 23:50:21 [INFO] [AEP_XGBoost_Pipeline] Dữ liệu sau làm sạch: 121,296 quan sát liên tục từ 2004-10-01 01:00:00 đến 2018-08-03 00:00:00
+2026-11-15 23:50:21 [INFO] [AEP_XGBoost_Pipeline] Bắt đầu trích xuất đặc trưng (Lags: [1, 2, 3, 24, 48, 168], Rolling: [{'window': 24, 'metrics': ['mean', 'std']}, {'window': 168, 'metrics': ['mean', 'std']}], Calendar: ['hour', 'dayofweek', 'quarter', 'month', 'year', 'dayofyear', 'is_weekend'])
+2026-11-15 23:50:21 [INFO] [AEP_XGBoost_Pipeline] Đã loại bỏ 168 dòng NaN ban đầu do trượt cửa sổ. Kích thước ma trận đặc trưng: (121128, 18)
+2026-11-15 23:50:22 [INFO] [AEP_XGBoost_Pipeline] Đã lưu ma trận đặc trưng tại: lab3/data/processed/AEP_features.csv
+2026-11-15 23:50:22 [INFO] [AEP_XGBoost_Pipeline] Phân chia Train/Test tại mốc: 2017-01-01
+2026-11-15 23:50:22 [INFO] [AEP_XGBoost_Pipeline]  - Train set: 107,231 mẫu (2004-10-08 01:00:00 -> 2016-12-31 23:00:00)
+2026-11-15 23:50:22 [INFO] [AEP_XGBoost_Pipeline]  - Test set : 13,897 mẫu (2017-01-01 00:00:00 -> 2018-08-03 00:00:00)
+2026-11-15 23:50:22 [INFO] [AEP_XGBoost_Pipeline] Bắt đầu huấn luyện mô hình: [linear_regression] với 107,231 mẫu...
+2026-11-15 23:50:22 [INFO] [AEP_XGBoost_Pipeline] Hoàn thành huấn luyện [linear_regression] sau 0.08s
+2026-11-15 23:50:22 [INFO] [AEP_XGBoost_Pipeline] Đã lưu checkpoint mô hình tại: lab3/artifacts/linear_regression.joblib
+2026-11-15 23:50:22 [INFO] [AEP_XGBoost_Pipeline] Bắt đầu huấn luyện mô hình: [random_forest] với 107,231 mẫu...
+2026-11-15 23:50:38 [INFO] [AEP_XGBoost_Pipeline] Hoàn thành huấn luyện [random_forest] sau 16.05s
+2026-11-15 23:50:39 [INFO] [AEP_XGBoost_Pipeline] Đã lưu checkpoint mô hình tại: lab3/artifacts/random_forest.joblib
+2026-11-15 23:50:39 [INFO] [AEP_XGBoost_Pipeline] Bắt đầu huấn luyện mô hình: [xgboost] với 107,231 mẫu...
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline] Hoàn thành huấn luyện [xgboost] sau 2.10s
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline] Đã lưu checkpoint mô hình tại: lab3/artifacts/xgboost.joblib
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline] Kết quả kiểm thử [linear_regression]: MAE=187.23 MW, RMSE=249.54 MW, MAPE=1.27%
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline] Kết quả kiểm thử [random_forest]: MAE=136.39 MW, RMSE=182.98 MW, MAPE=0.92%
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline] Kết quả kiểm thử [xgboost]: MAE=120.34 MW, RMSE=158.72 MW, MAPE=0.82%
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline] 
+=======================================================
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline] BẢNG SO CHUẨN CÁC MÔ HÌNH TRÊN TẬP TEST (2017 - 2018):
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline] =======================================================
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline]  -> linear_regression    | MAE:  187.23 MW | RMSE:  249.54 MW | MAPE:  1.27%
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline]  -> random_forest        | MAE:  136.39 MW | RMSE:  182.98 MW | MAPE:  0.92%
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline]  -> xgboost              | MAE:  120.34 MW | RMSE:  158.72 MW | MAPE:  0.82%
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline] =======================================================
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline] TOP 5 ĐẶC TRƯNG QUAN TRỌNG NHẤT CỦA XGBOOST:
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline]    1. lag_1               : 59.21%
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline]    2. lag_2               : 19.44%
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline]    3. lag_24              : 10.09%
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline]    4. lag_168             : 4.55%
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline]    5. lag_3               : 1.47%
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline] Tiến hành dự báo đa bước đệ quy (Recursive Multi-Step Forecasting)...
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline] Kết quả Recursive Multi-Step (24 bước): MAE=1235.51 MW, MAPE=6.35%
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline] ======================================================================
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline] PIPELINE LAB 3 HOÀN TẤT THÀNH CÔNG VÀ AN TOÀN!
+2026-11-15 23:50:41 [INFO] [AEP_XGBoost_Pipeline] ======================================================================
+2026-11-15 23:54:15 [INFO] [AEP_XGBoost_Pipeline] ======================================================================
+2026-11-15 23:54:15 [INFO] [AEP_XGBoost_Pipeline] BẮT ĐẦU CHẠY PIPELINE LAB 3: MACHINE LEARNING DỰ BÁO PHỤ TẢI ĐIỆN
+2026-11-15 23:54:15 [INFO] [AEP_XGBoost_Pipeline] ======================================================================
+2026-11-15 23:54:15 [INFO] [AEP_XGBoost_Pipeline] Checksum dữ liệu gốc (MD5): 821dc3f29e9b22c5bdbaa519fdab7bfe
+2026-11-15 23:54:15 [INFO] [AEP_XGBoost_Pipeline] Bắt đầu đọc dữ liệu từ: lab3/data/raw/AEP_hourly.csv
+2026-11-15 23:54:15 [INFO] [AEP_XGBoost_Pipeline] Kích thước ban đầu: 121,273 dòng, 2 cột
+2026-11-15 23:54:15 [WARNING] [AEP_XGBoost_Pipeline] Phát hiện 4 mốc thời gian bị trùng lặp (do đổi giờ DST). Đang khử trùng...
+2026-11-15 23:54:15 [INFO] [AEP_XGBoost_Pipeline] Phát hiện 27 mốc giờ khuyết (0.022%). Đang nội suy chuỗi...
+2026-11-15 23:54:15 [INFO] [AEP_XGBoost_Pipeline] Đã lưu dữ liệu làm sạch tại: lab3/data/processed/AEP_clean.csv
+2026-11-15 23:54:15 [INFO] [AEP_XGBoost_Pipeline] Dữ liệu sau làm sạch: 121,296 quan sát liên tục từ 2004-10-01 01:00:00 đến 2018-08-03 00:00:00
+2026-11-15 23:54:15 [INFO] [AEP_XGBoost_Pipeline] Bắt đầu trích xuất đặc trưng (Lags: [1, 2, 3, 24, 48, 168], Rolling: [{'window': 24, 'metrics': ['mean', 'std']}, {'window': 168, 'metrics': ['mean', 'std']}], Calendar: ['hour', 'dayofweek', 'quarter', 'month', 'year', 'dayofyear', 'is_weekend'])
+2026-11-15 23:54:15 [INFO] [AEP_XGBoost_Pipeline] Đã loại bỏ 168 dòng NaN ban đầu do trượt cửa sổ. Kích thước ma trận đặc trưng: (121128, 18)
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline] Đã lưu ma trận đặc trưng tại: lab3/data/processed/AEP_features.csv
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline] Phân chia Train/Test tại mốc: 2017-01-01
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline]  - Train set: 107,231 mẫu (2004-10-08 01:00:00 -> 2016-12-31 23:00:00)
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline]  - Test set : 13,897 mẫu (2017-01-01 00:00:00 -> 2018-08-03 00:00:00)
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline] Chế độ --skip-train kích hoạt. Đang nạp các mô hình đã huấn luyện từ artifacts...
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline] Đã nạp checkpoint: lab3/artifacts/models/linear_regression.joblib
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline] Đã nạp checkpoint: lab3/artifacts/models/random_forest.joblib
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline] Đã nạp checkpoint: lab3/artifacts/models/xgboost.joblib
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline] Kết quả kiểm thử [linear_regression]: MAE=187.23 MW, RMSE=249.54 MW, MAPE=1.27%
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline] Kết quả kiểm thử [random_forest]: MAE=136.39 MW, RMSE=182.98 MW, MAPE=0.92%
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline] Kết quả kiểm thử [xgboost]: MAE=120.34 MW, RMSE=158.72 MW, MAPE=0.82%
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline] 
+=======================================================
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline] BẢNG SO CHUẨN CÁC MÔ HÌNH TRÊN TẬP TEST (2017 - 2018):
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline] =======================================================
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline]  -> linear_regression    | MAE:  187.23 MW | RMSE:  249.54 MW | MAPE:  1.27%
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline]  -> random_forest        | MAE:  136.39 MW | RMSE:  182.98 MW | MAPE:  0.92%
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline]  -> xgboost              | MAE:  120.34 MW | RMSE:  158.72 MW | MAPE:  0.82%
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline] =======================================================
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline] Đã lưu bảng số liệu đánh giá tại: lab3/artifacts/metrics/benchmark_metrics.json
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline] Đã đồng bộ biểu đồ vào: lab3/artifacts/figures
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline] TOP 5 ĐẶC TRƯNG QUAN TRỌNG NHẤT CỦA XGBOOST:
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline]    1. lag_1               : 59.21%
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline]    2. lag_2               : 19.44%
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline]    3. lag_24              : 10.09%
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline]    4. lag_168             : 4.55%
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline]    5. lag_3               : 1.47%
+2026-11-15 23:54:16 [INFO] [AEP_XGBoost_Pipeline] Tiến hành dự báo đa bước đệ quy (Recursive Multi-Step Forecasting)...
+2026-11-15 23:54:17 [INFO] [AEP_XGBoost_Pipeline] Kết quả Recursive Multi-Step (24 bước): MAE=1235.51 MW, MAPE=6.35%
+2026-11-15 23:54:17 [INFO] [AEP_XGBoost_Pipeline] ======================================================================
+2026-11-15 23:54:17 [INFO] [AEP_XGBoost_Pipeline] PIPELINE LAB 3 HOÀN TẤT THÀNH CÔNG VÀ AN TOÀN!
+2026-11-15 23:54:17 [INFO] [AEP_XGBoost_Pipeline] ======================================================================
+2026-11-15 23:58:24 [INFO] [AEP_XGBoost_Pipeline] ======================================================================
+2026-11-15 23:58:24 [INFO] [AEP_XGBoost_Pipeline] BẮT ĐẦU CHẠY PIPELINE LAB 3: MACHINE LEARNING DỰ BÁO PHỤ TẢI ĐIỆN
+2026-11-15 23:58:24 [INFO] [AEP_XGBoost_Pipeline] ======================================================================
+2026-11-15 23:58:24 [INFO] [AEP_XGBoost_Pipeline] Checksum dữ liệu gốc (MD5): 821dc3f29e9b22c5bdbaa519fdab7bfe
+2026-11-15 23:58:24 [INFO] [AEP_XGBoost_Pipeline] Bắt đầu đọc dữ liệu từ: lab3/data/raw/AEP_hourly.csv
+2026-11-15 23:58:24 [INFO] [AEP_XGBoost_Pipeline] Kích thước ban đầu: 121,273 dòng, 2 cột
+2026-11-15 23:58:24 [WARNING] [AEP_XGBoost_Pipeline] Phát hiện 4 mốc thời gian bị trùng lặp (do đổi giờ DST). Đang khử trùng...
+2026-11-15 23:58:24 [INFO] [AEP_XGBoost_Pipeline] Phát hiện 27 mốc giờ khuyết (0.022%). Đang nội suy chuỗi...
+2026-11-15 23:58:24 [INFO] [AEP_XGBoost_Pipeline] Đã lưu dữ liệu làm sạch tại: lab3/data/processed/AEP_clean.csv
+2026-11-15 23:58:24 [INFO] [AEP_XGBoost_Pipeline] Dữ liệu sau làm sạch: 121,296 quan sát liên tục từ 2004-10-01 01:00:00 đến 2018-08-03 00:00:00
+2026-11-15 23:58:24 [INFO] [AEP_XGBoost_Pipeline] Bắt đầu trích xuất đặc trưng (Lags: [1, 2, 3, 24, 48, 168], Rolling: [{'window': 24, 'metrics': ['mean', 'std']}, {'window': 168, 'metrics': ['mean', 'std']}], Calendar: ['hour', 'dayofweek', 'quarter', 'month', 'year', 'dayofyear', 'is_weekend'])
+2026-11-15 23:58:25 [INFO] [AEP_XGBoost_Pipeline] Đã loại bỏ 168 dòng NaN ban đầu do trượt cửa sổ. Kích thước ma trận đặc trưng: (121128, 18)
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline] Đã lưu ma trận đặc trưng tại: lab3/data/processed/AEP_features.csv
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline] Phân chia Train/Test tại mốc: 2017-01-01
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline]  - Train set: 107,231 mẫu (2004-10-08 01:00:00 -> 2016-12-31 23:00:00)
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline]  - Test set : 13,897 mẫu (2017-01-01 00:00:00 -> 2018-08-03 00:00:00)
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline] Chế độ --skip-train kích hoạt. Đang nạp các mô hình đã huấn luyện từ artifacts...
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline] Đã nạp checkpoint: lab3/artifacts/models/linear_regression.joblib
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline] Đã nạp checkpoint: lab3/artifacts/models/random_forest.joblib
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline] Đã nạp checkpoint: lab3/artifacts/models/xgboost.joblib
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline] Kết quả kiểm thử [linear_regression]: MAE=187.23 MW, RMSE=249.54 MW, MAPE=1.27%
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline] Kết quả kiểm thử [random_forest]: MAE=136.39 MW, RMSE=182.98 MW, MAPE=0.92%
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline] Kết quả kiểm thử [xgboost]: MAE=120.34 MW, RMSE=158.72 MW, MAPE=0.82%
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline] 
+=======================================================
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline] BẢNG SO CHUẨN CÁC MÔ HÌNH TRÊN TẬP TEST (2017 - 2018):
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline] =======================================================
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline]  -> linear_regression    | MAE:  187.23 MW | RMSE:  249.54 MW | MAPE:  1.27%
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline]  -> random_forest        | MAE:  136.39 MW | RMSE:  182.98 MW | MAPE:  0.92%
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline]  -> xgboost              | MAE:  120.34 MW | RMSE:  158.72 MW | MAPE:  0.82%
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline] =======================================================
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline] Đã lưu bảng số liệu đánh giá tại: lab3/artifacts/metrics/benchmark_metrics.json
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline] TOP 5 ĐẶC TRƯNG QUAN TRỌNG NHẤT CỦA XGBOOST:
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline]    1. lag_1               : 59.21%
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline]    2. lag_2               : 19.44%
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline]    3. lag_24              : 10.09%
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline]    4. lag_168             : 4.55%
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline]    5. lag_3               : 1.47%
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline] Tiến hành dự báo đa bước đệ quy (Recursive Multi-Step Forecasting)...
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline] Kết quả Recursive Multi-Step (24 bước): MAE=1235.51 MW, MAPE=6.35%
+2026-11-15 23:58:26 [INFO] [AEP_XGBoost_Pipeline] Đang tạo và lưu toàn bộ biểu đồ vào plots/ và artifacts/figures/...
+2026-11-15 23:58:31 [INFO] [AEP_XGBoost_Pipeline] Đã tạo thành công 6 biểu đồ trực quan hóa!
+2026-11-15 23:58:31 [INFO] [AEP_XGBoost_Pipeline] ======================================================================
+2026-11-15 23:58:31 [INFO] [AEP_XGBoost_Pipeline] PIPELINE LAB 3 HOÀN TẤT THÀNH CÔNG VÀ AN TOÀN!
+2026-11-15 23:58:31 [INFO] [AEP_XGBoost_Pipeline] ======================================================================
+2026-11-16 00:01:31 [INFO] [AEP_XGBoost_Pipeline] ======================================================================
+2026-11-16 00:01:31 [INFO] [AEP_XGBoost_Pipeline] BẮT ĐẦU CHẠY PIPELINE LAB 3: MACHINE LEARNING DỰ BÁO PHỤ TẢI ĐIỆN
+2026-11-16 00:01:31 [INFO] [AEP_XGBoost_Pipeline] ======================================================================
+2026-11-16 00:01:31 [INFO] [AEP_XGBoost_Pipeline] Checksum dữ liệu gốc (MD5): 821dc3f29e9b22c5bdbaa519fdab7bfe
+2026-11-16 00:01:31 [INFO] [AEP_XGBoost_Pipeline] Bắt đầu đọc dữ liệu từ: lab3/data/raw/AEP_hourly.csv
+2026-11-16 00:01:31 [INFO] [AEP_XGBoost_Pipeline] Kích thước ban đầu: 121,273 dòng, 2 cột
+2026-11-16 00:01:31 [WARNING] [AEP_XGBoost_Pipeline] Phát hiện 4 mốc thời gian bị trùng lặp (do đổi giờ DST). Đang khử trùng...
+2026-11-16 00:01:31 [INFO] [AEP_XGBoost_Pipeline] Phát hiện 27 mốc giờ khuyết (0.022%). Đang nội suy chuỗi...
+2026-11-16 00:01:31 [INFO] [AEP_XGBoost_Pipeline] Đã lưu dữ liệu làm sạch tại: lab3/data/processed/AEP_clean.csv
+2026-11-16 00:01:31 [INFO] [AEP_XGBoost_Pipeline] Dữ liệu sau làm sạch: 121,296 quan sát liên tục từ 2004-10-01 01:00:00 đến 2018-08-03 00:00:00
+2026-11-16 00:01:31 [INFO] [AEP_XGBoost_Pipeline] Bắt đầu trích xuất đặc trưng (Lags: [1, 2, 3, 24, 48, 168], Rolling: [{'window': 24, 'metrics': ['mean', 'std']}, {'window': 168, 'metrics': ['mean', 'std']}], Calendar: ['hour', 'dayofweek', 'quarter', 'month', 'year', 'dayofyear', 'is_weekend'])
+2026-11-16 00:01:31 [INFO] [AEP_XGBoost_Pipeline] Đã loại bỏ 168 dòng NaN ban đầu do trượt cửa sổ. Kích thước ma trận đặc trưng: (121128, 18)
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline] Đã lưu ma trận đặc trưng tại: lab3/data/processed/AEP_features.csv
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline] Phân chia Train/Test tại mốc: 2017-01-01
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline]  - Train set: 107,231 mẫu (2004-10-08 01:00:00 -> 2016-12-31 23:00:00)
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline]  - Test set : 13,897 mẫu (2017-01-01 00:00:00 -> 2018-08-03 00:00:00)
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline] Chế độ --skip-train kích hoạt. Đang nạp các mô hình đã huấn luyện từ artifacts...
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline] Đã nạp checkpoint: lab3/artifacts/models/linear_regression.joblib
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline] Đã nạp checkpoint: lab3/artifacts/models/random_forest.joblib
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline] Đã nạp checkpoint: lab3/artifacts/models/xgboost.joblib
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline] Kết quả kiểm thử [linear_regression]: MAE=187.23 MW, RMSE=249.54 MW, MAPE=1.27%
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline] Kết quả kiểm thử [random_forest]: MAE=136.39 MW, RMSE=182.98 MW, MAPE=0.92%
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline] Kết quả kiểm thử [xgboost]: MAE=120.34 MW, RMSE=158.72 MW, MAPE=0.82%
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline] 
+=======================================================
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline] BẢNG SO CHUẨN CÁC MÔ HÌNH TRÊN TẬP TEST (2017 - 2018):
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline] =======================================================
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline]  -> linear_regression    | MAE:  187.23 MW | RMSE:  249.54 MW | MAPE:  1.27%
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline]  -> random_forest        | MAE:  136.39 MW | RMSE:  182.98 MW | MAPE:  0.92%
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline]  -> xgboost              | MAE:  120.34 MW | RMSE:  158.72 MW | MAPE:  0.82%
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline] =======================================================
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline] Đã lưu bảng số liệu đánh giá tại: lab3/artifacts/metrics/benchmark_metrics.json
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline] TOP 5 ĐẶC TRƯNG QUAN TRỌNG NHẤT CỦA XGBOOST:
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline]    1. lag_1               : 59.21%
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline]    2. lag_2               : 19.44%
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline]    3. lag_24              : 10.09%
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline]    4. lag_168             : 4.55%
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline]    5. lag_3               : 1.47%
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline] Tiến hành dự báo đa bước đệ quy (Recursive Multi-Step Forecasting)...
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline] Kết quả Recursive Multi-Step (24 bước): MAE=1235.51 MW, MAPE=6.35%
+2026-11-16 00:01:32 [INFO] [AEP_XGBoost_Pipeline] Đang tạo và lưu toàn bộ biểu đồ vào: lab3/artifacts/figures...
+2026-11-16 00:01:35 [INFO] [AEP_XGBoost_Pipeline] Đã tạo thành công 6 biểu đồ trực quan hóa!
+2026-11-16 00:01:35 [INFO] [AEP_XGBoost_Pipeline] ======================================================================
+2026-11-16 00:01:35 [INFO] [AEP_XGBoost_Pipeline] PIPELINE LAB 3 HOÀN TẤT THÀNH CÔNG VÀ AN TOÀN!
+2026-11-16 00:01:35 [INFO] [AEP_XGBoost_Pipeline] ======================================================================

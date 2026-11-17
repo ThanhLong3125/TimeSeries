@@ -2206,3 +2206,57 @@ LÝ DO CHI TIẾT  : Challenger kém hơn Champion: Test RMSE tăng +20.00% (t�
 [2026-11-17 23:39:15] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC=  244.6443
 [2026-11-17 23:39:15] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC=  246.2198
 [2026-11-17 23:39:15] [INFO] [stationarity.py:34] - ADF Result [Synthetic Noise]: stat=-10.0844, p_value=1.1655e-17, used_lag=0/12, nobs=99, crit_5%=-2.8912 -> STATIONARY (Bác bỏ H0)
+[2026-11-17 23:44:35] [INFO] [data_loader.py:15] - Ingesting raw dataset: path=lab2/data/raw/a10.csv, md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-17 23:44:35] [INFO] [data_loader.py:18] - Dataset loaded: rows=204, columns=['date', 'value']
+[2026-11-17 23:44:35] [INFO] [data_loader.py:48] - Data Validation: time_span=1991-07 to 2008-06, monotonic=True, freq=MS, missing_gaps=0, nulls=0, min=2.81, max=29.67, has_negatives=False
+[2026-11-17 23:44:35] [INFO] [stationarity.py:55] - Evaluating Differencing Orders & Over-differencing Safeguard...
+[2026-11-17 23:44:35] [INFO] [stationarity.py:78] -    Order d=0 (Original): Variance=5249.2118, Std=72.4514, Lag1_ACF=0.9998
+[2026-11-17 23:44:35] [INFO] [stationarity.py:82] -    Order d=1: Variance=2.0165 (-99.96%), Std=1.4200, Lag1_ACF=-0.4949
+[2026-11-17 23:44:35] [INFO] [stationarity.py:82] -    Order d=2: Variance=6.0834 (+201.68%), Std=2.4665, Lag1_ACF=-0.6455
+[2026-11-17 23:44:35] [WARNING] [stationarity.py:89] - [OVER-DIFFERENCING DETECTED at d=2] Variance increased by +201.7% and Lag-1 Autocorrelation -0.6455 < -0.5! Model should NOT use d=2.
+[2026-11-17 23:44:35] [INFO] [model_comparator.py:110] - 
+================================================================================
+CHAMPION VS CHALLENGER MODEL EVALUATION GATE (MLOps Time Series Gate)
+================================================================================
+Tiêu chí so sánh           | Champion     | Challenger   | Chênh lệch      | Đánh giá
+--------------------------------------------------------------------------------
+Test RMSE (Tiêu chí chính) | 5.0000       | 4.5000       |   -10.00%       | CHALLENGER TỐT HƠN
+Test MAE                   | 4.0000       | 3.5000       |   -12.50%       | CHALLENGER TỐT HƠN
+Test MAPE (%)              | 18.00        | 15.00        |    -3.00% pts   | CHALLENGER TỐT HƠN
+AIC (Mức độ tối giản)      | 520.00       | 500.00       |   -20.00 pts     | CHALLENGER GỌN HƠN
+BIC (Phạt số tham số)      | 530.00       | 510.00       |   -20.00 pts     | CHALLENGER GỌN HƠN
+--------------------------------------------------------------------------------
+KẾT QUẢ PHÂN XỬ : THĂNG HẠNG (PROMOTED)
+LÝ DO CHI TIẾT  : Challenger vượt trội Champion: Test RMSE giảm 10.00% (từ 5.0000 xuống 4.5000).
+================================================================================
+[2026-11-17 23:44:35] [INFO] [model_comparator.py:110] - 
+================================================================================
+CHAMPION VS CHALLENGER MODEL EVALUATION GATE (MLOps Time Series Gate)
+================================================================================
+Tiêu chí so sánh           | Champion     | Challenger   | Chênh lệch      | Đánh giá
+--------------------------------------------------------------------------------
+Test RMSE (Tiêu chí chính) | 5.0000       | 6.0000       |   +20.00%       | CHAMPION TỐT HƠN
+Test MAE                   | 4.0000       | 5.0000       |   +25.00%       | CHAMPION TỐT HƠN
+Test MAPE (%)              | 18.00        | 22.00        |    +4.00% pts   | CHAMPION TỐT HƠN
+AIC (Mức độ tối giản)      | 520.00       | 550.00       |   +30.00 pts     | CHAMPION GỌN HƠN
+BIC (Phạt số tham số)      | 530.00       | 560.00       |   +30.00 pts     | CHAMPION GỌN HƠN
+--------------------------------------------------------------------------------
+KẾT QUẢ PHÂN XỬ : TỪ CHỐI (REJECTED)
+LÝ DO CHI TIẾT  : Challenger kém hơn Champion: Test RMSE tăng +20.00% (từ 5.0000 lên 6.0000).
+================================================================================
+[2026-11-17 23:44:35] [INFO] [preprocessor.py:34] - Train/Test split: total=10, train=8 (2020-01 -> 2020-08), test=2 (2020-09 -> 2020-10)
+[2026-11-17 23:44:35] [INFO] [stationarity.py:22] - --- ADF Test [Synthetic Noise] Autolag Evaluation (Criterion: AIC) ---
+[2026-11-17 23:44:35] [INFO] [stationarity.py:29] -    Candidate Lag  0: AIC=  235.6941 [MINIMUM AIC - SELECTED]
+[2026-11-17 23:44:35] [INFO] [stationarity.py:29] -    Candidate Lag  1: AIC=  237.5200
+[2026-11-17 23:44:35] [INFO] [stationarity.py:29] -    Candidate Lag  2: AIC=  238.6671
+[2026-11-17 23:44:35] [INFO] [stationarity.py:29] -    Candidate Lag  3: AIC=  239.7886
+[2026-11-17 23:44:35] [INFO] [stationarity.py:29] -    Candidate Lag  4: AIC=  238.0330
+[2026-11-17 23:44:35] [INFO] [stationarity.py:29] -    Candidate Lag  5: AIC=  239.7417
+[2026-11-17 23:44:35] [INFO] [stationarity.py:29] -    Candidate Lag  6: AIC=  241.7302
+[2026-11-17 23:44:35] [INFO] [stationarity.py:29] -    Candidate Lag  7: AIC=  242.7425
+[2026-11-17 23:44:35] [INFO] [stationarity.py:29] -    Candidate Lag  8: AIC=  244.7368
+[2026-11-17 23:44:35] [INFO] [stationarity.py:29] -    Candidate Lag  9: AIC=  243.9938
+[2026-11-17 23:44:35] [INFO] [stationarity.py:29] -    Candidate Lag 10: AIC=  243.2645
+[2026-11-17 23:44:35] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC=  244.6443
+[2026-11-17 23:44:35] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC=  246.2198
+[2026-11-17 23:44:35] [INFO] [stationarity.py:34] - ADF Result [Synthetic Noise]: stat=-10.0844, p_value=1.1655e-17, used_lag=0/12, nobs=99, crit_5%=-2.8912 -> STATIONARY (Bác bỏ H0)

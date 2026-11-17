@@ -22,9 +22,10 @@ def generate_forecasts(fitted_model, test_series, apply_log=False):
     else:
         return test_series, forecast_series
 
-def plot_forecast_vs_actual(train_series, actual_test, forecast_series, metrics, config, run_id, output_dir="lab2/artifacts/figures"):
+def plot_forecast_vs_actual(train_series, actual_test, forecast_series, metrics, config, run_id=None, output_dir="lab2/artifacts/figures"):
     """
     Vẽ biểu đồ đối chiếu ngoài mẫu (Forecast vs Actuals) theo chuẩn Senior Data Analyst.
+    Ghi đè trực tiếp lên ảnh cũ nếu không truyền run_id.
     """
     os.makedirs(output_dir, exist_ok=True)
     exp_name = config.get("experiment_name", "model")
@@ -76,8 +77,9 @@ def plot_forecast_vs_actual(train_series, actual_test, forecast_series, metrics,
     ax.legend(loc="center left", bbox_to_anchor=(0.02, 0.76), frameon=True, framealpha=0.9, fontsize=9.5)
     
     plt.tight_layout()
-    filepath = os.path.join(output_dir, f"{exp_name}_forecast_{run_id}.png")
+    filename = f"{exp_name}_forecast_{run_id}.png" if run_id else f"{exp_name}_forecast.png"
+    filepath = os.path.join(output_dir, filename)
     plt.savefig(filepath, dpi=300)
     plt.close()
-    logger.info(f"Forecast evaluation plot saved: path={filepath}")
+    logger.info(f"Forecast evaluation plot saved (overwritten): path={filepath}")
     return filepath

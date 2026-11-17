@@ -99,8 +99,11 @@ def export_metrics_json(metrics, experiment_name, run_id, output_dir="lab2/artif
     logger.info(f"Metrics JSON persisted: path={filepath}")
     return filepath
 
-def plot_residual_diagnostics(residuals, experiment_name, run_id, output_dir="lab2/artifacts/figures"):
-    """Xuất bản bộ 4 đồ thị chẩn đoán phần dư theo chuẩn Senior Data Analyst."""
+def plot_residual_diagnostics(residuals, experiment_name, run_id=None, output_dir="lab2/artifacts/figures"):
+    """
+    Xuất bản bộ 4 đồ thị chẩn đoán phần dư theo chuẩn Senior Data Analyst.
+    Ghi đè trực tiếp lên ảnh cũ nếu không truyền run_id.
+    """
     os.makedirs(output_dir, exist_ok=True)
     clean_resid = residuals.dropna()
     mean_val = float(clean_resid.mean())
@@ -151,8 +154,9 @@ def plot_residual_diagnostics(residuals, experiment_name, run_id, output_dir="la
     axes[1, 1].grid(True, linestyle="--", alpha=0.35)
     
     plt.tight_layout()
-    filepath = os.path.join(output_dir, f"{experiment_name}_residuals_{run_id}.png")
+    filename = f"{experiment_name}_residuals_{run_id}.png" if run_id else f"{experiment_name}_residuals.png"
+    filepath = os.path.join(output_dir, filename)
     plt.savefig(filepath, dpi=300)
     plt.close()
-    logger.info(f"Residual diagnostics plot saved: path={filepath}")
+    logger.info(f"Residual diagnostics plot saved (overwritten): path={filepath}")
     return filepath

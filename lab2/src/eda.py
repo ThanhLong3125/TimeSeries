@@ -5,9 +5,10 @@ import matplotlib.pyplot as plt
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 from .logger import logger
 
-def plot_eda_raw_series(series, config, run_id, output_dir="lab2/artifacts/figures"):
+def plot_eda_raw_series(series, config, run_id=None, output_dir="lab2/artifacts/figures"):
     """
     Vẽ biểu đồ EDA chuỗi thời gian gốc: Mean, Min, Max, và xu hướng phát triển.
+    Ghi đè trực tiếp lên ảnh cũ nếu không truyền run_id.
     """
     os.makedirs(output_dir, exist_ok=True)
     exp_name = config.get("experiment_name", "model")
@@ -49,15 +50,17 @@ def plot_eda_raw_series(series, config, run_id, output_dir="lab2/artifacts/figur
     ax.legend(loc="upper left", frameon=True, framealpha=0.9, fontsize=9.5)
     
     plt.tight_layout()
-    filepath = os.path.join(output_dir, f"{exp_name}_eda_01_raw_{run_id}.png")
+    filename = f"{exp_name}_eda_01_raw_{run_id}.png" if run_id else f"{exp_name}_eda_01_raw.png"
+    filepath = os.path.join(output_dir, filename)
     plt.savefig(filepath, dpi=300)
     plt.close()
-    logger.info(f"EDA Raw series plot saved: path={filepath}")
+    logger.info(f"EDA Raw series plot saved (overwritten): path={filepath}")
     return filepath
 
-def plot_eda_differencing(diff_results, config, run_id, output_dir="lab2/artifacts/figures"):
+def plot_eda_differencing(diff_results, config, run_id=None, output_dir="lab2/artifacts/figures"):
     """
     Vẽ biểu đồ so sánh chuỗi sau sai phân bậc 1 (d=1) và bậc 2 (d=2) kèm theo dõi phương sai.
+    Ghi đè trực tiếp lên ảnh cũ nếu không truyền run_id.
     """
     os.makedirs(output_dir, exist_ok=True)
     exp_name = config.get("experiment_name", "model")
@@ -103,15 +106,17 @@ def plot_eda_differencing(diff_results, config, run_id, output_dir="lab2/artifac
         ax1.legend(loc="upper left", fontsize=9)
         
     plt.tight_layout()
-    filepath = os.path.join(output_dir, f"{exp_name}_eda_02_differenced_{run_id}.png")
+    filename = f"{exp_name}_eda_02_differenced_{run_id}.png" if run_id else f"{exp_name}_eda_02_differenced.png"
+    filepath = os.path.join(output_dir, filename)
     plt.savefig(filepath, dpi=300)
     plt.close()
-    logger.info(f"EDA Differenced series plot saved: path={filepath}")
+    logger.info(f"EDA Differenced series plot saved (overwritten): path={filepath}")
     return filepath
 
-def plot_eda_acf_pacf(series, config, run_id, output_dir="lab2/artifacts/figures", max_lags=40):
+def plot_eda_acf_pacf(series, config, run_id=None, output_dir="lab2/artifacts/figures", max_lags=40):
     """
     Vẽ biểu đồ ACF và PACF trên chuỗi đã sai phân để nhận dạng bậc (p, d, q).
+    Ghi đè trực tiếp lên ảnh cũ nếu không truyền run_id.
     """
     os.makedirs(output_dir, exist_ok=True)
     exp_name = config.get("experiment_name", "model")
@@ -140,8 +145,9 @@ def plot_eda_acf_pacf(series, config, run_id, output_dir="lab2/artifacts/figures
     ax2.legend(loc="upper right", fontsize=9)
     
     plt.tight_layout()
-    filepath = os.path.join(output_dir, f"{exp_name}_eda_03_acf_pacf_{run_id}.png")
+    filename = f"{exp_name}_eda_03_acf_pacf_{run_id}.png" if run_id else f"{exp_name}_eda_03_acf_pacf.png"
+    filepath = os.path.join(output_dir, filename)
     plt.savefig(filepath, dpi=300)
     plt.close()
-    logger.info(f"EDA ACF/PACF plot saved: path={filepath}")
+    logger.info(f"EDA ACF/PACF plot saved (overwritten): path={filepath}")
     return filepath

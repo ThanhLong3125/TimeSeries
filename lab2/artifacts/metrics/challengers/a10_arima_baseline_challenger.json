@@ -62,10 +62,26 @@
     }
   },
   "champion_gate": {
-    "is_promoted": true,
-    "verdict": "INITIAL_CHAMPION",
-    "reason": "Chưa có mô hình tiền nhiệm. Mô hình mới tự động được xác lập làm Champion đầu tiên.",
-    "champion_exists": false,
-    "metrics_diff": {}
+    "is_promoted": false,
+    "verdict": "REJECTED_PARSIMONY",
+    "reason": "Sai số ngoại mẫu tương đương, nhưng Champion tối giản hơn (AIC Champion thấp hơn 0.00).",
+    "champion_exists": true,
+    "metrics_diff": {
+      "champ_rmse": 4.6243,
+      "chall_rmse": 4.6243,
+      "rmse_delta_pct": 0.0,
+      "champ_mae": 3.6667,
+      "chall_mae": 3.6667,
+      "mae_delta_pct": 0.0,
+      "champ_mape": 18.04,
+      "chall_mape": 18.04,
+      "mape_delta": 0.0,
+      "champ_aic": 582.4673514864145,
+      "chall_aic": 582.4673514864145,
+      "aic_delta": 0.0,
+      "champ_bic": 591.7301404921117,
+      "chall_bic": 591.7301404921117,
+      "bic_delta": 0.0
+    }
   }
 }

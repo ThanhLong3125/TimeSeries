@@ -33,10 +33,19 @@ def run_pipeline(config_path, dry_run=False):
     exp_name = cfg.get("experiment_name", "unnamed_experiment")
     temp_run_id = f"run_{int(time.time())}"
     
-    logger.info(f"================================================================================")
-    logger.info(f"STARTING TIME SERIES PIPELINE: {exp_name}")
-    logger.info(f"Config: {config_path} | DryRun={dry_run}")
-    logger.info(f"================================================================================")
+    # Nhận diện rõ ràng họ mô hình (ARIMA vs SARIMA) để log không bị lẫn lộn
+    is_seasonal = bool(cfg.get("model", {}).get("seasonal_order"))
+    model_type_str = "SARIMA" if is_seasonal else "ARIMA"
+    dataset_desc = "Doanh số thuốc Úc (a10)" if "a10" in exp_name.lower() else "Lượng hành khách hàng không (AirPassengers)"
+    task_num = "1/2" if not is_seasonal else "2/2"
+    
+    logger.info(f"\n{'#'*80}")
+    logger.info(f"# [BÀI TOÁN {task_num}]: MÔ HÌNH HÓA {model_type_str} — {dataset_desc.upper()}")
+    logger.info(f"# • Loại mô hình    : {cfg['model']['type']}{cfg['model']['order']} {cfg['model'].get('seasonal_order') or '[Phi mùa vụ]'}")
+    logger.info(f"# • File cấu hình   : {config_path}")
+    logger.info(f"# • File dữ liệu thô: {cfg['data_path']}")
+    logger.info(f"# • Chế độ chạy     : {'DRY-RUN (Chỉ kiểm định)' if dry_run else 'FULL PIPELINE (Huấn luyện & Đánh giá)'}")
+    logger.info(f"{'#'*80}\n")
     
     # 1. Ingestion & Validation
     t0 = time.time()
@@ -175,16 +184,16 @@ def run_pipeline(config_path, dry_run=False):
         
         residuals_plot_path = champ_residuals_path
         forecast_plot_path = champ_forecast_path
-        logger.info(f"🏆 [CHAMPION PROMOTED] {gate_result['reason']}")
+        logger.info(f" [CHAMPION PROMOTED] {gate_result['reason']}")
         logger.info(f"   Champion assets updated in: {champ_fig_dir}, {champ_models_dir}, {champ_metrics_dir}")
     else:
         # TỪ CHỐI: Giữ nguyên Champion cũ, Challenger plots vẫn sẵn sàng trong thư mục challengers/
-        logger.warning(f"🛑 [CHALLENGER REJECTED] {gate_result['reason']}")
+        logger.warning(f" [CHALLENGER REJECTED] {gate_result['reason']}")
         logger.warning(f"   Current Champion artifacts preserved in: {champ_fig_dir}")
-        logger.info(f"💡 [CHALLENGER DIAGNOSTICS READY] Challenger plots saved in: {chal_fig_dir}")
+        logger.info(f" [CHALLENGER DIAGNOSTICS READY] Challenger plots saved in: {chal_fig_dir}")
         logger.info(f"   - Forecast Plot : {chal_forecast_path}")
         logger.info(f"   - Residuals Plot: {chal_residuals_path}")
-        logger.info(f"   👉 Hãy mở 2 thư mục champions/ và challengers/ để trực tiếp so sánh và tinh chỉnh!")
+        logger.info(f"    Hãy mở 2 thư mục champions/ và challengers/ để trực tiếp so sánh và tinh chỉnh!")
         residuals_plot_path = champ_residuals_path
         forecast_plot_path = champ_forecast_path
         
@@ -201,28 +210,46 @@ def run_pipeline(config_path, dry_run=False):
         gate_reason=gate_result["reason"]
     )
     
-    logger.info(f"================================================================================")
-    logger.info(f"PIPELINE EXECUTION COMPLETED! Result: {gate_result['verdict']}")
-    logger.info(f"Audit Run ID   : {audit_run_id}")
-    logger.info(f"Gate Verdict   : {'PROMOTED' if is_promoted else 'REJECTED'}")
-    logger.info(f"Gate Reason    : {gate_result['reason']}")
-    logger.info(f"Active Model   : {champ_model_path}")
-    logger.info(f"Active Metrics : {champ_metrics_path}")
-    logger.info(f"EDA Plots      : 1) {eda_raw_plot}")
-    logger.info(f"                 2) {eda_diff_plot}")
-    logger.info(f"                 3) {eda_acf_plot}")
-    logger.info(f"Eval Plots     : 1) {residuals_plot_path}")
-    logger.info(f"                 2) {forecast_plot_path}")
+    logger.info(f"\n{'#'*80}")
+    logger.info(f"#  [HOÀN TẤT THỰC THI {model_type_str}]: {dataset_desc.upper()}")
+    logger.info(f"# • Kết quả Gate    : {gate_result['verdict']} ({'THĂNG HẠNG CHAMPION' if is_promoted else 'TỪ CHỐI CHALLENGER'})")
+    logger.info(f"# • Lý do chi tiết  : {gate_result['reason']}")
+    logger.info(f"# • Audit Run ID    : {audit_run_id}")
+    logger.info(f"# • Model File      : {champ_model_path}")
+    logger.info(f"# • Metrics JSON    : {champ_metrics_path}")
+    logger.info(f"# • Biểu đồ EDA     : 1) {eda_raw_plot}")
+    logger.info(f"#                     2) {eda_diff_plot}")
+    logger.info(f"#                     3) {eda_acf_plot}")
+    logger.info(f"# • Biểu đồ Đánh Giá: 1) {residuals_plot_path}")
+    logger.info(f"#                     2) {forecast_plot_path}")
     logger.info(
-        f"Execution Time : Total={total_time:.3f}s (Load={time_load:.3f}s, Prep={time_prep:.3f}s, "
+        f"# • Thời gian chạy  : Total={total_time:.3f}s (Load={time_load:.3f}s, Prep={time_prep:.3f}s, "
         f"Stat={time_stat:.3f}s, Train={time_train:.3f}s, Eval={time_eval:.3f}s)"
     )
-    logger.info(f"================================================================================\n")
+    logger.info(f"{'#'*80}\n")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Time Series Production Pipeline - Lab 2")
-    parser.add_argument("--config", required=True, help="Path to YAML configuration file")
-    parser.add_argument("--dry-run", action="store_true", help="Run validation and stationarity tests only")
+    parser.add_argument("--config", help="Đường dẫn đến file cấu hình YAML (vd: lab2/configs/arima_a10.yaml)")
+    parser.add_argument("--all", action="store_true", help="Chạy toàn bộ tuần tự 2 bài toán: 1. ARIMA (a10) -> 2. SARIMA (AirPassengers)")
+    parser.add_argument("--dry-run", action="store_true", help="Chế độ kiểm thử dữ liệu và tính dừng, không fit model")
     args = parser.parse_args()
     
-    run_pipeline(config_path=args.config, dry_run=args.dry_run)
+    if args.all:
+        logger.info("\n" + "="*80)
+        logger.info(">>> KHỞI CHẠY TOÀN BỘ LAB 2: 1. ARIMA (a10) TRƯỚC  ->  2. SARIMA (AirPassengers) SAU <<<")
+        logger.info("="*80 + "\n")
+        
+        # 1. Chạy bài toán 1: ARIMA cho a10
+        run_pipeline(config_path="lab2/configs/arima_a10.yaml", dry_run=args.dry_run)
+        
+        # 2. Chạy bài toán 2: SARIMA cho AirPassengers
+        run_pipeline(config_path="lab2/configs/sarima_airpassengers.yaml", dry_run=args.dry_run)
+        
+        logger.info("\n" + "="*80)
+        logger.info(">>> 🏁 ĐÃ CHẠY HOÀN TẤT VÀ XUẤT BẢN THÀNH CÔNG CẢ 2 BÀI TOÁN ARIMA VÀ SARIMA! <<<")
+        logger.info("="*80 + "\n")
+    elif args.config:
+        run_pipeline(config_path=args.config, dry_run=args.dry_run)
+    else:
+        parser.print_help()

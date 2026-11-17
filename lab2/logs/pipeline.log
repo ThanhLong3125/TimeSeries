@@ -2260,3 +2260,333 @@ LÝ DO CHI TIẾT  : Challenger kém hơn Champion: Test RMSE tăng +20.00% (t�
 [2026-11-17 23:44:35] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC=  244.6443
 [2026-11-17 23:44:35] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC=  246.2198
 [2026-11-17 23:44:35] [INFO] [stationarity.py:34] - ADF Result [Synthetic Noise]: stat=-10.0844, p_value=1.1655e-17, used_lag=0/12, nobs=99, crit_5%=-2.8912 -> STATIONARY (Bác bỏ H0)
+[2026-11-18 06:57:07] [INFO] [main.py:239] - 
+================================================================================
+[2026-11-18 06:57:07] [INFO] [main.py:240] - >>> 🌟 KHỞI CHẠY TOÀN BỘ LAB 2: 1. ARIMA (a10) TRƯỚC  ->  2. SARIMA (AirPassengers) SAU <<<
+[2026-11-18 06:57:07] [INFO] [main.py:241] - ================================================================================
+
+[2026-11-18 06:57:07] [INFO] [main.py:42] - 
+################################################################################
+[2026-11-18 06:57:07] [INFO] [main.py:43] - # 🚀 [BÀI TOÁN 1/2]: MÔ HÌNH HÓA ARIMA — DOANH SỐ THUỐC ÚC (A10)
+[2026-11-18 06:57:07] [INFO] [main.py:44] - # • Loại mô hình    : ARIMA[1, 1, 1] [Phi mùa vụ]
+[2026-11-18 06:57:07] [INFO] [main.py:45] - # • File cấu hình   : lab2/configs/arima_a10.yaml
+[2026-11-18 06:57:07] [INFO] [main.py:46] - # • File dữ liệu thô: lab2/data/raw/a10.csv
+[2026-11-18 06:57:07] [INFO] [main.py:47] - # • Chế độ chạy     : FULL PIPELINE (Huấn luyện & Đánh giá)
+[2026-11-18 06:57:07] [INFO] [main.py:48] - ################################################################################
+
+[2026-11-18 06:57:07] [INFO] [data_loader.py:15] - Ingesting raw dataset: path=lab2/data/raw/a10.csv, md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-18 06:57:07] [INFO] [data_loader.py:18] - Dataset loaded: rows=204, columns=['date', 'value']
+[2026-11-18 06:57:07] [INFO] [data_loader.py:48] - Data Validation: time_span=1991-07 to 2008-06, monotonic=True, freq=MS, missing_gaps=0, nulls=0, min=2.81, max=29.67, has_negatives=False
+[2026-11-18 06:57:07] [INFO] [preprocessor.py:34] - Train/Test split: total=204, train=163 (1991-07 -> 2005-01), test=41 (2005-02 -> 2008-06)
+[2026-11-18 06:57:07] [INFO] [eda.py:57] - EDA Raw series plot saved (overwritten): path=lab2/artifacts/figures/eda/a10_arima_baseline_eda_01_raw.png
+[2026-11-18 06:57:07] [INFO] [stationarity.py:22] - --- ADF Test [a10_arima_baseline (Train Raw)] Autolag Evaluation (Criterion: AIC) ---
+[2026-11-18 06:57:07] [INFO] [stationarity.py:29] -    Candidate Lag  0: AIC=  568.2089
+[2026-11-18 06:57:07] [INFO] [stationarity.py:29] -    Candidate Lag  1: AIC=  556.8780
+[2026-11-18 06:57:07] [INFO] [stationarity.py:29] -    Candidate Lag  2: AIC=  553.3574
+[2026-11-18 06:57:07] [INFO] [stationarity.py:29] -    Candidate Lag  3: AIC=  552.7783
+[2026-11-18 06:57:07] [INFO] [stationarity.py:29] -    Candidate Lag  4: AIC=  551.5923
+[2026-11-18 06:57:07] [INFO] [stationarity.py:29] -    Candidate Lag  5: AIC=  549.0680
+[2026-11-18 06:57:07] [INFO] [stationarity.py:29] -    Candidate Lag  6: AIC=  550.9243
+[2026-11-18 06:57:07] [INFO] [stationarity.py:29] -    Candidate Lag  7: AIC=  551.1322
+[2026-11-18 06:57:07] [INFO] [stationarity.py:29] -    Candidate Lag  8: AIC=  550.7333
+[2026-11-18 06:57:07] [INFO] [stationarity.py:29] -    Candidate Lag  9: AIC=  547.6864
+[2026-11-18 06:57:07] [INFO] [stationarity.py:29] -    Candidate Lag 10: AIC=  533.0005
+[2026-11-18 06:57:07] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC=  289.9872
+[2026-11-18 06:57:07] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC=  285.7654
+[2026-11-18 06:57:07] [INFO] [stationarity.py:29] -    Candidate Lag 13: AIC=  273.9349
+[2026-11-18 06:57:07] [INFO] [stationarity.py:29] -    Candidate Lag 14: AIC=  262.0001 [MINIMUM AIC - SELECTED]
+[2026-11-18 06:57:07] [INFO] [stationarity.py:34] - ADF Result [a10_arima_baseline (Train Raw)]: stat=2.2309, p_value=9.9891e-01, used_lag=14/14, nobs=148, crit_5%=-2.8813 -> NON-STATIONARY (Chưa đủ bằng chứng bác bỏ H0)
+[2026-11-18 06:57:07] [INFO] [stationarity.py:55] - Evaluating Differencing Orders & Over-differencing Safeguard...
+[2026-11-18 06:57:07] [INFO] [stationarity.py:78] -    Order d=0 (Original): Variance=15.5181, Std=3.9393, Lag1_ACF=0.9159
+[2026-11-18 06:57:07] [INFO] [stationarity.py:82] -    Order d=1: Variance=2.5445 (-83.60%), Std=1.5951, Lag1_ACF=-0.3204
+[2026-11-18 06:57:07] [INFO] [stationarity.py:82] -    Order d=2: Variance=6.7327 (+164.60%), Std=2.5947, Lag1_ACF=-0.5917
+[2026-11-18 06:57:07] [WARNING] [stationarity.py:89] - [OVER-DIFFERENCING DETECTED at d=2] Variance increased by +164.6% and Lag-1 Autocorrelation -0.5917 < -0.5! Model should NOT use d=2.
+[2026-11-18 06:57:07] [INFO] [eda.py:113] - EDA Differenced series plot saved (overwritten): path=lab2/artifacts/figures/eda/a10_arima_baseline_eda_02_differenced.png
+[2026-11-18 06:57:08] [INFO] [eda.py:152] - EDA ACF/PACF plot saved (overwritten): path=lab2/artifacts/figures/eda/a10_arima_baseline_eda_03_acf_pacf.png
+[2026-11-18 06:57:08] [INFO] [trainer.py:101] - Training Model: type=ARIMA, order=(1, 1, 1), seasonal_order=None
+[2026-11-18 06:57:08] [INFO] [trainer.py:95] - 
+================================================================================
+ARIMA MODEL ESTIMATION SUMMARY — A10_ARIMA_BASELINE
+================================================================================
+Data                   : a10_drug_sales
+Date range             : 1991-07-01 00:00:00 to 2005-01-01 00:00:00
+Number of observations : 163
+AR order (p)           : 1
+Differencing order (d) : 1
+MA order (q)           : 1
+Model Specification    : ARIMA(1, 1, 1)
+================================================================================
+STATISTICAL ESTIMATION RESULTS (STATSMODELS)
+================================================================================
+                               SARIMAX Results                                
+==============================================================================
+Dep. Variable:                  value   No. Observations:                  163
+Model:                 ARIMA(1, 1, 1)   Log Likelihood                -288.234
+Date:                Wed, 18 Nov 2026   AIC                            582.467
+Time:                        06:57:08   BIC                            591.730
+Sample:                    07-01-1991   HQIC                           586.228
+                         - 01-01-2005                                         
+Covariance Type:                  opg                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+ar.L1          0.3322      0.237      1.404      0.160      -0.132       0.796
+ma.L1         -0.8059      0.134     -6.017      0.000      -1.068      -0.543
+sigma2         2.0487      0.187     10.957      0.000       1.682       2.415
+===================================================================================
+Ljung-Box (L1) (Q):                   0.38   Jarque-Bera (JB):               117.88
+Prob(Q):                              0.54   Prob(JB):                         0.00
+Heteroskedasticity (H):               5.46   Skew:                            -1.02
+Prob(H) (two-sided):                  0.00   Kurtosis:                         6.65
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+================================================================================
+CHẨN ĐOÁN HỘI TỤ, TÍNH DỪNG & KHẢ NGHỊCH (STABILITY & INVERTIBILITY):
+ • Thuật toán tối ưu (MLE) : HỘI TỤ THÀNH CÔNG (Số vòng lặp: -1)
+ • Nghiệm AR (Min Modulus) : 3.0098 (> 1.0 -> DỪNG (Stationary))
+ • Nghiệm MA (Min Modulus) : 1.2408 (> 1.0 -> KHẢ NGHỊCH (Invertible))
+ • Tham số có ý nghĩa (p < 0.05)    : ma.L1 (p=0.0000), sigma2 (p=0.0000)
+ • Tham số không có ý nghĩa (p >= 0.05): ar.L1 (p=0.1603)
+================================================================================
+[2026-11-18 06:57:08] [INFO] [forecaster.py:12] - Generating out-of-sample forecast for 41 future steps...
+[2026-11-18 06:57:08] [INFO] [evaluator.py:47] - Test Evaluation: MAE=3.6667, RMSE=4.6243, MAPE=18.04%, max_error=12.13 at 2008-01-01 (actual=29.67, pred=17.54)
+[2026-11-18 06:57:08] [INFO] [evaluator.py:71] - Residual Properties: N=163, Mean=0.3181, Std=1.4228, Skew=-0.955, Kurtosis=3.630
+[2026-11-18 06:57:08] [INFO] [evaluator.py:72] - Jarque-Bera Normality Test: stat=106.68, p_value=6.8409e-24 -> NON-NORMAL (Fat tails)
+[2026-11-18 06:57:08] [INFO] [evaluator.py:82] -    Ljung-Box at Lag 10: p-value=0.3857 >= 0.05 -> White noise behavior at this lag.
+[2026-11-18 06:57:08] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 12: p-value=7.0712e-22 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-18 06:57:08] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 24: p-value=2.9888e-35 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-18 06:57:09] [INFO] [evaluator.py:162] - Residual diagnostics plot saved (overwritten): path=lab2/artifacts/figures/challengers/a10_arima_baseline_residuals.png
+[2026-11-18 06:57:09] [INFO] [forecaster.py:86] - Forecast evaluation plot saved (overwritten): path=lab2/artifacts/figures/challengers/a10_arima_baseline_forecast.png
+[2026-11-18 06:57:09] [INFO] [model_comparator.py:110] - 
+================================================================================
+CHAMPION VS CHALLENGER MODEL EVALUATION GATE (MLOps Time Series Gate)
+================================================================================
+Tiêu chí so sánh           | Champion     | Challenger   | Chênh lệch      | Đánh giá
+--------------------------------------------------------------------------------
+Test RMSE (Tiêu chí chính) | 4.6243       | 4.6243       |    +0.00%       | CHAMPION TỐT HƠN
+Test MAE                   | 3.6667       | 3.6667       |    +0.00%       | CHAMPION TỐT HƠN
+Test MAPE (%)              | 18.04        | 18.04        |    +0.00% pts   | CHAMPION TỐT HƠN
+AIC (Mức độ tối giản)      | 582.47       | 582.47       |    +0.00 pts     | CHAMPION GỌN HƠN
+BIC (Phạt số tham số)      | 591.73       | 591.73       |    +0.00 pts     | CHAMPION GỌN HƠN
+--------------------------------------------------------------------------------
+KẾT QUẢ PHÂN XỬ : TỪ CHỐI (REJECTED)
+LÝ DO CHI TIẾT  : Sai số ngoại mẫu tương đương, nhưng Champion tối giản hơn (AIC Champion thấp hơn 0.00).
+================================================================================
+[2026-11-18 06:57:09] [WARNING] [main.py:191] - 🛑 [CHALLENGER REJECTED] Sai số ngoại mẫu tương đương, nhưng Champion tối giản hơn (AIC Champion thấp hơn 0.00).
+[2026-11-18 06:57:09] [WARNING] [main.py:192] -    Current Champion artifacts preserved in: lab2/artifacts/figures/champions
+[2026-11-18 06:57:09] [INFO] [main.py:193] - 💡 [CHALLENGER DIAGNOSTICS READY] Challenger plots saved in: lab2/artifacts/figures/challengers
+[2026-11-18 06:57:09] [INFO] [main.py:194] -    - Forecast Plot : lab2/artifacts/figures/challengers/a10_arima_baseline_forecast.png
+[2026-11-18 06:57:09] [INFO] [main.py:195] -    - Residuals Plot: lab2/artifacts/figures/challengers/a10_arima_baseline_residuals.png
+[2026-11-18 06:57:09] [INFO] [main.py:196] -    👉 Hãy mở 2 thư mục champions/ và challengers/ để trực tiếp so sánh và tinh chỉnh!
+[2026-11-18 06:57:09] [INFO] [tracker.py:46] - [AUDIT TRAIL] Recorded immutable run entry | run_id=55651602 | data_md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-18 06:57:09] [INFO] [main.py:213] - 
+################################################################################
+[2026-11-18 06:57:09] [INFO] [main.py:214] - # ✅ [HOÀN TẤT THỰC THI ARIMA]: DOANH SỐ THUỐC ÚC (A10)
+[2026-11-18 06:57:09] [INFO] [main.py:215] - # • Kết quả Gate    : REJECTED_PARSIMONY (TỪ CHỐI CHALLENGER)
+[2026-11-18 06:57:09] [INFO] [main.py:216] - # • Lý do chi tiết  : Sai số ngoại mẫu tương đương, nhưng Champion tối giản hơn (AIC Champion thấp hơn 0.00).
+[2026-11-18 06:57:09] [INFO] [main.py:217] - # • Audit Run ID    : 55651602
+[2026-11-18 06:57:09] [INFO] [main.py:218] - # • Model File      : lab2/artifacts/models/champions/a10_arima_baseline_champion.joblib
+[2026-11-18 06:57:09] [INFO] [main.py:219] - # • Metrics JSON    : lab2/artifacts/metrics/champions/a10_arima_baseline_champion.json
+[2026-11-18 06:57:09] [INFO] [main.py:220] - # • Biểu đồ EDA     : 1) lab2/artifacts/figures/eda/a10_arima_baseline_eda_01_raw.png
+[2026-11-18 06:57:09] [INFO] [main.py:221] - #                     2) lab2/artifacts/figures/eda/a10_arima_baseline_eda_02_differenced.png
+[2026-11-18 06:57:09] [INFO] [main.py:222] - #                     3) lab2/artifacts/figures/eda/a10_arima_baseline_eda_03_acf_pacf.png
+[2026-11-18 06:57:09] [INFO] [main.py:223] - # • Biểu đồ Đánh Giá: 1) lab2/artifacts/figures/champions/a10_arima_baseline_residuals.png
+[2026-11-18 06:57:09] [INFO] [main.py:224] - #                     2) lab2/artifacts/figures/champions/a10_arima_baseline_forecast.png
+[2026-11-18 06:57:09] [INFO] [main.py:225] - # • Thời gian chạy  : Total=2.849s (Load=0.005s, Prep=0.002s, Stat=0.010s, Train=0.051s, Eval=1.384s)
+[2026-11-18 06:57:09] [INFO] [main.py:229] - ################################################################################
+
+[2026-11-18 06:57:09] [INFO] [main.py:42] - 
+################################################################################
+[2026-11-18 06:57:09] [INFO] [main.py:43] - # 🚀 [BÀI TOÁN 2/2]: MÔ HÌNH HÓA SARIMA — LƯỢNG HÀNH KHÁCH HÀNG KHÔNG (AIRPASSENGERS)
+[2026-11-18 06:57:09] [INFO] [main.py:44] - # • Loại mô hình    : SARIMAX[0, 1, 1] [0, 1, 1, 12]
+[2026-11-18 06:57:09] [INFO] [main.py:45] - # • File cấu hình   : lab2/configs/sarima_airpassengers.yaml
+[2026-11-18 06:57:09] [INFO] [main.py:46] - # • File dữ liệu thô: lab2/data/raw/AirPassengers.csv
+[2026-11-18 06:57:09] [INFO] [main.py:47] - # • Chế độ chạy     : FULL PIPELINE (Huấn luyện & Đánh giá)
+[2026-11-18 06:57:09] [INFO] [main.py:48] - ################################################################################
+
+[2026-11-18 06:57:09] [INFO] [data_loader.py:15] - Ingesting raw dataset: path=lab2/data/raw/AirPassengers.csv, md5=558a08bfda3955c8506436677352f7b8
+[2026-11-18 06:57:09] [INFO] [data_loader.py:18] - Dataset loaded: rows=144, columns=['Month', 'Passengers']
+[2026-11-18 06:57:09] [INFO] [data_loader.py:48] - Data Validation: time_span=1949-01 to 1960-12, monotonic=True, freq=MS, missing_gaps=0, nulls=0, min=104.00, max=622.00, has_negatives=False
+[2026-11-18 06:57:09] [INFO] [preprocessor.py:18] - Applying natural logarithm transform: y_log = ln(y) to stabilize variance (Heteroskedasticity fix)
+[2026-11-18 06:57:09] [INFO] [preprocessor.py:34] - Train/Test split: total=144, train=115 (1949-01 -> 1958-07), test=29 (1958-08 -> 1960-12)
+[2026-11-18 06:57:10] [INFO] [eda.py:57] - EDA Raw series plot saved (overwritten): path=lab2/artifacts/figures/eda/airpassengers_sarima_eda_01_raw.png
+[2026-11-18 06:57:10] [INFO] [stationarity.py:22] - --- ADF Test [airpassengers_sarima (Train Raw)] Autolag Evaluation (Criterion: AIC) ---
+[2026-11-18 06:57:10] [INFO] [stationarity.py:29] -    Candidate Lag  0: AIC= -166.8594
+[2026-11-18 06:57:10] [INFO] [stationarity.py:29] -    Candidate Lag  1: AIC= -168.7751
+[2026-11-18 06:57:10] [INFO] [stationarity.py:29] -    Candidate Lag  2: AIC= -169.5240
+[2026-11-18 06:57:10] [INFO] [stationarity.py:29] -    Candidate Lag  3: AIC= -167.5285
+[2026-11-18 06:57:10] [INFO] [stationarity.py:29] -    Candidate Lag  4: AIC= -177.9177
+[2026-11-18 06:57:10] [INFO] [stationarity.py:29] -    Candidate Lag  5: AIC= -175.9843
+[2026-11-18 06:57:10] [INFO] [stationarity.py:29] -    Candidate Lag  6: AIC= -173.9957
+[2026-11-18 06:57:10] [INFO] [stationarity.py:29] -    Candidate Lag  7: AIC= -176.6211
+[2026-11-18 06:57:10] [INFO] [stationarity.py:29] -    Candidate Lag  8: AIC= -208.8507
+[2026-11-18 06:57:10] [INFO] [stationarity.py:29] -    Candidate Lag  9: AIC= -212.6071
+[2026-11-18 06:57:10] [INFO] [stationarity.py:29] -    Candidate Lag 10: AIC= -260.4437
+[2026-11-18 06:57:10] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC= -294.4990
+[2026-11-18 06:57:10] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC= -333.9298
+[2026-11-18 06:57:10] [INFO] [stationarity.py:29] -    Candidate Lag 13: AIC= -339.6529 [MINIMUM AIC - SELECTED]
+[2026-11-18 06:57:10] [INFO] [stationarity.py:34] - ADF Result [airpassengers_sarima (Train Raw)]: stat=-1.5740, p_value=4.9663e-01, used_lag=13/13, nobs=101, crit_5%=-2.8906 -> NON-STATIONARY (Chưa đủ bằng chứng bác bỏ H0)
+[2026-11-18 06:57:10] [INFO] [stationarity.py:55] - Evaluating Differencing Orders & Over-differencing Safeguard...
+[2026-11-18 06:57:10] [INFO] [stationarity.py:78] -    Order d=0 (Original): Variance=0.1473, Std=0.3838, Lag1_ACF=0.9625
+[2026-11-18 06:57:10] [INFO] [stationarity.py:82] -    Order d=1: Variance=0.0108 (-92.67%), Std=0.1039, Lag1_ACF=0.1696
+[2026-11-18 06:57:10] [INFO] [stationarity.py:82] -    Order d=2: Variance=0.0180 (+66.64%), Std=0.1341, Lag1_ACF=-0.3161
+[2026-11-18 06:57:11] [INFO] [eda.py:113] - EDA Differenced series plot saved (overwritten): path=lab2/artifacts/figures/eda/airpassengers_sarima_eda_02_differenced.png
+[2026-11-18 06:57:11] [INFO] [eda.py:152] - EDA ACF/PACF plot saved (overwritten): path=lab2/artifacts/figures/eda/airpassengers_sarima_eda_03_acf_pacf.png
+[2026-11-18 06:57:11] [INFO] [trainer.py:101] - Training Model: type=SARIMAX, order=(0, 1, 1), seasonal_order=(0, 1, 1, 12)
+[2026-11-18 06:57:11] [INFO] [trainer.py:95] - 
+================================================================================
+SARIMAX MODEL ESTIMATION SUMMARY — AIRPASSENGERS_SARIMA
+================================================================================
+Data                   : international_airline_passengers
+Date range             : 1949-01-01 00:00:00 to 1958-07-01 00:00:00
+Number of observations : 115
+AR order (p)           : 0
+Differencing order (d) : 1
+MA order (q)           : 1
+Seasonal AR order (P)  : 0
+Seasonal diff (D)      : 1
+Seasonal MA order (Q)  : 1
+Seasonal period (s)    : 12
+Model Specification    : SARIMAX(0, 1, 1) x (0, 1, 1)[12]
+================================================================================
+STATISTICAL ESTIMATION RESULTS (STATSMODELS)
+================================================================================
+                                     SARIMAX Results                                      
+==========================================================================================
+Dep. Variable:                         Passengers   No. Observations:                  115
+Model:             SARIMAX(0, 1, 1)x(0, 1, 1, 12)   Log Likelihood                 164.875
+Date:                            Wed, 18 Nov 2026   AIC                           -323.749
+Time:                                    06:57:11   BIC                           -316.317
+Sample:                                01-01-1949   HQIC                          -320.755
+                                     - 07-01-1958                                         
+Covariance Type:                              opg                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+ma.L1         -0.3528      0.096     -3.680      0.000      -0.541      -0.165
+ma.S.L12      -0.5582      0.109     -5.123      0.000      -0.772      -0.345
+sigma2         0.0014      0.000      7.632      0.000       0.001       0.002
+===================================================================================
+Ljung-Box (L1) (Q):                   0.02   Jarque-Bera (JB):                 2.69
+Prob(Q):                              0.90   Prob(JB):                         0.26
+Heteroskedasticity (H):               0.25   Skew:                             0.16
+Prob(H) (two-sided):                  0.00   Kurtosis:                         3.80
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+================================================================================
+CHẨN ĐOÁN HỘI TỤ, TÍNH DỪNG & KHẢ NGHỊCH (STABILITY & INVERTIBILITY):
+ • Thuật toán tối ưu (MLE) : HỘI TỤ THÀNH CÔNG (Số vòng lặp: -1)
+ • Nghiệm MA (Min Modulus) : 1.0498 (> 1.0 -> KHẢ NGHỊCH (Invertible))
+ • Tham số có ý nghĩa (p < 0.05)    : ma.L1 (p=0.0002), ma.S.L12 (p=0.0000), sigma2 (p=0.0000)
+================================================================================
+[2026-11-18 06:57:11] [INFO] [forecaster.py:12] - Generating out-of-sample forecast for 29 future steps...
+[2026-11-18 06:57:12] [INFO] [forecaster.py:18] - Inverting log transformation: actual = exp(y_log), forecast = exp(fc_log)
+[2026-11-18 06:57:12] [INFO] [evaluator.py:47] - Test Evaluation: MAE=12.9540, RMSE=16.1601, MAPE=2.89%, max_error=32.15 at 1960-07-01 (actual=622.00, pred=589.85)
+[2026-11-18 06:57:12] [INFO] [evaluator.py:71] - Residual Properties: N=115, Mean=0.0147, Std=0.5343, Skew=4.197, Kurtosis=64.142
+[2026-11-18 06:57:12] [INFO] [evaluator.py:72] - Jarque-Bera Normality Test: stat=18355.42, p_value=0.0000e+00 -> NON-NORMAL (Fat tails)
+[2026-11-18 06:57:12] [INFO] [evaluator.py:82] -    Ljung-Box at Lag 10: p-value=1.0000 >= 0.05 -> White noise behavior at this lag.
+[2026-11-18 06:57:12] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 12: p-value=4.3991e-03 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-18 06:57:12] [INFO] [evaluator.py:82] -    Ljung-Box at Lag 24: p-value=0.2262 >= 0.05 -> White noise behavior at this lag.
+[2026-11-18 06:57:12] [INFO] [evaluator.py:162] - Residual diagnostics plot saved (overwritten): path=lab2/artifacts/figures/challengers/airpassengers_sarima_residuals.png
+[2026-11-18 06:57:13] [INFO] [forecaster.py:86] - Forecast evaluation plot saved (overwritten): path=lab2/artifacts/figures/challengers/airpassengers_sarima_forecast.png
+[2026-11-18 06:57:13] [INFO] [model_comparator.py:110] - 
+================================================================================
+CHAMPION VS CHALLENGER MODEL EVALUATION GATE (MLOps Time Series Gate)
+================================================================================
+Tiêu chí so sánh           | Champion     | Challenger   | Chênh lệch      | Đánh giá
+--------------------------------------------------------------------------------
+Test RMSE (Tiêu chí chính) | 16.1601      | 16.1601      |    +0.00%       | CHAMPION TỐT HƠN
+Test MAE                   | 12.9540      | 12.9540      |    +0.00%       | CHAMPION TỐT HƠN
+Test MAPE (%)              | 2.89         | 2.89         |    +0.00% pts   | CHAMPION TỐT HƠN
+AIC (Mức độ tối giản)      | -323.75      | -323.75      |    +0.00 pts     | CHAMPION GỌN HƠN
+BIC (Phạt số tham số)      | -316.32      | -316.32      |    +0.00 pts     | CHAMPION GỌN HƠN
+--------------------------------------------------------------------------------
+KẾT QUẢ PHÂN XỬ : TỪ CHỐI (REJECTED)
+LÝ DO CHI TIẾT  : Sai số ngoại mẫu tương đương, nhưng Champion tối giản hơn (AIC Champion thấp hơn 0.00).
+================================================================================
+[2026-11-18 06:57:13] [WARNING] [main.py:191] - 🛑 [CHALLENGER REJECTED] Sai số ngoại mẫu tương đương, nhưng Champion tối giản hơn (AIC Champion thấp hơn 0.00).
+[2026-11-18 06:57:13] [WARNING] [main.py:192] -    Current Champion artifacts preserved in: lab2/artifacts/figures/champions
+[2026-11-18 06:57:13] [INFO] [main.py:193] - 💡 [CHALLENGER DIAGNOSTICS READY] Challenger plots saved in: lab2/artifacts/figures/challengers
+[2026-11-18 06:57:13] [INFO] [main.py:194] -    - Forecast Plot : lab2/artifacts/figures/challengers/airpassengers_sarima_forecast.png
+[2026-11-18 06:57:13] [INFO] [main.py:195] -    - Residuals Plot: lab2/artifacts/figures/challengers/airpassengers_sarima_residuals.png
+[2026-11-18 06:57:13] [INFO] [main.py:196] -    👉 Hãy mở 2 thư mục champions/ và challengers/ để trực tiếp so sánh và tinh chỉnh!
+[2026-11-18 06:57:13] [INFO] [tracker.py:46] - [AUDIT TRAIL] Recorded immutable run entry | run_id=7ed2d2b2 | data_md5=558a08bfda3955c8506436677352f7b8
+[2026-11-18 06:57:13] [INFO] [main.py:213] - 
+################################################################################
+[2026-11-18 06:57:13] [INFO] [main.py:214] - # ✅ [HOÀN TẤT THỰC THI SARIMA]: LƯỢNG HÀNH KHÁCH HÀNG KHÔNG (AIRPASSENGERS)
+[2026-11-18 06:57:13] [INFO] [main.py:215] - # • Kết quả Gate    : REJECTED_PARSIMONY (TỪ CHỐI CHALLENGER)
+[2026-11-18 06:57:13] [INFO] [main.py:216] - # • Lý do chi tiết  : Sai số ngoại mẫu tương đương, nhưng Champion tối giản hơn (AIC Champion thấp hơn 0.00).
+[2026-11-18 06:57:13] [INFO] [main.py:217] - # • Audit Run ID    : 7ed2d2b2
+[2026-11-18 06:57:13] [INFO] [main.py:218] - # • Model File      : lab2/artifacts/models/champions/airpassengers_sarima_champion.joblib
+[2026-11-18 06:57:13] [INFO] [main.py:219] - # • Metrics JSON    : lab2/artifacts/metrics/champions/airpassengers_sarima_champion.json
+[2026-11-18 06:57:13] [INFO] [main.py:220] - # • Biểu đồ EDA     : 1) lab2/artifacts/figures/eda/airpassengers_sarima_eda_01_raw.png
+[2026-11-18 06:57:13] [INFO] [main.py:221] - #                     2) lab2/artifacts/figures/eda/airpassengers_sarima_eda_02_differenced.png
+[2026-11-18 06:57:13] [INFO] [main.py:222] - #                     3) lab2/artifacts/figures/eda/airpassengers_sarima_eda_03_acf_pacf.png
+[2026-11-18 06:57:13] [INFO] [main.py:223] - # • Biểu đồ Đánh Giá: 1) lab2/artifacts/figures/champions/airpassengers_sarima_residuals.png
+[2026-11-18 06:57:13] [INFO] [main.py:224] - #                     2) lab2/artifacts/figures/champions/airpassengers_sarima_forecast.png
+[2026-11-18 06:57:13] [INFO] [main.py:225] - # • Thời gian chạy  : Total=3.451s (Load=0.007s, Prep=0.004s, Stat=0.006s, Train=0.401s, Eval=1.349s)
+[2026-11-18 06:57:13] [INFO] [main.py:229] - ################################################################################
+
+[2026-11-18 06:57:13] [INFO] [main.py:249] - 
+================================================================================
+[2026-11-18 06:57:13] [INFO] [main.py:250] - >>> 🏁 ĐÃ CHẠY HOÀN TẤT VÀ XUẤT BẢN THÀNH CÔNG CẢ 2 BÀI TOÁN ARIMA VÀ SARIMA! <<<
+[2026-11-18 06:57:13] [INFO] [main.py:251] - ================================================================================
+
+[2026-11-18 06:57:25] [INFO] [data_loader.py:15] - Ingesting raw dataset: path=lab2/data/raw/a10.csv, md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-18 06:57:25] [INFO] [data_loader.py:18] - Dataset loaded: rows=204, columns=['date', 'value']
+[2026-11-18 06:57:25] [INFO] [data_loader.py:48] - Data Validation: time_span=1991-07 to 2008-06, monotonic=True, freq=MS, missing_gaps=0, nulls=0, min=2.81, max=29.67, has_negatives=False
+[2026-11-18 06:57:25] [INFO] [stationarity.py:55] - Evaluating Differencing Orders & Over-differencing Safeguard...
+[2026-11-18 06:57:25] [INFO] [stationarity.py:78] -    Order d=0 (Original): Variance=5241.8868, Std=72.4009, Lag1_ACF=0.9998
+[2026-11-18 06:57:25] [INFO] [stationarity.py:82] -    Order d=1: Variance=2.0677 (-99.96%), Std=1.4380, Lag1_ACF=-0.6245
+[2026-11-18 06:57:25] [INFO] [stationarity.py:82] -    Order d=2: Variance=6.7373 (+225.83%), Std=2.5956, Lag1_ACF=-0.7715
+[2026-11-18 06:57:25] [WARNING] [stationarity.py:89] - [OVER-DIFFERENCING DETECTED at d=2] Variance increased by +225.8% and Lag-1 Autocorrelation -0.7715 < -0.5! Model should NOT use d=2.
+[2026-11-18 06:57:25] [INFO] [model_comparator.py:110] - 
+================================================================================
+CHAMPION VS CHALLENGER MODEL EVALUATION GATE (MLOps Time Series Gate)
+================================================================================
+Tiêu chí so sánh           | Champion     | Challenger   | Chênh lệch      | Đánh giá
+--------------------------------------------------------------------------------
+Test RMSE (Tiêu chí chính) | 5.0000       | 4.5000       |   -10.00%       | CHALLENGER TỐT HƠN
+Test MAE                   | 4.0000       | 3.5000       |   -12.50%       | CHALLENGER TỐT HƠN
+Test MAPE (%)              | 18.00        | 15.00        |    -3.00% pts   | CHALLENGER TỐT HƠN
+AIC (Mức độ tối giản)      | 520.00       | 500.00       |   -20.00 pts     | CHALLENGER GỌN HƠN
+BIC (Phạt số tham số)      | 530.00       | 510.00       |   -20.00 pts     | CHALLENGER GỌN HƠN
+--------------------------------------------------------------------------------
+KẾT QUẢ PHÂN XỬ : THĂNG HẠNG (PROMOTED)
+LÝ DO CHI TIẾT  : Challenger vượt trội Champion: Test RMSE giảm 10.00% (từ 5.0000 xuống 4.5000).
+================================================================================
+[2026-11-18 06:57:25] [INFO] [model_comparator.py:110] - 
+================================================================================
+CHAMPION VS CHALLENGER MODEL EVALUATION GATE (MLOps Time Series Gate)
+================================================================================
+Tiêu chí so sánh           | Champion     | Challenger   | Chênh lệch      | Đánh giá
+--------------------------------------------------------------------------------
+Test RMSE (Tiêu chí chính) | 5.0000       | 6.0000       |   +20.00%       | CHAMPION TỐT HƠN
+Test MAE                   | 4.0000       | 5.0000       |   +25.00%       | CHAMPION TỐT HƠN
+Test MAPE (%)              | 18.00        | 22.00        |    +4.00% pts   | CHAMPION TỐT HƠN
+AIC (Mức độ tối giản)      | 520.00       | 550.00       |   +30.00 pts     | CHAMPION GỌN HƠN
+BIC (Phạt số tham số)      | 530.00       | 560.00       |   +30.00 pts     | CHAMPION GỌN HƠN
+--------------------------------------------------------------------------------
+KẾT QUẢ PHÂN XỬ : TỪ CHỐI (REJECTED)
+LÝ DO CHI TIẾT  : Challenger kém hơn Champion: Test RMSE tăng +20.00% (từ 5.0000 lên 6.0000).
+================================================================================
+[2026-11-18 06:57:25] [INFO] [preprocessor.py:34] - Train/Test split: total=10, train=8 (2020-01 -> 2020-08), test=2 (2020-09 -> 2020-10)
+[2026-11-18 06:57:25] [INFO] [stationarity.py:22] - --- ADF Test [Synthetic Noise] Autolag Evaluation (Criterion: AIC) ---
+[2026-11-18 06:57:25] [INFO] [stationarity.py:29] -    Candidate Lag  0: AIC=  235.6941 [MINIMUM AIC - SELECTED]
+[2026-11-18 06:57:25] [INFO] [stationarity.py:29] -    Candidate Lag  1: AIC=  237.5200
+[2026-11-18 06:57:25] [INFO] [stationarity.py:29] -    Candidate Lag  2: AIC=  238.6671
+[2026-11-18 06:57:25] [INFO] [stationarity.py:29] -    Candidate Lag  3: AIC=  239.7886
+[2026-11-18 06:57:25] [INFO] [stationarity.py:29] -    Candidate Lag  4: AIC=  238.0330
+[2026-11-18 06:57:25] [INFO] [stationarity.py:29] -    Candidate Lag  5: AIC=  239.7417
+[2026-11-18 06:57:25] [INFO] [stationarity.py:29] -    Candidate Lag  6: AIC=  241.7302
+[2026-11-18 06:57:25] [INFO] [stationarity.py:29] -    Candidate Lag  7: AIC=  242.7425
+[2026-11-18 06:57:25] [INFO] [stationarity.py:29] -    Candidate Lag  8: AIC=  244.7368
+[2026-11-18 06:57:25] [INFO] [stationarity.py:29] -    Candidate Lag  9: AIC=  243.9938
+[2026-11-18 06:57:25] [INFO] [stationarity.py:29] -    Candidate Lag 10: AIC=  243.2645
+[2026-11-18 06:57:25] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC=  244.6443
+[2026-11-18 06:57:25] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC=  246.2198
+[2026-11-18 06:57:25] [INFO] [stationarity.py:34] - ADF Result [Synthetic Noise]: stat=-10.0844, p_value=1.1655e-17, used_lag=0/12, nobs=99, crit_5%=-2.8912 -> STATIONARY (Bác bỏ H0)

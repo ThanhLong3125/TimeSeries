@@ -320,3 +320,1076 @@
 [2026-11-16 00:06:16] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC=  244.6443
 [2026-11-16 00:06:16] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC=  246.2198
 [2026-11-16 00:06:16] [INFO] [stationarity.py:34] - ADF Result [Synthetic Noise]: stat=-10.0844, p_value=1.1655e-17, used_lag=0/12, nobs=99, crit_5%=-2.8912 -> STATIONARY (Bác bỏ H0)
+[2026-11-17 22:25:05] [INFO] [data_loader.py:15] - Ingesting raw dataset: path=lab2/data/raw/a10.csv, md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-17 22:25:05] [INFO] [data_loader.py:18] - Dataset loaded: rows=204, columns=['date', 'value']
+[2026-11-17 22:25:05] [INFO] [data_loader.py:48] - Data Validation: time_span=1991-07 to 2008-06, monotonic=True, freq=MS, missing_gaps=0, nulls=0, min=2.81, max=29.67, has_negatives=False
+[2026-11-17 22:25:05] [INFO] [stationarity.py:55] - Evaluating Differencing Orders & Over-differencing Safeguard...
+[2026-11-17 22:25:05] [INFO] [stationarity.py:78] -    Order d=0 (Original): Variance=5241.6718, Std=72.3994, Lag1_ACF=0.9998
+[2026-11-17 22:25:05] [INFO] [stationarity.py:82] -    Order d=1: Variance=2.4031 (-99.95%), Std=1.5502, Lag1_ACF=-0.5218
+[2026-11-17 22:25:05] [INFO] [stationarity.py:82] -    Order d=2: Variance=7.3447 (+205.64%), Std=2.7101, Lag1_ACF=-0.6665
+[2026-11-17 22:25:05] [WARNING] [stationarity.py:89] - [OVER-DIFFERENCING DETECTED at d=2] Variance increased by +205.6% and Lag-1 Autocorrelation -0.6665 < -0.5! Model should NOT use d=2.
+[2026-11-17 22:25:05] [INFO] [preprocessor.py:34] - Train/Test split: total=10, train=8 (2020-01 -> 2020-08), test=2 (2020-09 -> 2020-10)
+[2026-11-17 22:25:05] [INFO] [stationarity.py:22] - --- ADF Test [Synthetic Noise] Autolag Evaluation (Criterion: AIC) ---
+[2026-11-17 22:25:05] [INFO] [stationarity.py:29] -    Candidate Lag  0: AIC=  235.6941 [MINIMUM AIC - SELECTED]
+[2026-11-17 22:25:05] [INFO] [stationarity.py:29] -    Candidate Lag  1: AIC=  237.5200
+[2026-11-17 22:25:05] [INFO] [stationarity.py:29] -    Candidate Lag  2: AIC=  238.6671
+[2026-11-17 22:25:05] [INFO] [stationarity.py:29] -    Candidate Lag  3: AIC=  239.7886
+[2026-11-17 22:25:05] [INFO] [stationarity.py:29] -    Candidate Lag  4: AIC=  238.0330
+[2026-11-17 22:25:05] [INFO] [stationarity.py:29] -    Candidate Lag  5: AIC=  239.7417
+[2026-11-17 22:25:05] [INFO] [stationarity.py:29] -    Candidate Lag  6: AIC=  241.7302
+[2026-11-17 22:25:05] [INFO] [stationarity.py:29] -    Candidate Lag  7: AIC=  242.7425
+[2026-11-17 22:25:05] [INFO] [stationarity.py:29] -    Candidate Lag  8: AIC=  244.7368
+[2026-11-17 22:25:05] [INFO] [stationarity.py:29] -    Candidate Lag  9: AIC=  243.9938
+[2026-11-17 22:25:05] [INFO] [stationarity.py:29] -    Candidate Lag 10: AIC=  243.2645
+[2026-11-17 22:25:05] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC=  244.6443
+[2026-11-17 22:25:05] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC=  246.2198
+[2026-11-17 22:25:05] [INFO] [stationarity.py:34] - ADF Result [Synthetic Noise]: stat=-10.0844, p_value=1.1655e-17, used_lag=0/12, nobs=99, crit_5%=-2.8912 -> STATIONARY (Bác bỏ H0)
+[2026-11-17 22:25:12] [INFO] [main.py:34] - ================================================================================
+[2026-11-17 22:25:12] [INFO] [main.py:35] - STARTING TIME SERIES PIPELINE: a10_arima_baseline
+[2026-11-17 22:25:12] [INFO] [main.py:36] - Config: lab2/configs/arima_a10.yaml | DryRun=False
+[2026-11-17 22:25:12] [INFO] [main.py:37] - ================================================================================
+[2026-11-17 22:25:12] [INFO] [data_loader.py:15] - Ingesting raw dataset: path=lab2/data/raw/a10.csv, md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-17 22:25:12] [INFO] [data_loader.py:18] - Dataset loaded: rows=204, columns=['date', 'value']
+[2026-11-17 22:25:12] [INFO] [data_loader.py:48] - Data Validation: time_span=1991-07 to 2008-06, monotonic=True, freq=MS, missing_gaps=0, nulls=0, min=2.81, max=29.67, has_negatives=False
+[2026-11-17 22:25:12] [INFO] [preprocessor.py:34] - Train/Test split: total=204, train=163 (1991-07 -> 2005-01), test=41 (2005-02 -> 2008-06)
+[2026-11-17 22:25:12] [INFO] [eda.py:55] - EDA Raw series plot saved: path=lab2/artifacts/figures/a10_arima_baseline_eda_01_raw_run_1794929112.png
+[2026-11-17 22:25:12] [INFO] [stationarity.py:22] - --- ADF Test [a10_arima_baseline (Train Raw)] Autolag Evaluation (Criterion: AIC) ---
+[2026-11-17 22:25:12] [INFO] [stationarity.py:29] -    Candidate Lag  0: AIC=  568.2089
+[2026-11-17 22:25:12] [INFO] [stationarity.py:29] -    Candidate Lag  1: AIC=  556.8780
+[2026-11-17 22:25:12] [INFO] [stationarity.py:29] -    Candidate Lag  2: AIC=  553.3574
+[2026-11-17 22:25:12] [INFO] [stationarity.py:29] -    Candidate Lag  3: AIC=  552.7783
+[2026-11-17 22:25:12] [INFO] [stationarity.py:29] -    Candidate Lag  4: AIC=  551.5923
+[2026-11-17 22:25:12] [INFO] [stationarity.py:29] -    Candidate Lag  5: AIC=  549.0680
+[2026-11-17 22:25:12] [INFO] [stationarity.py:29] -    Candidate Lag  6: AIC=  550.9243
+[2026-11-17 22:25:12] [INFO] [stationarity.py:29] -    Candidate Lag  7: AIC=  551.1322
+[2026-11-17 22:25:12] [INFO] [stationarity.py:29] -    Candidate Lag  8: AIC=  550.7333
+[2026-11-17 22:25:12] [INFO] [stationarity.py:29] -    Candidate Lag  9: AIC=  547.6864
+[2026-11-17 22:25:12] [INFO] [stationarity.py:29] -    Candidate Lag 10: AIC=  533.0005
+[2026-11-17 22:25:12] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC=  289.9872
+[2026-11-17 22:25:12] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC=  285.7654
+[2026-11-17 22:25:12] [INFO] [stationarity.py:29] -    Candidate Lag 13: AIC=  273.9349
+[2026-11-17 22:25:12] [INFO] [stationarity.py:29] -    Candidate Lag 14: AIC=  262.0001 [MINIMUM AIC - SELECTED]
+[2026-11-17 22:25:12] [INFO] [stationarity.py:34] - ADF Result [a10_arima_baseline (Train Raw)]: stat=2.2309, p_value=9.9891e-01, used_lag=14/14, nobs=148, crit_5%=-2.8813 -> NON-STATIONARY (Chưa đủ bằng chứng bác bỏ H0)
+[2026-11-17 22:25:12] [INFO] [stationarity.py:55] - Evaluating Differencing Orders & Over-differencing Safeguard...
+[2026-11-17 22:25:12] [INFO] [stationarity.py:78] -    Order d=0 (Original): Variance=15.5181, Std=3.9393, Lag1_ACF=0.9159
+[2026-11-17 22:25:12] [INFO] [stationarity.py:82] -    Order d=1: Variance=2.5445 (-83.60%), Std=1.5951, Lag1_ACF=-0.3204
+[2026-11-17 22:25:12] [INFO] [stationarity.py:82] -    Order d=2: Variance=6.7327 (+164.60%), Std=2.5947, Lag1_ACF=-0.5917
+[2026-11-17 22:25:12] [WARNING] [stationarity.py:89] - [OVER-DIFFERENCING DETECTED at d=2] Variance increased by +164.6% and Lag-1 Autocorrelation -0.5917 < -0.5! Model should NOT use d=2.
+[2026-11-17 22:25:13] [INFO] [eda.py:109] - EDA Differenced series plot saved: path=lab2/artifacts/figures/a10_arima_baseline_eda_02_differenced_run_1794929112.png
+[2026-11-17 22:25:13] [INFO] [eda.py:146] - EDA ACF/PACF plot saved: path=lab2/artifacts/figures/a10_arima_baseline_eda_03_acf_pacf_run_1794929112.png
+[2026-11-17 22:25:13] [INFO] [trainer.py:12] - Training Model: type=ARIMA, order=(1, 1, 1), seasonal_order=None
+[2026-11-17 22:25:13] [INFO] [trainer.py:30] - Optimization Result: converged=True, iterations=-1, LogLikelihood=-288.234, AIC=582.47, BIC=591.73
+[2026-11-17 22:25:13] [INFO] [trainer.py:39] -    AR Roots Modulus (min): 3.0098 (Stationary if > 1.0)
+[2026-11-17 22:25:13] [INFO] [trainer.py:46] -    MA Roots Modulus (min): 1.2408 (Invertible if > 1.0)
+[2026-11-17 22:25:13] [INFO] [trainer.py:58] - Model artifact persisted: path=lab2/artifacts/models/a10_arima_baseline_run_1794929112.joblib
+[2026-11-17 22:25:13] [INFO] [forecaster.py:12] - Generating out-of-sample forecast for 41 future steps...
+[2026-11-17 22:25:13] [INFO] [evaluator.py:47] - Test Evaluation: MAE=3.6667, RMSE=4.6243, MAPE=18.04%, max_error=12.13 at 2008-01-01 (actual=29.67, pred=17.54)
+[2026-11-17 22:25:13] [INFO] [evaluator.py:71] - Residual Properties: N=163, Mean=0.3181, Std=1.4228, Skew=-0.955, Kurtosis=3.630
+[2026-11-17 22:25:13] [INFO] [evaluator.py:72] - Jarque-Bera Normality Test: stat=106.68, p_value=6.8409e-24 -> NON-NORMAL (Fat tails)
+[2026-11-17 22:25:13] [INFO] [evaluator.py:82] -    Ljung-Box at Lag 10: p-value=0.3857 >= 0.05 -> White noise behavior at this lag.
+[2026-11-17 22:25:13] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 12: p-value=7.0712e-22 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-17 22:25:13] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 24: p-value=2.9888e-35 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-17 22:25:13] [INFO] [evaluator.py:99] - Metrics JSON persisted: path=lab2/artifacts/metrics/a10_arima_baseline_run_1794929112.json
+[2026-11-17 22:25:14] [INFO] [evaluator.py:157] - Residual diagnostics plot saved: path=lab2/artifacts/figures/a10_arima_baseline_residuals_run_1794929112.png
+[2026-11-17 22:25:15] [INFO] [forecaster.py:82] - Forecast evaluation plot saved: path=lab2/artifacts/figures/a10_arima_baseline_forecast_run_1794929112.png
+[2026-11-17 22:25:15] [INFO] [tracker.py:44] - [AUDIT TRAIL] Recorded immutable run entry | run_id=ff1f3daf | data_md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-17 22:25:15] [INFO] [main.py:158] - ================================================================================
+[2026-11-17 22:25:15] [INFO] [main.py:159] - PIPELINE EXECUTION COMPLETED SUCCESSFULLY!
+[2026-11-17 22:25:15] [INFO] [main.py:160] - Audit Run ID   : ff1f3daf
+[2026-11-17 22:25:15] [INFO] [main.py:161] - Model Artifact : lab2/artifacts/models/a10_arima_baseline_ff1f3daf.joblib
+[2026-11-17 22:25:15] [INFO] [main.py:162] - Metrics JSON   : lab2/artifacts/metrics/a10_arima_baseline_ff1f3daf.json
+[2026-11-17 22:25:15] [INFO] [main.py:163] - EDA Plots      : 1) lab2/artifacts/figures/a10_arima_baseline_eda_01_raw_ff1f3daf.png
+[2026-11-17 22:25:15] [INFO] [main.py:164] -                  2) lab2/artifacts/figures/a10_arima_baseline_eda_02_differenced_ff1f3daf.png
+[2026-11-17 22:25:15] [INFO] [main.py:165] -                  3) lab2/artifacts/figures/a10_arima_baseline_eda_03_acf_pacf_ff1f3daf.png
+[2026-11-17 22:25:15] [INFO] [main.py:166] - Eval Plots     : 1) lab2/artifacts/figures/a10_arima_baseline_residuals_ff1f3daf.png
+[2026-11-17 22:25:15] [INFO] [main.py:167] -                  2) lab2/artifacts/figures/a10_arima_baseline_forecast_ff1f3daf.png
+[2026-11-17 22:25:15] [INFO] [main.py:168] - Execution Time : Total=2.789s (Load=0.005s, Prep=0.002s, Stat=0.008s, Train=0.088s, Eval=1.326s)
+[2026-11-17 22:25:15] [INFO] [main.py:172] - ================================================================================
+
+[2026-11-17 22:31:41] [INFO] [data_loader.py:15] - Ingesting raw dataset: path=lab2/data/raw/a10.csv, md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-17 22:31:41] [INFO] [data_loader.py:18] - Dataset loaded: rows=204, columns=['date', 'value']
+[2026-11-17 22:31:41] [INFO] [data_loader.py:48] - Data Validation: time_span=1991-07 to 2008-06, monotonic=True, freq=MS, missing_gaps=0, nulls=0, min=2.81, max=29.67, has_negatives=False
+[2026-11-17 22:31:41] [INFO] [stationarity.py:55] - Evaluating Differencing Orders & Over-differencing Safeguard...
+[2026-11-17 22:31:41] [INFO] [stationarity.py:78] -    Order d=0 (Original): Variance=5266.1310, Std=72.5681, Lag1_ACF=0.9998
+[2026-11-17 22:31:41] [INFO] [stationarity.py:82] -    Order d=1: Variance=1.5965 (-99.97%), Std=1.2635, Lag1_ACF=-0.5133
+[2026-11-17 22:31:41] [INFO] [stationarity.py:82] -    Order d=2: Variance=4.8243 (+202.19%), Std=2.1964, Lag1_ACF=-0.6598
+[2026-11-17 22:31:41] [WARNING] [stationarity.py:89] - [OVER-DIFFERENCING DETECTED at d=2] Variance increased by +202.2% and Lag-1 Autocorrelation -0.6598 < -0.5! Model should NOT use d=2.
+[2026-11-17 22:31:41] [INFO] [preprocessor.py:34] - Train/Test split: total=10, train=8 (2020-01 -> 2020-08), test=2 (2020-09 -> 2020-10)
+[2026-11-17 22:31:41] [INFO] [stationarity.py:22] - --- ADF Test [Synthetic Noise] Autolag Evaluation (Criterion: AIC) ---
+[2026-11-17 22:31:41] [INFO] [stationarity.py:29] -    Candidate Lag  0: AIC=  235.6941 [MINIMUM AIC - SELECTED]
+[2026-11-17 22:31:41] [INFO] [stationarity.py:29] -    Candidate Lag  1: AIC=  237.5200
+[2026-11-17 22:31:41] [INFO] [stationarity.py:29] -    Candidate Lag  2: AIC=  238.6671
+[2026-11-17 22:31:41] [INFO] [stationarity.py:29] -    Candidate Lag  3: AIC=  239.7886
+[2026-11-17 22:31:41] [INFO] [stationarity.py:29] -    Candidate Lag  4: AIC=  238.0330
+[2026-11-17 22:31:41] [INFO] [stationarity.py:29] -    Candidate Lag  5: AIC=  239.7417
+[2026-11-17 22:31:41] [INFO] [stationarity.py:29] -    Candidate Lag  6: AIC=  241.7302
+[2026-11-17 22:31:41] [INFO] [stationarity.py:29] -    Candidate Lag  7: AIC=  242.7425
+[2026-11-17 22:31:41] [INFO] [stationarity.py:29] -    Candidate Lag  8: AIC=  244.7368
+[2026-11-17 22:31:41] [INFO] [stationarity.py:29] -    Candidate Lag  9: AIC=  243.9938
+[2026-11-17 22:31:41] [INFO] [stationarity.py:29] -    Candidate Lag 10: AIC=  243.2645
+[2026-11-17 22:31:41] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC=  244.6443
+[2026-11-17 22:31:41] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC=  246.2198
+[2026-11-17 22:31:41] [INFO] [stationarity.py:34] - ADF Result [Synthetic Noise]: stat=-10.0844, p_value=1.1655e-17, used_lag=0/12, nobs=99, crit_5%=-2.8912 -> STATIONARY (Bác bỏ H0)
+[2026-11-17 22:31:47] [INFO] [main.py:34] - ================================================================================
+[2026-11-17 22:31:47] [INFO] [main.py:35] - STARTING TIME SERIES PIPELINE: a10_arima_baseline
+[2026-11-17 22:31:47] [INFO] [main.py:36] - Config: lab2/configs/arima_a10.yaml | DryRun=False
+[2026-11-17 22:31:47] [INFO] [main.py:37] - ================================================================================
+[2026-11-17 22:31:47] [INFO] [data_loader.py:15] - Ingesting raw dataset: path=lab2/data/raw/a10.csv, md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-17 22:31:47] [INFO] [data_loader.py:18] - Dataset loaded: rows=204, columns=['date', 'value']
+[2026-11-17 22:31:47] [INFO] [data_loader.py:48] - Data Validation: time_span=1991-07 to 2008-06, monotonic=True, freq=MS, missing_gaps=0, nulls=0, min=2.81, max=29.67, has_negatives=False
+[2026-11-17 22:31:47] [INFO] [preprocessor.py:34] - Train/Test split: total=204, train=163 (1991-07 -> 2005-01), test=41 (2005-02 -> 2008-06)
+[2026-11-17 22:31:48] [INFO] [eda.py:55] - EDA Raw series plot saved: path=lab2/artifacts/figures/a10_arima_baseline_eda_01_raw_run_1794929507.png
+[2026-11-17 22:31:48] [INFO] [stationarity.py:22] - --- ADF Test [a10_arima_baseline (Train Raw)] Autolag Evaluation (Criterion: AIC) ---
+[2026-11-17 22:31:48] [INFO] [stationarity.py:29] -    Candidate Lag  0: AIC=  568.2089
+[2026-11-17 22:31:48] [INFO] [stationarity.py:29] -    Candidate Lag  1: AIC=  556.8780
+[2026-11-17 22:31:48] [INFO] [stationarity.py:29] -    Candidate Lag  2: AIC=  553.3574
+[2026-11-17 22:31:48] [INFO] [stationarity.py:29] -    Candidate Lag  3: AIC=  552.7783
+[2026-11-17 22:31:48] [INFO] [stationarity.py:29] -    Candidate Lag  4: AIC=  551.5923
+[2026-11-17 22:31:48] [INFO] [stationarity.py:29] -    Candidate Lag  5: AIC=  549.0680
+[2026-11-17 22:31:48] [INFO] [stationarity.py:29] -    Candidate Lag  6: AIC=  550.9243
+[2026-11-17 22:31:48] [INFO] [stationarity.py:29] -    Candidate Lag  7: AIC=  551.1322
+[2026-11-17 22:31:48] [INFO] [stationarity.py:29] -    Candidate Lag  8: AIC=  550.7333
+[2026-11-17 22:31:48] [INFO] [stationarity.py:29] -    Candidate Lag  9: AIC=  547.6864
+[2026-11-17 22:31:48] [INFO] [stationarity.py:29] -    Candidate Lag 10: AIC=  533.0005
+[2026-11-17 22:31:48] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC=  289.9872
+[2026-11-17 22:31:48] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC=  285.7654
+[2026-11-17 22:31:48] [INFO] [stationarity.py:29] -    Candidate Lag 13: AIC=  273.9349
+[2026-11-17 22:31:48] [INFO] [stationarity.py:29] -    Candidate Lag 14: AIC=  262.0001 [MINIMUM AIC - SELECTED]
+[2026-11-17 22:31:48] [INFO] [stationarity.py:34] - ADF Result [a10_arima_baseline (Train Raw)]: stat=2.2309, p_value=9.9891e-01, used_lag=14/14, nobs=148, crit_5%=-2.8813 -> NON-STATIONARY (Chưa đủ bằng chứng bác bỏ H0)
+[2026-11-17 22:31:48] [INFO] [stationarity.py:55] - Evaluating Differencing Orders & Over-differencing Safeguard...
+[2026-11-17 22:31:48] [INFO] [stationarity.py:78] -    Order d=0 (Original): Variance=15.5181, Std=3.9393, Lag1_ACF=0.9159
+[2026-11-17 22:31:48] [INFO] [stationarity.py:82] -    Order d=1: Variance=2.5445 (-83.60%), Std=1.5951, Lag1_ACF=-0.3204
+[2026-11-17 22:31:48] [INFO] [stationarity.py:82] -    Order d=2: Variance=6.7327 (+164.60%), Std=2.5947, Lag1_ACF=-0.5917
+[2026-11-17 22:31:48] [WARNING] [stationarity.py:89] - [OVER-DIFFERENCING DETECTED at d=2] Variance increased by +164.6% and Lag-1 Autocorrelation -0.5917 < -0.5! Model should NOT use d=2.
+[2026-11-17 22:31:48] [INFO] [eda.py:109] - EDA Differenced series plot saved: path=lab2/artifacts/figures/a10_arima_baseline_eda_02_differenced_run_1794929507.png
+[2026-11-17 22:31:49] [INFO] [eda.py:146] - EDA ACF/PACF plot saved: path=lab2/artifacts/figures/a10_arima_baseline_eda_03_acf_pacf_run_1794929507.png
+[2026-11-17 22:31:49] [INFO] [trainer.py:101] - Training Model: type=ARIMA, order=(1, 1, 1), seasonal_order=None
+[2026-11-17 22:31:49] [INFO] [trainer.py:95] - 
+================================================================================
+ARIMA MODEL ESTIMATION SUMMARY — A10_ARIMA_BASELINE
+================================================================================
+Data                   : a10_drug_sales
+Date range             : 1991-07-01 00:00:00 to 2005-01-01 00:00:00
+Number of observations : 163
+AR order (p)           : 1
+Differencing order (d) : 1
+MA order (q)           : 1
+Model Specification    : ARIMA(1, 1, 1)
+================================================================================
+STATISTICAL ESTIMATION RESULTS (STATSMODELS)
+================================================================================
+                               SARIMAX Results                                
+==============================================================================
+Dep. Variable:                  value   No. Observations:                  163
+Model:                 ARIMA(1, 1, 1)   Log Likelihood                -288.234
+Date:                Tue, 17 Nov 2026   AIC                            582.467
+Time:                        22:31:49   BIC                            591.730
+Sample:                    07-01-1991   HQIC                           586.228
+                         - 01-01-2005                                         
+Covariance Type:                  opg                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+ar.L1          0.3322      0.237      1.404      0.160      -0.132       0.796
+ma.L1         -0.8059      0.134     -6.017      0.000      -1.068      -0.543
+sigma2         2.0487      0.187     10.957      0.000       1.682       2.415
+===================================================================================
+Ljung-Box (L1) (Q):                   0.38   Jarque-Bera (JB):               117.88
+Prob(Q):                              0.54   Prob(JB):                         0.00
+Heteroskedasticity (H):               5.46   Skew:                            -1.02
+Prob(H) (two-sided):                  0.00   Kurtosis:                         6.65
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+================================================================================
+CHẨN ĐOÁN HỘI TỤ, TÍNH DỪNG & KHẢ NGHỊCH (STABILITY & INVERTIBILITY):
+ • Thuật toán tối ưu (MLE) : HỘI TỤ THÀNH CÔNG (Số vòng lặp: -1)
+ • Nghiệm AR (Min Modulus) : 3.0098 (> 1.0 -> DỪNG (Stationary))
+ • Nghiệm MA (Min Modulus) : 1.2408 (> 1.0 -> KHẢ NGHỊCH (Invertible))
+ • Tham số có ý nghĩa (p < 0.05)    : ma.L1 (p=0.0000), sigma2 (p=0.0000)
+ • Tham số không có ý nghĩa (p >= 0.05): ar.L1 (p=0.1603)
+================================================================================
+[2026-11-17 22:31:49] [INFO] [trainer.py:131] - Model artifact persisted: path=lab2/artifacts/models/a10_arima_baseline_run_1794929507.joblib
+[2026-11-17 22:31:49] [INFO] [forecaster.py:12] - Generating out-of-sample forecast for 41 future steps...
+[2026-11-17 22:31:49] [INFO] [evaluator.py:47] - Test Evaluation: MAE=3.6667, RMSE=4.6243, MAPE=18.04%, max_error=12.13 at 2008-01-01 (actual=29.67, pred=17.54)
+[2026-11-17 22:31:49] [INFO] [evaluator.py:71] - Residual Properties: N=163, Mean=0.3181, Std=1.4228, Skew=-0.955, Kurtosis=3.630
+[2026-11-17 22:31:49] [INFO] [evaluator.py:72] - Jarque-Bera Normality Test: stat=106.68, p_value=6.8409e-24 -> NON-NORMAL (Fat tails)
+[2026-11-17 22:31:49] [INFO] [evaluator.py:82] -    Ljung-Box at Lag 10: p-value=0.3857 >= 0.05 -> White noise behavior at this lag.
+[2026-11-17 22:31:49] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 12: p-value=7.0712e-22 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-17 22:31:49] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 24: p-value=2.9888e-35 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-17 22:31:49] [INFO] [evaluator.py:99] - Metrics JSON persisted: path=lab2/artifacts/metrics/a10_arima_baseline_run_1794929507.json
+[2026-11-17 22:31:49] [INFO] [evaluator.py:157] - Residual diagnostics plot saved: path=lab2/artifacts/figures/a10_arima_baseline_residuals_run_1794929507.png
+[2026-11-17 22:31:50] [INFO] [forecaster.py:82] - Forecast evaluation plot saved: path=lab2/artifacts/figures/a10_arima_baseline_forecast_run_1794929507.png
+[2026-11-17 22:31:50] [INFO] [tracker.py:44] - [AUDIT TRAIL] Recorded immutable run entry | run_id=8438d468 | data_md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-17 22:31:50] [INFO] [main.py:160] - ================================================================================
+[2026-11-17 22:31:50] [INFO] [main.py:161] - PIPELINE EXECUTION COMPLETED SUCCESSFULLY!
+[2026-11-17 22:31:50] [INFO] [main.py:162] - Audit Run ID   : 8438d468
+[2026-11-17 22:31:50] [INFO] [main.py:163] - Model Artifact : lab2/artifacts/models/a10_arima_baseline_8438d468.joblib
+[2026-11-17 22:31:50] [INFO] [main.py:164] - Metrics JSON   : lab2/artifacts/metrics/a10_arima_baseline_8438d468.json
+[2026-11-17 22:31:50] [INFO] [main.py:165] - EDA Plots      : 1) lab2/artifacts/figures/a10_arima_baseline_eda_01_raw_8438d468.png
+[2026-11-17 22:31:50] [INFO] [main.py:166] -                  2) lab2/artifacts/figures/a10_arima_baseline_eda_02_differenced_8438d468.png
+[2026-11-17 22:31:50] [INFO] [main.py:167] -                  3) lab2/artifacts/figures/a10_arima_baseline_eda_03_acf_pacf_8438d468.png
+[2026-11-17 22:31:50] [INFO] [main.py:168] - Eval Plots     : 1) lab2/artifacts/figures/a10_arima_baseline_residuals_8438d468.png
+[2026-11-17 22:31:50] [INFO] [main.py:169] -                  2) lab2/artifacts/figures/a10_arima_baseline_forecast_8438d468.png
+[2026-11-17 22:31:50] [INFO] [main.py:170] - Execution Time : Total=2.629s (Load=0.006s, Prep=0.002s, Stat=0.006s, Train=0.058s, Eval=1.245s)
+[2026-11-17 22:31:50] [INFO] [main.py:174] - ================================================================================
+
+[2026-11-17 22:31:56] [INFO] [main.py:34] - ================================================================================
+[2026-11-17 22:31:56] [INFO] [main.py:35] - STARTING TIME SERIES PIPELINE: airpassengers_sarima
+[2026-11-17 22:31:56] [INFO] [main.py:36] - Config: lab2/configs/sarima_airpassengers.yaml | DryRun=False
+[2026-11-17 22:31:56] [INFO] [main.py:37] - ================================================================================
+[2026-11-17 22:31:56] [INFO] [data_loader.py:15] - Ingesting raw dataset: path=lab2/data/raw/AirPassengers.csv, md5=558a08bfda3955c8506436677352f7b8
+[2026-11-17 22:31:56] [INFO] [data_loader.py:18] - Dataset loaded: rows=144, columns=['Month', 'Passengers']
+[2026-11-17 22:31:56] [INFO] [data_loader.py:48] - Data Validation: time_span=1949-01 to 1960-12, monotonic=True, freq=MS, missing_gaps=0, nulls=0, min=104.00, max=622.00, has_negatives=False
+[2026-11-17 22:31:56] [INFO] [preprocessor.py:18] - Applying natural logarithm transform: y_log = ln(y) to stabilize variance (Heteroskedasticity fix)
+[2026-11-17 22:31:56] [INFO] [preprocessor.py:34] - Train/Test split: total=144, train=115 (1949-01 -> 1958-07), test=29 (1958-08 -> 1960-12)
+[2026-11-17 22:31:56] [INFO] [eda.py:55] - EDA Raw series plot saved: path=lab2/artifacts/figures/airpassengers_sarima_eda_01_raw_run_1794929516.png
+[2026-11-17 22:31:56] [INFO] [stationarity.py:22] - --- ADF Test [airpassengers_sarima (Train Raw)] Autolag Evaluation (Criterion: AIC) ---
+[2026-11-17 22:31:56] [INFO] [stationarity.py:29] -    Candidate Lag  0: AIC= -166.8594
+[2026-11-17 22:31:56] [INFO] [stationarity.py:29] -    Candidate Lag  1: AIC= -168.7751
+[2026-11-17 22:31:56] [INFO] [stationarity.py:29] -    Candidate Lag  2: AIC= -169.5240
+[2026-11-17 22:31:56] [INFO] [stationarity.py:29] -    Candidate Lag  3: AIC= -167.5285
+[2026-11-17 22:31:56] [INFO] [stationarity.py:29] -    Candidate Lag  4: AIC= -177.9177
+[2026-11-17 22:31:56] [INFO] [stationarity.py:29] -    Candidate Lag  5: AIC= -175.9843
+[2026-11-17 22:31:56] [INFO] [stationarity.py:29] -    Candidate Lag  6: AIC= -173.9957
+[2026-11-17 22:31:56] [INFO] [stationarity.py:29] -    Candidate Lag  7: AIC= -176.6211
+[2026-11-17 22:31:56] [INFO] [stationarity.py:29] -    Candidate Lag  8: AIC= -208.8507
+[2026-11-17 22:31:56] [INFO] [stationarity.py:29] -    Candidate Lag  9: AIC= -212.6071
+[2026-11-17 22:31:56] [INFO] [stationarity.py:29] -    Candidate Lag 10: AIC= -260.4437
+[2026-11-17 22:31:56] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC= -294.4990
+[2026-11-17 22:31:56] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC= -333.9298
+[2026-11-17 22:31:56] [INFO] [stationarity.py:29] -    Candidate Lag 13: AIC= -339.6529 [MINIMUM AIC - SELECTED]
+[2026-11-17 22:31:56] [INFO] [stationarity.py:34] - ADF Result [airpassengers_sarima (Train Raw)]: stat=-1.5740, p_value=4.9663e-01, used_lag=13/13, nobs=101, crit_5%=-2.8906 -> NON-STATIONARY (Chưa đủ bằng chứng bác bỏ H0)
+[2026-11-17 22:31:56] [INFO] [stationarity.py:55] - Evaluating Differencing Orders & Over-differencing Safeguard...
+[2026-11-17 22:31:56] [INFO] [stationarity.py:78] -    Order d=0 (Original): Variance=0.1473, Std=0.3838, Lag1_ACF=0.9625
+[2026-11-17 22:31:56] [INFO] [stationarity.py:82] -    Order d=1: Variance=0.0108 (-92.67%), Std=0.1039, Lag1_ACF=0.1696
+[2026-11-17 22:31:56] [INFO] [stationarity.py:82] -    Order d=2: Variance=0.0180 (+66.64%), Std=0.1341, Lag1_ACF=-0.3161
+[2026-11-17 22:31:57] [INFO] [eda.py:109] - EDA Differenced series plot saved: path=lab2/artifacts/figures/airpassengers_sarima_eda_02_differenced_run_1794929516.png
+[2026-11-17 22:31:57] [INFO] [eda.py:146] - EDA ACF/PACF plot saved: path=lab2/artifacts/figures/airpassengers_sarima_eda_03_acf_pacf_run_1794929516.png
+[2026-11-17 22:31:57] [INFO] [trainer.py:101] - Training Model: type=SARIMAX, order=(0, 1, 1), seasonal_order=(0, 1, 1, 12)
+[2026-11-17 22:31:57] [INFO] [trainer.py:95] - 
+================================================================================
+SARIMAX MODEL ESTIMATION SUMMARY — AIRPASSENGERS_SARIMA
+================================================================================
+Data                   : international_airline_passengers
+Date range             : 1949-01-01 00:00:00 to 1958-07-01 00:00:00
+Number of observations : 115
+AR order (p)           : 0
+Differencing order (d) : 1
+MA order (q)           : 1
+Seasonal AR order (P)  : 0
+Seasonal diff (D)      : 1
+Seasonal MA order (Q)  : 1
+Seasonal period (s)    : 12
+Model Specification    : SARIMAX(0, 1, 1) x (0, 1, 1)[12]
+================================================================================
+STATISTICAL ESTIMATION RESULTS (STATSMODELS)
+================================================================================
+                                     SARIMAX Results                                      
+==========================================================================================
+Dep. Variable:                         Passengers   No. Observations:                  115
+Model:             SARIMAX(0, 1, 1)x(0, 1, 1, 12)   Log Likelihood                 164.875
+Date:                            Tue, 17 Nov 2026   AIC                           -323.749
+Time:                                    22:31:57   BIC                           -316.317
+Sample:                                01-01-1949   HQIC                          -320.755
+                                     - 07-01-1958                                         
+Covariance Type:                              opg                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+ma.L1         -0.3528      0.096     -3.680      0.000      -0.541      -0.165
+ma.S.L12      -0.5582      0.109     -5.123      0.000      -0.772      -0.345
+sigma2         0.0014      0.000      7.632      0.000       0.001       0.002
+===================================================================================
+Ljung-Box (L1) (Q):                   0.02   Jarque-Bera (JB):                 2.69
+Prob(Q):                              0.90   Prob(JB):                         0.26
+Heteroskedasticity (H):               0.25   Skew:                             0.16
+Prob(H) (two-sided):                  0.00   Kurtosis:                         3.80
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+================================================================================
+CHẨN ĐOÁN HỘI TỤ, TÍNH DỪNG & KHẢ NGHỊCH (STABILITY & INVERTIBILITY):
+ • Thuật toán tối ưu (MLE) : HỘI TỤ THÀNH CÔNG (Số vòng lặp: -1)
+ • Nghiệm MA (Min Modulus) : 1.0498 (> 1.0 -> KHẢ NGHỊCH (Invertible))
+ • Tham số có ý nghĩa (p < 0.05)    : ma.L1 (p=0.0002), ma.S.L12 (p=0.0000), sigma2 (p=0.0000)
+================================================================================
+[2026-11-17 22:31:57] [INFO] [trainer.py:131] - Model artifact persisted: path=lab2/artifacts/models/airpassengers_sarima_run_1794929516.joblib
+[2026-11-17 22:31:57] [INFO] [forecaster.py:12] - Generating out-of-sample forecast for 29 future steps...
+[2026-11-17 22:31:57] [INFO] [forecaster.py:18] - Inverting log transformation: actual = exp(y_log), forecast = exp(fc_log)
+[2026-11-17 22:31:57] [INFO] [evaluator.py:47] - Test Evaluation: MAE=12.9540, RMSE=16.1601, MAPE=2.89%, max_error=32.15 at 1960-07-01 (actual=622.00, pred=589.85)
+[2026-11-17 22:31:57] [INFO] [evaluator.py:71] - Residual Properties: N=115, Mean=0.0147, Std=0.5343, Skew=4.197, Kurtosis=64.142
+[2026-11-17 22:31:57] [INFO] [evaluator.py:72] - Jarque-Bera Normality Test: stat=18355.42, p_value=0.0000e+00 -> NON-NORMAL (Fat tails)
+[2026-11-17 22:31:57] [INFO] [evaluator.py:82] -    Ljung-Box at Lag 10: p-value=1.0000 >= 0.05 -> White noise behavior at this lag.
+[2026-11-17 22:31:57] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 12: p-value=4.3991e-03 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-17 22:31:57] [INFO] [evaluator.py:82] -    Ljung-Box at Lag 24: p-value=0.2262 >= 0.05 -> White noise behavior at this lag.
+[2026-11-17 22:31:57] [INFO] [evaluator.py:99] - Metrics JSON persisted: path=lab2/artifacts/metrics/airpassengers_sarima_run_1794929516.json
+[2026-11-17 22:31:58] [INFO] [evaluator.py:157] - Residual diagnostics plot saved: path=lab2/artifacts/figures/airpassengers_sarima_residuals_run_1794929516.png
+[2026-11-17 22:31:59] [INFO] [forecaster.py:82] - Forecast evaluation plot saved: path=lab2/artifacts/figures/airpassengers_sarima_forecast_run_1794929516.png
+[2026-11-17 22:31:59] [INFO] [tracker.py:44] - [AUDIT TRAIL] Recorded immutable run entry | run_id=7d903a9e | data_md5=558a08bfda3955c8506436677352f7b8
+[2026-11-17 22:31:59] [INFO] [main.py:160] - ================================================================================
+[2026-11-17 22:31:59] [INFO] [main.py:161] - PIPELINE EXECUTION COMPLETED SUCCESSFULLY!
+[2026-11-17 22:31:59] [INFO] [main.py:162] - Audit Run ID   : 7d903a9e
+[2026-11-17 22:31:59] [INFO] [main.py:163] - Model Artifact : lab2/artifacts/models/airpassengers_sarima_7d903a9e.joblib
+[2026-11-17 22:31:59] [INFO] [main.py:164] - Metrics JSON   : lab2/artifacts/metrics/airpassengers_sarima_7d903a9e.json
+[2026-11-17 22:31:59] [INFO] [main.py:165] - EDA Plots      : 1) lab2/artifacts/figures/airpassengers_sarima_eda_01_raw_7d903a9e.png
+[2026-11-17 22:31:59] [INFO] [main.py:166] -                  2) lab2/artifacts/figures/airpassengers_sarima_eda_02_differenced_7d903a9e.png
+[2026-11-17 22:31:59] [INFO] [main.py:167] -                  3) lab2/artifacts/figures/airpassengers_sarima_eda_03_acf_pacf_7d903a9e.png
+[2026-11-17 22:31:59] [INFO] [main.py:168] - Eval Plots     : 1) lab2/artifacts/figures/airpassengers_sarima_residuals_7d903a9e.png
+[2026-11-17 22:31:59] [INFO] [main.py:169] -                  2) lab2/artifacts/figures/airpassengers_sarima_forecast_7d903a9e.png
+[2026-11-17 22:31:59] [INFO] [main.py:170] - Execution Time : Total=3.126s (Load=0.005s, Prep=0.002s, Stat=0.007s, Train=0.283s, Eval=1.439s)
+[2026-11-17 22:31:59] [INFO] [main.py:174] - ================================================================================
+
+[2026-11-17 22:38:33] [INFO] [data_loader.py:15] - Ingesting raw dataset: path=lab2/data/raw/a10.csv, md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-17 22:38:33] [INFO] [data_loader.py:18] - Dataset loaded: rows=204, columns=['date', 'value']
+[2026-11-17 22:38:33] [INFO] [data_loader.py:48] - Data Validation: time_span=1991-07 to 2008-06, monotonic=True, freq=MS, missing_gaps=0, nulls=0, min=2.81, max=29.67, has_negatives=False
+[2026-11-17 22:38:33] [INFO] [stationarity.py:55] - Evaluating Differencing Orders & Over-differencing Safeguard...
+[2026-11-17 22:38:33] [INFO] [stationarity.py:78] -    Order d=0 (Original): Variance=5252.6765, Std=72.4754, Lag1_ACF=0.9997
+[2026-11-17 22:38:33] [INFO] [stationarity.py:82] -    Order d=1: Variance=2.5926 (-99.95%), Std=1.6102, Lag1_ACF=-0.4512
+[2026-11-17 22:38:33] [INFO] [stationarity.py:82] -    Order d=2: Variance=7.5622 (+191.68%), Std=2.7499, Lag1_ACF=-0.6428
+[2026-11-17 22:38:33] [WARNING] [stationarity.py:89] - [OVER-DIFFERENCING DETECTED at d=2] Variance increased by +191.7% and Lag-1 Autocorrelation -0.6428 < -0.5! Model should NOT use d=2.
+[2026-11-17 22:38:33] [INFO] [preprocessor.py:34] - Train/Test split: total=10, train=8 (2020-01 -> 2020-08), test=2 (2020-09 -> 2020-10)
+[2026-11-17 22:38:33] [INFO] [stationarity.py:22] - --- ADF Test [Synthetic Noise] Autolag Evaluation (Criterion: AIC) ---
+[2026-11-17 22:38:33] [INFO] [stationarity.py:29] -    Candidate Lag  0: AIC=  235.6941 [MINIMUM AIC - SELECTED]
+[2026-11-17 22:38:33] [INFO] [stationarity.py:29] -    Candidate Lag  1: AIC=  237.5200
+[2026-11-17 22:38:33] [INFO] [stationarity.py:29] -    Candidate Lag  2: AIC=  238.6671
+[2026-11-17 22:38:33] [INFO] [stationarity.py:29] -    Candidate Lag  3: AIC=  239.7886
+[2026-11-17 22:38:33] [INFO] [stationarity.py:29] -    Candidate Lag  4: AIC=  238.0330
+[2026-11-17 22:38:33] [INFO] [stationarity.py:29] -    Candidate Lag  5: AIC=  239.7417
+[2026-11-17 22:38:33] [INFO] [stationarity.py:29] -    Candidate Lag  6: AIC=  241.7302
+[2026-11-17 22:38:33] [INFO] [stationarity.py:29] -    Candidate Lag  7: AIC=  242.7425
+[2026-11-17 22:38:33] [INFO] [stationarity.py:29] -    Candidate Lag  8: AIC=  244.7368
+[2026-11-17 22:38:33] [INFO] [stationarity.py:29] -    Candidate Lag  9: AIC=  243.9938
+[2026-11-17 22:38:33] [INFO] [stationarity.py:29] -    Candidate Lag 10: AIC=  243.2645
+[2026-11-17 22:38:33] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC=  244.6443
+[2026-11-17 22:38:33] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC=  246.2198
+[2026-11-17 22:38:33] [INFO] [stationarity.py:34] - ADF Result [Synthetic Noise]: stat=-10.0844, p_value=1.1655e-17, used_lag=0/12, nobs=99, crit_5%=-2.8912 -> STATIONARY (Bác bỏ H0)
+[2026-11-17 22:38:47] [INFO] [main.py:34] - ================================================================================
+[2026-11-17 22:38:47] [INFO] [main.py:35] - STARTING TIME SERIES PIPELINE: a10_arima_baseline
+[2026-11-17 22:38:47] [INFO] [main.py:36] - Config: lab2/configs/arima_a10.yaml | DryRun=False
+[2026-11-17 22:38:47] [INFO] [main.py:37] - ================================================================================
+[2026-11-17 22:38:47] [INFO] [data_loader.py:15] - Ingesting raw dataset: path=lab2/data/raw/a10.csv, md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-17 22:38:47] [INFO] [data_loader.py:18] - Dataset loaded: rows=204, columns=['date', 'value']
+[2026-11-17 22:38:47] [INFO] [data_loader.py:48] - Data Validation: time_span=1991-07 to 2008-06, monotonic=True, freq=MS, missing_gaps=0, nulls=0, min=2.81, max=29.67, has_negatives=False
+[2026-11-17 22:38:47] [INFO] [preprocessor.py:34] - Train/Test split: total=204, train=163 (1991-07 -> 2005-01), test=41 (2005-02 -> 2008-06)
+[2026-11-17 22:38:47] [INFO] [eda.py:57] - EDA Raw series plot saved (overwritten): path=lab2/artifacts/figures/a10_arima_baseline_eda_01_raw.png
+[2026-11-17 22:38:47] [INFO] [stationarity.py:22] - --- ADF Test [a10_arima_baseline (Train Raw)] Autolag Evaluation (Criterion: AIC) ---
+[2026-11-17 22:38:47] [INFO] [stationarity.py:29] -    Candidate Lag  0: AIC=  568.2089
+[2026-11-17 22:38:47] [INFO] [stationarity.py:29] -    Candidate Lag  1: AIC=  556.8780
+[2026-11-17 22:38:47] [INFO] [stationarity.py:29] -    Candidate Lag  2: AIC=  553.3574
+[2026-11-17 22:38:47] [INFO] [stationarity.py:29] -    Candidate Lag  3: AIC=  552.7783
+[2026-11-17 22:38:47] [INFO] [stationarity.py:29] -    Candidate Lag  4: AIC=  551.5923
+[2026-11-17 22:38:47] [INFO] [stationarity.py:29] -    Candidate Lag  5: AIC=  549.0680
+[2026-11-17 22:38:47] [INFO] [stationarity.py:29] -    Candidate Lag  6: AIC=  550.9243
+[2026-11-17 22:38:47] [INFO] [stationarity.py:29] -    Candidate Lag  7: AIC=  551.1322
+[2026-11-17 22:38:47] [INFO] [stationarity.py:29] -    Candidate Lag  8: AIC=  550.7333
+[2026-11-17 22:38:47] [INFO] [stationarity.py:29] -    Candidate Lag  9: AIC=  547.6864
+[2026-11-17 22:38:47] [INFO] [stationarity.py:29] -    Candidate Lag 10: AIC=  533.0005
+[2026-11-17 22:38:47] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC=  289.9872
+[2026-11-17 22:38:47] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC=  285.7654
+[2026-11-17 22:38:47] [INFO] [stationarity.py:29] -    Candidate Lag 13: AIC=  273.9349
+[2026-11-17 22:38:47] [INFO] [stationarity.py:29] -    Candidate Lag 14: AIC=  262.0001 [MINIMUM AIC - SELECTED]
+[2026-11-17 22:38:47] [INFO] [stationarity.py:34] - ADF Result [a10_arima_baseline (Train Raw)]: stat=2.2309, p_value=9.9891e-01, used_lag=14/14, nobs=148, crit_5%=-2.8813 -> NON-STATIONARY (Chưa đủ bằng chứng bác bỏ H0)
+[2026-11-17 22:38:47] [INFO] [stationarity.py:55] - Evaluating Differencing Orders & Over-differencing Safeguard...
+[2026-11-17 22:38:47] [INFO] [stationarity.py:78] -    Order d=0 (Original): Variance=15.5181, Std=3.9393, Lag1_ACF=0.9159
+[2026-11-17 22:38:47] [INFO] [stationarity.py:82] -    Order d=1: Variance=2.5445 (-83.60%), Std=1.5951, Lag1_ACF=-0.3204
+[2026-11-17 22:38:47] [INFO] [stationarity.py:82] -    Order d=2: Variance=6.7327 (+164.60%), Std=2.5947, Lag1_ACF=-0.5917
+[2026-11-17 22:38:47] [WARNING] [stationarity.py:89] - [OVER-DIFFERENCING DETECTED at d=2] Variance increased by +164.6% and Lag-1 Autocorrelation -0.5917 < -0.5! Model should NOT use d=2.
+[2026-11-17 22:38:48] [INFO] [eda.py:113] - EDA Differenced series plot saved (overwritten): path=lab2/artifacts/figures/a10_arima_baseline_eda_02_differenced.png
+[2026-11-17 22:38:48] [INFO] [eda.py:152] - EDA ACF/PACF plot saved (overwritten): path=lab2/artifacts/figures/a10_arima_baseline_eda_03_acf_pacf.png
+[2026-11-17 22:38:48] [INFO] [trainer.py:101] - Training Model: type=ARIMA, order=(1, 1, 1), seasonal_order=None
+[2026-11-17 22:38:48] [INFO] [trainer.py:95] - 
+================================================================================
+ARIMA MODEL ESTIMATION SUMMARY — A10_ARIMA_BASELINE
+================================================================================
+Data                   : a10_drug_sales
+Date range             : 1991-07-01 00:00:00 to 2005-01-01 00:00:00
+Number of observations : 163
+AR order (p)           : 1
+Differencing order (d) : 1
+MA order (q)           : 1
+Model Specification    : ARIMA(1, 1, 1)
+================================================================================
+STATISTICAL ESTIMATION RESULTS (STATSMODELS)
+================================================================================
+                               SARIMAX Results                                
+==============================================================================
+Dep. Variable:                  value   No. Observations:                  163
+Model:                 ARIMA(1, 1, 1)   Log Likelihood                -288.234
+Date:                Tue, 17 Nov 2026   AIC                            582.467
+Time:                        22:38:48   BIC                            591.730
+Sample:                    07-01-1991   HQIC                           586.228
+                         - 01-01-2005                                         
+Covariance Type:                  opg                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+ar.L1          0.3322      0.237      1.404      0.160      -0.132       0.796
+ma.L1         -0.8059      0.134     -6.017      0.000      -1.068      -0.543
+sigma2         2.0487      0.187     10.957      0.000       1.682       2.415
+===================================================================================
+Ljung-Box (L1) (Q):                   0.38   Jarque-Bera (JB):               117.88
+Prob(Q):                              0.54   Prob(JB):                         0.00
+Heteroskedasticity (H):               5.46   Skew:                            -1.02
+Prob(H) (two-sided):                  0.00   Kurtosis:                         6.65
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+================================================================================
+CHẨN ĐOÁN HỘI TỤ, TÍNH DỪNG & KHẢ NGHỊCH (STABILITY & INVERTIBILITY):
+ • Thuật toán tối ưu (MLE) : HỘI TỤ THÀNH CÔNG (Số vòng lặp: -1)
+ • Nghiệm AR (Min Modulus) : 3.0098 (> 1.0 -> DỪNG (Stationary))
+ • Nghiệm MA (Min Modulus) : 1.2408 (> 1.0 -> KHẢ NGHỊCH (Invertible))
+ • Tham số có ý nghĩa (p < 0.05)    : ma.L1 (p=0.0000), sigma2 (p=0.0000)
+ • Tham số không có ý nghĩa (p >= 0.05): ar.L1 (p=0.1603)
+================================================================================
+[2026-11-17 22:38:48] [INFO] [trainer.py:131] - Model artifact persisted: path=lab2/artifacts/models/a10_arima_baseline_run_1794929927.joblib
+[2026-11-17 22:38:48] [INFO] [forecaster.py:12] - Generating out-of-sample forecast for 41 future steps...
+[2026-11-17 22:38:48] [INFO] [evaluator.py:47] - Test Evaluation: MAE=3.6667, RMSE=4.6243, MAPE=18.04%, max_error=12.13 at 2008-01-01 (actual=29.67, pred=17.54)
+[2026-11-17 22:38:48] [INFO] [evaluator.py:71] - Residual Properties: N=163, Mean=0.3181, Std=1.4228, Skew=-0.955, Kurtosis=3.630
+[2026-11-17 22:38:48] [INFO] [evaluator.py:72] - Jarque-Bera Normality Test: stat=106.68, p_value=6.8409e-24 -> NON-NORMAL (Fat tails)
+[2026-11-17 22:38:48] [INFO] [evaluator.py:82] -    Ljung-Box at Lag 10: p-value=0.3857 >= 0.05 -> White noise behavior at this lag.
+[2026-11-17 22:38:48] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 12: p-value=7.0712e-22 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-17 22:38:48] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 24: p-value=2.9888e-35 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-17 22:38:48] [INFO] [evaluator.py:99] - Metrics JSON persisted: path=lab2/artifacts/metrics/a10_arima_baseline_run_1794929927.json
+[2026-11-17 22:38:49] [INFO] [evaluator.py:161] - Residual diagnostics plot saved (overwritten): path=lab2/artifacts/figures/a10_arima_baseline_residuals.png
+[2026-11-17 22:38:50] [INFO] [forecaster.py:84] - Forecast evaluation plot saved (overwritten): path=lab2/artifacts/figures/a10_arima_baseline_forecast.png
+[2026-11-17 22:38:50] [INFO] [tracker.py:44] - [AUDIT TRAIL] Recorded immutable run entry | run_id=631810f7 | data_md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-17 22:38:50] [INFO] [main.py:161] - ================================================================================
+[2026-11-17 22:38:50] [INFO] [main.py:162] - PIPELINE EXECUTION COMPLETED SUCCESSFULLY!
+[2026-11-17 22:38:50] [INFO] [main.py:163] - Audit Run ID   : 631810f7
+[2026-11-17 22:38:50] [INFO] [main.py:164] - Model Artifact : lab2/artifacts/models/a10_arima_baseline_631810f7.joblib
+[2026-11-17 22:38:50] [INFO] [main.py:165] - Metrics JSON   : lab2/artifacts/metrics/a10_arima_baseline_631810f7.json
+[2026-11-17 22:38:50] [INFO] [main.py:166] - EDA Plots      : 1) lab2/artifacts/figures/a10_arima_baseline_eda_01_raw.png
+[2026-11-17 22:38:50] [INFO] [main.py:167] -                  2) lab2/artifacts/figures/a10_arima_baseline_eda_02_differenced.png
+[2026-11-17 22:38:50] [INFO] [main.py:168] -                  3) lab2/artifacts/figures/a10_arima_baseline_eda_03_acf_pacf.png
+[2026-11-17 22:38:50] [INFO] [main.py:169] - Eval Plots     : 1) lab2/artifacts/figures/a10_arima_baseline_residuals.png
+[2026-11-17 22:38:50] [INFO] [main.py:170] -                  2) lab2/artifacts/figures/a10_arima_baseline_forecast.png
+[2026-11-17 22:38:50] [INFO] [main.py:171] - Execution Time : Total=2.699s (Load=0.006s, Prep=0.002s, Stat=0.007s, Train=0.053s, Eval=1.247s)
+[2026-11-17 22:38:50] [INFO] [main.py:175] - ================================================================================
+
+[2026-11-17 22:38:56] [INFO] [main.py:34] - ================================================================================
+[2026-11-17 22:38:56] [INFO] [main.py:35] - STARTING TIME SERIES PIPELINE: a10_arima_baseline
+[2026-11-17 22:38:56] [INFO] [main.py:36] - Config: lab2/configs/arima_a10.yaml | DryRun=False
+[2026-11-17 22:38:56] [INFO] [main.py:37] - ================================================================================
+[2026-11-17 22:38:56] [INFO] [data_loader.py:15] - Ingesting raw dataset: path=lab2/data/raw/a10.csv, md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-17 22:38:56] [INFO] [data_loader.py:18] - Dataset loaded: rows=204, columns=['date', 'value']
+[2026-11-17 22:38:56] [INFO] [data_loader.py:48] - Data Validation: time_span=1991-07 to 2008-06, monotonic=True, freq=MS, missing_gaps=0, nulls=0, min=2.81, max=29.67, has_negatives=False
+[2026-11-17 22:38:56] [INFO] [preprocessor.py:34] - Train/Test split: total=204, train=163 (1991-07 -> 2005-01), test=41 (2005-02 -> 2008-06)
+[2026-11-17 22:38:57] [INFO] [eda.py:57] - EDA Raw series plot saved (overwritten): path=lab2/artifacts/figures/a10_arima_baseline_eda_01_raw.png
+[2026-11-17 22:38:57] [INFO] [stationarity.py:22] - --- ADF Test [a10_arima_baseline (Train Raw)] Autolag Evaluation (Criterion: AIC) ---
+[2026-11-17 22:38:57] [INFO] [stationarity.py:29] -    Candidate Lag  0: AIC=  568.2089
+[2026-11-17 22:38:57] [INFO] [stationarity.py:29] -    Candidate Lag  1: AIC=  556.8780
+[2026-11-17 22:38:57] [INFO] [stationarity.py:29] -    Candidate Lag  2: AIC=  553.3574
+[2026-11-17 22:38:57] [INFO] [stationarity.py:29] -    Candidate Lag  3: AIC=  552.7783
+[2026-11-17 22:38:57] [INFO] [stationarity.py:29] -    Candidate Lag  4: AIC=  551.5923
+[2026-11-17 22:38:57] [INFO] [stationarity.py:29] -    Candidate Lag  5: AIC=  549.0680
+[2026-11-17 22:38:57] [INFO] [stationarity.py:29] -    Candidate Lag  6: AIC=  550.9243
+[2026-11-17 22:38:57] [INFO] [stationarity.py:29] -    Candidate Lag  7: AIC=  551.1322
+[2026-11-17 22:38:57] [INFO] [stationarity.py:29] -    Candidate Lag  8: AIC=  550.7333
+[2026-11-17 22:38:57] [INFO] [stationarity.py:29] -    Candidate Lag  9: AIC=  547.6864
+[2026-11-17 22:38:57] [INFO] [stationarity.py:29] -    Candidate Lag 10: AIC=  533.0005
+[2026-11-17 22:38:57] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC=  289.9872
+[2026-11-17 22:38:57] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC=  285.7654
+[2026-11-17 22:38:57] [INFO] [stationarity.py:29] -    Candidate Lag 13: AIC=  273.9349
+[2026-11-17 22:38:57] [INFO] [stationarity.py:29] -    Candidate Lag 14: AIC=  262.0001 [MINIMUM AIC - SELECTED]
+[2026-11-17 22:38:57] [INFO] [stationarity.py:34] - ADF Result [a10_arima_baseline (Train Raw)]: stat=2.2309, p_value=9.9891e-01, used_lag=14/14, nobs=148, crit_5%=-2.8813 -> NON-STATIONARY (Chưa đủ bằng chứng bác bỏ H0)
+[2026-11-17 22:38:57] [INFO] [stationarity.py:55] - Evaluating Differencing Orders & Over-differencing Safeguard...
+[2026-11-17 22:38:57] [INFO] [stationarity.py:78] -    Order d=0 (Original): Variance=15.5181, Std=3.9393, Lag1_ACF=0.9159
+[2026-11-17 22:38:57] [INFO] [stationarity.py:82] -    Order d=1: Variance=2.5445 (-83.60%), Std=1.5951, Lag1_ACF=-0.3204
+[2026-11-17 22:38:57] [INFO] [stationarity.py:82] -    Order d=2: Variance=6.7327 (+164.60%), Std=2.5947, Lag1_ACF=-0.5917
+[2026-11-17 22:38:57] [WARNING] [stationarity.py:89] - [OVER-DIFFERENCING DETECTED at d=2] Variance increased by +164.6% and Lag-1 Autocorrelation -0.5917 < -0.5! Model should NOT use d=2.
+[2026-11-17 22:38:57] [INFO] [eda.py:113] - EDA Differenced series plot saved (overwritten): path=lab2/artifacts/figures/a10_arima_baseline_eda_02_differenced.png
+[2026-11-17 22:38:58] [INFO] [eda.py:152] - EDA ACF/PACF plot saved (overwritten): path=lab2/artifacts/figures/a10_arima_baseline_eda_03_acf_pacf.png
+[2026-11-17 22:38:58] [INFO] [trainer.py:101] - Training Model: type=ARIMA, order=(1, 1, 1), seasonal_order=None
+[2026-11-17 22:38:58] [INFO] [trainer.py:95] - 
+================================================================================
+ARIMA MODEL ESTIMATION SUMMARY — A10_ARIMA_BASELINE
+================================================================================
+Data                   : a10_drug_sales
+Date range             : 1991-07-01 00:00:00 to 2005-01-01 00:00:00
+Number of observations : 163
+AR order (p)           : 1
+Differencing order (d) : 1
+MA order (q)           : 1
+Model Specification    : ARIMA(1, 1, 1)
+================================================================================
+STATISTICAL ESTIMATION RESULTS (STATSMODELS)
+================================================================================
+                               SARIMAX Results                                
+==============================================================================
+Dep. Variable:                  value   No. Observations:                  163
+Model:                 ARIMA(1, 1, 1)   Log Likelihood                -288.234
+Date:                Tue, 17 Nov 2026   AIC                            582.467
+Time:                        22:38:58   BIC                            591.730
+Sample:                    07-01-1991   HQIC                           586.228
+                         - 01-01-2005                                         
+Covariance Type:                  opg                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+ar.L1          0.3322      0.237      1.404      0.160      -0.132       0.796
+ma.L1         -0.8059      0.134     -6.017      0.000      -1.068      -0.543
+sigma2         2.0487      0.187     10.957      0.000       1.682       2.415
+===================================================================================
+Ljung-Box (L1) (Q):                   0.38   Jarque-Bera (JB):               117.88
+Prob(Q):                              0.54   Prob(JB):                         0.00
+Heteroskedasticity (H):               5.46   Skew:                            -1.02
+Prob(H) (two-sided):                  0.00   Kurtosis:                         6.65
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+================================================================================
+CHẨN ĐOÁN HỘI TỤ, TÍNH DỪNG & KHẢ NGHỊCH (STABILITY & INVERTIBILITY):
+ • Thuật toán tối ưu (MLE) : HỘI TỤ THÀNH CÔNG (Số vòng lặp: -1)
+ • Nghiệm AR (Min Modulus) : 3.0098 (> 1.0 -> DỪNG (Stationary))
+ • Nghiệm MA (Min Modulus) : 1.2408 (> 1.0 -> KHẢ NGHỊCH (Invertible))
+ • Tham số có ý nghĩa (p < 0.05)    : ma.L1 (p=0.0000), sigma2 (p=0.0000)
+ • Tham số không có ý nghĩa (p >= 0.05): ar.L1 (p=0.1603)
+================================================================================
+[2026-11-17 22:38:58] [INFO] [trainer.py:131] - Model artifact persisted: path=lab2/artifacts/models/a10_arima_baseline_run_1794929936.joblib
+[2026-11-17 22:38:58] [INFO] [forecaster.py:12] - Generating out-of-sample forecast for 41 future steps...
+[2026-11-17 22:38:58] [INFO] [evaluator.py:47] - Test Evaluation: MAE=3.6667, RMSE=4.6243, MAPE=18.04%, max_error=12.13 at 2008-01-01 (actual=29.67, pred=17.54)
+[2026-11-17 22:38:58] [INFO] [evaluator.py:71] - Residual Properties: N=163, Mean=0.3181, Std=1.4228, Skew=-0.955, Kurtosis=3.630
+[2026-11-17 22:38:58] [INFO] [evaluator.py:72] - Jarque-Bera Normality Test: stat=106.68, p_value=6.8409e-24 -> NON-NORMAL (Fat tails)
+[2026-11-17 22:38:58] [INFO] [evaluator.py:82] -    Ljung-Box at Lag 10: p-value=0.3857 >= 0.05 -> White noise behavior at this lag.
+[2026-11-17 22:38:58] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 12: p-value=7.0712e-22 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-17 22:38:58] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 24: p-value=2.9888e-35 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-17 22:38:58] [INFO] [evaluator.py:99] - Metrics JSON persisted: path=lab2/artifacts/metrics/a10_arima_baseline_run_1794929936.json
+[2026-11-17 22:38:59] [INFO] [evaluator.py:161] - Residual diagnostics plot saved (overwritten): path=lab2/artifacts/figures/a10_arima_baseline_residuals.png
+[2026-11-17 22:38:59] [INFO] [forecaster.py:84] - Forecast evaluation plot saved (overwritten): path=lab2/artifacts/figures/a10_arima_baseline_forecast.png
+[2026-11-17 22:38:59] [INFO] [tracker.py:44] - [AUDIT TRAIL] Recorded immutable run entry | run_id=4cbe5380 | data_md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-17 22:38:59] [INFO] [main.py:161] - ================================================================================
+[2026-11-17 22:38:59] [INFO] [main.py:162] - PIPELINE EXECUTION COMPLETED SUCCESSFULLY!
+[2026-11-17 22:38:59] [INFO] [main.py:163] - Audit Run ID   : 4cbe5380
+[2026-11-17 22:38:59] [INFO] [main.py:164] - Model Artifact : lab2/artifacts/models/a10_arima_baseline_4cbe5380.joblib
+[2026-11-17 22:38:59] [INFO] [main.py:165] - Metrics JSON   : lab2/artifacts/metrics/a10_arima_baseline_4cbe5380.json
+[2026-11-17 22:38:59] [INFO] [main.py:166] - EDA Plots      : 1) lab2/artifacts/figures/a10_arima_baseline_eda_01_raw.png
+[2026-11-17 22:38:59] [INFO] [main.py:167] -                  2) lab2/artifacts/figures/a10_arima_baseline_eda_02_differenced.png
+[2026-11-17 22:38:59] [INFO] [main.py:168] -                  3) lab2/artifacts/figures/a10_arima_baseline_eda_03_acf_pacf.png
+[2026-11-17 22:38:59] [INFO] [main.py:169] - Eval Plots     : 1) lab2/artifacts/figures/a10_arima_baseline_residuals.png
+[2026-11-17 22:38:59] [INFO] [main.py:170] -                  2) lab2/artifacts/figures/a10_arima_baseline_forecast.png
+[2026-11-17 22:38:59] [INFO] [main.py:171] - Execution Time : Total=2.784s (Load=0.006s, Prep=0.002s, Stat=0.006s, Train=0.058s, Eval=1.368s)
+[2026-11-17 22:38:59] [INFO] [main.py:175] - ================================================================================
+
+[2026-11-17 22:39:07] [INFO] [main.py:34] - ================================================================================
+[2026-11-17 22:39:07] [INFO] [main.py:35] - STARTING TIME SERIES PIPELINE: airpassengers_sarima
+[2026-11-17 22:39:07] [INFO] [main.py:36] - Config: lab2/configs/sarima_airpassengers.yaml | DryRun=False
+[2026-11-17 22:39:07] [INFO] [main.py:37] - ================================================================================
+[2026-11-17 22:39:07] [INFO] [data_loader.py:15] - Ingesting raw dataset: path=lab2/data/raw/AirPassengers.csv, md5=558a08bfda3955c8506436677352f7b8
+[2026-11-17 22:39:07] [INFO] [data_loader.py:18] - Dataset loaded: rows=144, columns=['Month', 'Passengers']
+[2026-11-17 22:39:07] [INFO] [data_loader.py:48] - Data Validation: time_span=1949-01 to 1960-12, monotonic=True, freq=MS, missing_gaps=0, nulls=0, min=104.00, max=622.00, has_negatives=False
+[2026-11-17 22:39:07] [INFO] [preprocessor.py:18] - Applying natural logarithm transform: y_log = ln(y) to stabilize variance (Heteroskedasticity fix)
+[2026-11-17 22:39:07] [INFO] [preprocessor.py:34] - Train/Test split: total=144, train=115 (1949-01 -> 1958-07), test=29 (1958-08 -> 1960-12)
+[2026-11-17 22:39:08] [INFO] [eda.py:57] - EDA Raw series plot saved (overwritten): path=lab2/artifacts/figures/airpassengers_sarima_eda_01_raw.png
+[2026-11-17 22:39:08] [INFO] [stationarity.py:22] - --- ADF Test [airpassengers_sarima (Train Raw)] Autolag Evaluation (Criterion: AIC) ---
+[2026-11-17 22:39:08] [INFO] [stationarity.py:29] -    Candidate Lag  0: AIC= -166.8594
+[2026-11-17 22:39:08] [INFO] [stationarity.py:29] -    Candidate Lag  1: AIC= -168.7751
+[2026-11-17 22:39:08] [INFO] [stationarity.py:29] -    Candidate Lag  2: AIC= -169.5240
+[2026-11-17 22:39:08] [INFO] [stationarity.py:29] -    Candidate Lag  3: AIC= -167.5285
+[2026-11-17 22:39:08] [INFO] [stationarity.py:29] -    Candidate Lag  4: AIC= -177.9177
+[2026-11-17 22:39:08] [INFO] [stationarity.py:29] -    Candidate Lag  5: AIC= -175.9843
+[2026-11-17 22:39:08] [INFO] [stationarity.py:29] -    Candidate Lag  6: AIC= -173.9957
+[2026-11-17 22:39:08] [INFO] [stationarity.py:29] -    Candidate Lag  7: AIC= -176.6211
+[2026-11-17 22:39:08] [INFO] [stationarity.py:29] -    Candidate Lag  8: AIC= -208.8507
+[2026-11-17 22:39:08] [INFO] [stationarity.py:29] -    Candidate Lag  9: AIC= -212.6071
+[2026-11-17 22:39:08] [INFO] [stationarity.py:29] -    Candidate Lag 10: AIC= -260.4437
+[2026-11-17 22:39:08] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC= -294.4990
+[2026-11-17 22:39:08] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC= -333.9298
+[2026-11-17 22:39:08] [INFO] [stationarity.py:29] -    Candidate Lag 13: AIC= -339.6529 [MINIMUM AIC - SELECTED]
+[2026-11-17 22:39:08] [INFO] [stationarity.py:34] - ADF Result [airpassengers_sarima (Train Raw)]: stat=-1.5740, p_value=4.9663e-01, used_lag=13/13, nobs=101, crit_5%=-2.8906 -> NON-STATIONARY (Chưa đủ bằng chứng bác bỏ H0)
+[2026-11-17 22:39:08] [INFO] [stationarity.py:55] - Evaluating Differencing Orders & Over-differencing Safeguard...
+[2026-11-17 22:39:08] [INFO] [stationarity.py:78] -    Order d=0 (Original): Variance=0.1473, Std=0.3838, Lag1_ACF=0.9625
+[2026-11-17 22:39:08] [INFO] [stationarity.py:82] -    Order d=1: Variance=0.0108 (-92.67%), Std=0.1039, Lag1_ACF=0.1696
+[2026-11-17 22:39:08] [INFO] [stationarity.py:82] -    Order d=2: Variance=0.0180 (+66.64%), Std=0.1341, Lag1_ACF=-0.3161
+[2026-11-17 22:39:08] [INFO] [eda.py:113] - EDA Differenced series plot saved (overwritten): path=lab2/artifacts/figures/airpassengers_sarima_eda_02_differenced.png
+[2026-11-17 22:39:09] [INFO] [eda.py:152] - EDA ACF/PACF plot saved (overwritten): path=lab2/artifacts/figures/airpassengers_sarima_eda_03_acf_pacf.png
+[2026-11-17 22:39:09] [INFO] [trainer.py:101] - Training Model: type=SARIMAX, order=(0, 1, 1), seasonal_order=(0, 1, 1, 12)
+[2026-11-17 22:39:09] [INFO] [trainer.py:95] - 
+================================================================================
+SARIMAX MODEL ESTIMATION SUMMARY — AIRPASSENGERS_SARIMA
+================================================================================
+Data                   : international_airline_passengers
+Date range             : 1949-01-01 00:00:00 to 1958-07-01 00:00:00
+Number of observations : 115
+AR order (p)           : 0
+Differencing order (d) : 1
+MA order (q)           : 1
+Seasonal AR order (P)  : 0
+Seasonal diff (D)      : 1
+Seasonal MA order (Q)  : 1
+Seasonal period (s)    : 12
+Model Specification    : SARIMAX(0, 1, 1) x (0, 1, 1)[12]
+================================================================================
+STATISTICAL ESTIMATION RESULTS (STATSMODELS)
+================================================================================
+                                     SARIMAX Results                                      
+==========================================================================================
+Dep. Variable:                         Passengers   No. Observations:                  115
+Model:             SARIMAX(0, 1, 1)x(0, 1, 1, 12)   Log Likelihood                 164.875
+Date:                            Tue, 17 Nov 2026   AIC                           -323.749
+Time:                                    22:39:09   BIC                           -316.317
+Sample:                                01-01-1949   HQIC                          -320.755
+                                     - 07-01-1958                                         
+Covariance Type:                              opg                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+ma.L1         -0.3528      0.096     -3.680      0.000      -0.541      -0.165
+ma.S.L12      -0.5582      0.109     -5.123      0.000      -0.772      -0.345
+sigma2         0.0014      0.000      7.632      0.000       0.001       0.002
+===================================================================================
+Ljung-Box (L1) (Q):                   0.02   Jarque-Bera (JB):                 2.69
+Prob(Q):                              0.90   Prob(JB):                         0.26
+Heteroskedasticity (H):               0.25   Skew:                             0.16
+Prob(H) (two-sided):                  0.00   Kurtosis:                         3.80
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+================================================================================
+CHẨN ĐOÁN HỘI TỤ, TÍNH DỪNG & KHẢ NGHỊCH (STABILITY & INVERTIBILITY):
+ • Thuật toán tối ưu (MLE) : HỘI TỤ THÀNH CÔNG (Số vòng lặp: -1)
+ • Nghiệm MA (Min Modulus) : 1.0498 (> 1.0 -> KHẢ NGHỊCH (Invertible))
+ • Tham số có ý nghĩa (p < 0.05)    : ma.L1 (p=0.0002), ma.S.L12 (p=0.0000), sigma2 (p=0.0000)
+================================================================================
+[2026-11-17 22:39:09] [INFO] [trainer.py:131] - Model artifact persisted: path=lab2/artifacts/models/airpassengers_sarima_run_1794929947.joblib
+[2026-11-17 22:39:09] [INFO] [forecaster.py:12] - Generating out-of-sample forecast for 29 future steps...
+[2026-11-17 22:39:09] [INFO] [forecaster.py:18] - Inverting log transformation: actual = exp(y_log), forecast = exp(fc_log)
+[2026-11-17 22:39:09] [INFO] [evaluator.py:47] - Test Evaluation: MAE=12.9540, RMSE=16.1601, MAPE=2.89%, max_error=32.15 at 1960-07-01 (actual=622.00, pred=589.85)
+[2026-11-17 22:39:09] [INFO] [evaluator.py:71] - Residual Properties: N=115, Mean=0.0147, Std=0.5343, Skew=4.197, Kurtosis=64.142
+[2026-11-17 22:39:09] [INFO] [evaluator.py:72] - Jarque-Bera Normality Test: stat=18355.42, p_value=0.0000e+00 -> NON-NORMAL (Fat tails)
+[2026-11-17 22:39:09] [INFO] [evaluator.py:82] -    Ljung-Box at Lag 10: p-value=1.0000 >= 0.05 -> White noise behavior at this lag.
+[2026-11-17 22:39:09] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 12: p-value=4.3991e-03 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-17 22:39:09] [INFO] [evaluator.py:82] -    Ljung-Box at Lag 24: p-value=0.2262 >= 0.05 -> White noise behavior at this lag.
+[2026-11-17 22:39:09] [INFO] [evaluator.py:99] - Metrics JSON persisted: path=lab2/artifacts/metrics/airpassengers_sarima_run_1794929947.json
+[2026-11-17 22:39:10] [INFO] [evaluator.py:161] - Residual diagnostics plot saved (overwritten): path=lab2/artifacts/figures/airpassengers_sarima_residuals.png
+[2026-11-17 22:39:11] [INFO] [forecaster.py:84] - Forecast evaluation plot saved (overwritten): path=lab2/artifacts/figures/airpassengers_sarima_forecast.png
+[2026-11-17 22:39:11] [INFO] [tracker.py:44] - [AUDIT TRAIL] Recorded immutable run entry | run_id=a9e387d5 | data_md5=558a08bfda3955c8506436677352f7b8
+[2026-11-17 22:39:11] [INFO] [main.py:161] - ================================================================================
+[2026-11-17 22:39:11] [INFO] [main.py:162] - PIPELINE EXECUTION COMPLETED SUCCESSFULLY!
+[2026-11-17 22:39:11] [INFO] [main.py:163] - Audit Run ID   : a9e387d5
+[2026-11-17 22:39:11] [INFO] [main.py:164] - Model Artifact : lab2/artifacts/models/airpassengers_sarima_a9e387d5.joblib
+[2026-11-17 22:39:11] [INFO] [main.py:165] - Metrics JSON   : lab2/artifacts/metrics/airpassengers_sarima_a9e387d5.json
+[2026-11-17 22:39:11] [INFO] [main.py:166] - EDA Plots      : 1) lab2/artifacts/figures/airpassengers_sarima_eda_01_raw.png
+[2026-11-17 22:39:11] [INFO] [main.py:167] -                  2) lab2/artifacts/figures/airpassengers_sarima_eda_02_differenced.png
+[2026-11-17 22:39:11] [INFO] [main.py:168] -                  3) lab2/artifacts/figures/airpassengers_sarima_eda_03_acf_pacf.png
+[2026-11-17 22:39:11] [INFO] [main.py:169] - Eval Plots     : 1) lab2/artifacts/figures/airpassengers_sarima_residuals.png
+[2026-11-17 22:39:11] [INFO] [main.py:170] -                  2) lab2/artifacts/figures/airpassengers_sarima_forecast.png
+[2026-11-17 22:39:11] [INFO] [main.py:171] - Execution Time : Total=3.296s (Load=0.005s, Prep=0.002s, Stat=0.007s, Train=0.324s, Eval=1.504s)
+[2026-11-17 22:39:11] [INFO] [main.py:175] - ================================================================================
+
+[2026-11-17 22:46:23] [INFO] [data_loader.py:15] - Ingesting raw dataset: path=lab2/data/raw/a10.csv, md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-17 22:46:23] [INFO] [data_loader.py:18] - Dataset loaded: rows=204, columns=['date', 'value']
+[2026-11-17 22:46:23] [INFO] [data_loader.py:48] - Data Validation: time_span=1991-07 to 2008-06, monotonic=True, freq=MS, missing_gaps=0, nulls=0, min=2.81, max=29.67, has_negatives=False
+[2026-11-17 22:46:23] [INFO] [stationarity.py:55] - Evaluating Differencing Orders & Over-differencing Safeguard...
+[2026-11-17 22:46:23] [INFO] [stationarity.py:78] -    Order d=0 (Original): Variance=5258.2003, Std=72.5134, Lag1_ACF=0.9998
+[2026-11-17 22:46:23] [INFO] [stationarity.py:82] -    Order d=1: Variance=1.5557 (-99.97%), Std=1.2473, Lag1_ACF=-0.4566
+[2026-11-17 22:46:23] [INFO] [stationarity.py:82] -    Order d=2: Variance=4.5395 (+191.79%), Std=2.1306, Lag1_ACF=-0.6308
+[2026-11-17 22:46:23] [WARNING] [stationarity.py:89] - [OVER-DIFFERENCING DETECTED at d=2] Variance increased by +191.8% and Lag-1 Autocorrelation -0.6308 < -0.5! Model should NOT use d=2.
+[2026-11-17 22:46:23] [INFO] [preprocessor.py:34] - Train/Test split: total=10, train=8 (2020-01 -> 2020-08), test=2 (2020-09 -> 2020-10)
+[2026-11-17 22:46:23] [INFO] [stationarity.py:22] - --- ADF Test [Synthetic Noise] Autolag Evaluation (Criterion: AIC) ---
+[2026-11-17 22:46:23] [INFO] [stationarity.py:29] -    Candidate Lag  0: AIC=  235.6941 [MINIMUM AIC - SELECTED]
+[2026-11-17 22:46:23] [INFO] [stationarity.py:29] -    Candidate Lag  1: AIC=  237.5200
+[2026-11-17 22:46:23] [INFO] [stationarity.py:29] -    Candidate Lag  2: AIC=  238.6671
+[2026-11-17 22:46:23] [INFO] [stationarity.py:29] -    Candidate Lag  3: AIC=  239.7886
+[2026-11-17 22:46:23] [INFO] [stationarity.py:29] -    Candidate Lag  4: AIC=  238.0330
+[2026-11-17 22:46:23] [INFO] [stationarity.py:29] -    Candidate Lag  5: AIC=  239.7417
+[2026-11-17 22:46:23] [INFO] [stationarity.py:29] -    Candidate Lag  6: AIC=  241.7302
+[2026-11-17 22:46:23] [INFO] [stationarity.py:29] -    Candidate Lag  7: AIC=  242.7425
+[2026-11-17 22:46:23] [INFO] [stationarity.py:29] -    Candidate Lag  8: AIC=  244.7368
+[2026-11-17 22:46:23] [INFO] [stationarity.py:29] -    Candidate Lag  9: AIC=  243.9938
+[2026-11-17 22:46:23] [INFO] [stationarity.py:29] -    Candidate Lag 10: AIC=  243.2645
+[2026-11-17 22:46:23] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC=  244.6443
+[2026-11-17 22:46:23] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC=  246.2198
+[2026-11-17 22:46:23] [INFO] [stationarity.py:34] - ADF Result [Synthetic Noise]: stat=-10.0844, p_value=1.1655e-17, used_lag=0/12, nobs=99, crit_5%=-2.8912 -> STATIONARY (Bác bỏ H0)
+[2026-11-17 22:46:53] [INFO] [data_loader.py:15] - Ingesting raw dataset: path=lab2/data/raw/a10.csv, md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-17 22:46:53] [INFO] [data_loader.py:18] - Dataset loaded: rows=204, columns=['date', 'value']
+[2026-11-17 22:46:53] [INFO] [data_loader.py:48] - Data Validation: time_span=1991-07 to 2008-06, monotonic=True, freq=MS, missing_gaps=0, nulls=0, min=2.81, max=29.67, has_negatives=False
+[2026-11-17 22:46:53] [INFO] [stationarity.py:55] - Evaluating Differencing Orders & Over-differencing Safeguard...
+[2026-11-17 22:46:53] [INFO] [stationarity.py:78] -    Order d=0 (Original): Variance=5234.8559, Std=72.3523, Lag1_ACF=0.9998
+[2026-11-17 22:46:53] [INFO] [stationarity.py:82] -    Order d=1: Variance=2.1158 (-99.96%), Std=1.4546, Lag1_ACF=-0.5458
+[2026-11-17 22:46:53] [INFO] [stationarity.py:82] -    Order d=2: Variance=6.5183 (+208.08%), Std=2.5531, Lag1_ACF=-0.6901
+[2026-11-17 22:46:53] [WARNING] [stationarity.py:89] - [OVER-DIFFERENCING DETECTED at d=2] Variance increased by +208.1% and Lag-1 Autocorrelation -0.6901 < -0.5! Model should NOT use d=2.
+[2026-11-17 22:46:53] [INFO] [model_comparator.py:110] - 
+================================================================================
+CHAMPION VS CHALLENGER MODEL EVALUATION GATE (MLOps Time Series Gate)
+================================================================================
+Tiêu chí so sánh           | Champion     | Challenger   | Chênh lệch      | Đánh giá
+--------------------------------------------------------------------------------
+Test RMSE (Tiêu chí chính) | 5.0000       | 4.5000       |   -10.00%       | CHALLENGER TỐT HƠN
+Test MAE                   | 4.0000       | 3.5000       |   -12.50%       | CHALLENGER TỐT HƠN
+Test MAPE (%)              | 18.00        | 15.00        |    -3.00% pts   | CHALLENGER TỐT HƠN
+AIC (Mức độ tối giản)      | 520.00       | 500.00       |   -20.00 pts     | CHALLENGER GỌN HƠN
+BIC (Phạt số tham số)      | 530.00       | 510.00       |   -20.00 pts     | CHALLENGER GỌN HƠN
+--------------------------------------------------------------------------------
+KẾT QUẢ PHÂN XỬ : THĂNG HẠNG (PROMOTED)
+LÝ DO CHI TIẾT  : Challenger vượt trội Champion: Test RMSE giảm 10.00% (từ 5.0000 xuống 4.5000).
+================================================================================
+[2026-11-17 22:46:53] [INFO] [model_comparator.py:110] - 
+================================================================================
+CHAMPION VS CHALLENGER MODEL EVALUATION GATE (MLOps Time Series Gate)
+================================================================================
+Tiêu chí so sánh           | Champion     | Challenger   | Chênh lệch      | Đánh giá
+--------------------------------------------------------------------------------
+Test RMSE (Tiêu chí chính) | 5.0000       | 6.0000       |   +20.00%       | CHAMPION TỐT HƠN
+Test MAE                   | 4.0000       | 5.0000       |   +25.00%       | CHAMPION TỐT HƠN
+Test MAPE (%)              | 18.00        | 22.00        |    +4.00% pts   | CHAMPION TỐT HƠN
+AIC (Mức độ tối giản)      | 520.00       | 550.00       |   +30.00 pts     | CHAMPION GỌN HƠN
+BIC (Phạt số tham số)      | 530.00       | 560.00       |   +30.00 pts     | CHAMPION GỌN HƠN
+--------------------------------------------------------------------------------
+KẾT QUẢ PHÂN XỬ : TỪ CHỐI (REJECTED)
+LÝ DO CHI TIẾT  : Challenger kém hơn Champion: Test RMSE tăng +20.00% (từ 5.0000 lên 6.0000).
+================================================================================
+[2026-11-17 22:46:53] [INFO] [preprocessor.py:34] - Train/Test split: total=10, train=8 (2020-01 -> 2020-08), test=2 (2020-09 -> 2020-10)
+[2026-11-17 22:46:53] [INFO] [stationarity.py:22] - --- ADF Test [Synthetic Noise] Autolag Evaluation (Criterion: AIC) ---
+[2026-11-17 22:46:53] [INFO] [stationarity.py:29] -    Candidate Lag  0: AIC=  235.6941 [MINIMUM AIC - SELECTED]
+[2026-11-17 22:46:53] [INFO] [stationarity.py:29] -    Candidate Lag  1: AIC=  237.5200
+[2026-11-17 22:46:53] [INFO] [stationarity.py:29] -    Candidate Lag  2: AIC=  238.6671
+[2026-11-17 22:46:53] [INFO] [stationarity.py:29] -    Candidate Lag  3: AIC=  239.7886
+[2026-11-17 22:46:53] [INFO] [stationarity.py:29] -    Candidate Lag  4: AIC=  238.0330
+[2026-11-17 22:46:53] [INFO] [stationarity.py:29] -    Candidate Lag  5: AIC=  239.7417
+[2026-11-17 22:46:53] [INFO] [stationarity.py:29] -    Candidate Lag  6: AIC=  241.7302
+[2026-11-17 22:46:53] [INFO] [stationarity.py:29] -    Candidate Lag  7: AIC=  242.7425
+[2026-11-17 22:46:53] [INFO] [stationarity.py:29] -    Candidate Lag  8: AIC=  244.7368
+[2026-11-17 22:46:53] [INFO] [stationarity.py:29] -    Candidate Lag  9: AIC=  243.9938
+[2026-11-17 22:46:53] [INFO] [stationarity.py:29] -    Candidate Lag 10: AIC=  243.2645
+[2026-11-17 22:46:53] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC=  244.6443
+[2026-11-17 22:46:53] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC=  246.2198
+[2026-11-17 22:46:53] [INFO] [stationarity.py:34] - ADF Result [Synthetic Noise]: stat=-10.0844, p_value=1.1655e-17, used_lag=0/12, nobs=99, crit_5%=-2.8912 -> STATIONARY (Bác bỏ H0)
+[2026-11-17 22:47:00] [INFO] [main.py:36] - ================================================================================
+[2026-11-17 22:47:00] [INFO] [main.py:37] - STARTING TIME SERIES PIPELINE: a10_arima_baseline
+[2026-11-17 22:47:00] [INFO] [main.py:38] - Config: lab2/configs/arima_a10.yaml | DryRun=False
+[2026-11-17 22:47:00] [INFO] [main.py:39] - ================================================================================
+[2026-11-17 22:47:00] [INFO] [data_loader.py:15] - Ingesting raw dataset: path=lab2/data/raw/a10.csv, md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-17 22:47:00] [INFO] [data_loader.py:18] - Dataset loaded: rows=204, columns=['date', 'value']
+[2026-11-17 22:47:00] [INFO] [data_loader.py:48] - Data Validation: time_span=1991-07 to 2008-06, monotonic=True, freq=MS, missing_gaps=0, nulls=0, min=2.81, max=29.67, has_negatives=False
+[2026-11-17 22:47:00] [INFO] [preprocessor.py:34] - Train/Test split: total=204, train=163 (1991-07 -> 2005-01), test=41 (2005-02 -> 2008-06)
+[2026-11-17 22:47:00] [INFO] [eda.py:57] - EDA Raw series plot saved (overwritten): path=lab2/artifacts/figures/a10_arima_baseline_eda_01_raw.png
+[2026-11-17 22:47:00] [INFO] [stationarity.py:22] - --- ADF Test [a10_arima_baseline (Train Raw)] Autolag Evaluation (Criterion: AIC) ---
+[2026-11-17 22:47:00] [INFO] [stationarity.py:29] -    Candidate Lag  0: AIC=  568.2089
+[2026-11-17 22:47:00] [INFO] [stationarity.py:29] -    Candidate Lag  1: AIC=  556.8780
+[2026-11-17 22:47:00] [INFO] [stationarity.py:29] -    Candidate Lag  2: AIC=  553.3574
+[2026-11-17 22:47:00] [INFO] [stationarity.py:29] -    Candidate Lag  3: AIC=  552.7783
+[2026-11-17 22:47:00] [INFO] [stationarity.py:29] -    Candidate Lag  4: AIC=  551.5923
+[2026-11-17 22:47:00] [INFO] [stationarity.py:29] -    Candidate Lag  5: AIC=  549.0680
+[2026-11-17 22:47:00] [INFO] [stationarity.py:29] -    Candidate Lag  6: AIC=  550.9243
+[2026-11-17 22:47:00] [INFO] [stationarity.py:29] -    Candidate Lag  7: AIC=  551.1322
+[2026-11-17 22:47:00] [INFO] [stationarity.py:29] -    Candidate Lag  8: AIC=  550.7333
+[2026-11-17 22:47:00] [INFO] [stationarity.py:29] -    Candidate Lag  9: AIC=  547.6864
+[2026-11-17 22:47:00] [INFO] [stationarity.py:29] -    Candidate Lag 10: AIC=  533.0005
+[2026-11-17 22:47:00] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC=  289.9872
+[2026-11-17 22:47:00] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC=  285.7654
+[2026-11-17 22:47:00] [INFO] [stationarity.py:29] -    Candidate Lag 13: AIC=  273.9349
+[2026-11-17 22:47:00] [INFO] [stationarity.py:29] -    Candidate Lag 14: AIC=  262.0001 [MINIMUM AIC - SELECTED]
+[2026-11-17 22:47:00] [INFO] [stationarity.py:34] - ADF Result [a10_arima_baseline (Train Raw)]: stat=2.2309, p_value=9.9891e-01, used_lag=14/14, nobs=148, crit_5%=-2.8813 -> NON-STATIONARY (Chưa đủ bằng chứng bác bỏ H0)
+[2026-11-17 22:47:00] [INFO] [stationarity.py:55] - Evaluating Differencing Orders & Over-differencing Safeguard...
+[2026-11-17 22:47:00] [INFO] [stationarity.py:78] -    Order d=0 (Original): Variance=15.5181, Std=3.9393, Lag1_ACF=0.9159
+[2026-11-17 22:47:00] [INFO] [stationarity.py:82] -    Order d=1: Variance=2.5445 (-83.60%), Std=1.5951, Lag1_ACF=-0.3204
+[2026-11-17 22:47:00] [INFO] [stationarity.py:82] -    Order d=2: Variance=6.7327 (+164.60%), Std=2.5947, Lag1_ACF=-0.5917
+[2026-11-17 22:47:00] [WARNING] [stationarity.py:89] - [OVER-DIFFERENCING DETECTED at d=2] Variance increased by +164.6% and Lag-1 Autocorrelation -0.5917 < -0.5! Model should NOT use d=2.
+[2026-11-17 22:47:01] [INFO] [eda.py:113] - EDA Differenced series plot saved (overwritten): path=lab2/artifacts/figures/a10_arima_baseline_eda_02_differenced.png
+[2026-11-17 22:47:01] [INFO] [eda.py:152] - EDA ACF/PACF plot saved (overwritten): path=lab2/artifacts/figures/a10_arima_baseline_eda_03_acf_pacf.png
+[2026-11-17 22:47:01] [INFO] [trainer.py:101] - Training Model: type=ARIMA, order=(1, 1, 1), seasonal_order=None
+[2026-11-17 22:47:02] [INFO] [trainer.py:95] - 
+================================================================================
+ARIMA MODEL ESTIMATION SUMMARY — A10_ARIMA_BASELINE
+================================================================================
+Data                   : a10_drug_sales
+Date range             : 1991-07-01 00:00:00 to 2005-01-01 00:00:00
+Number of observations : 163
+AR order (p)           : 1
+Differencing order (d) : 1
+MA order (q)           : 1
+Model Specification    : ARIMA(1, 1, 1)
+================================================================================
+STATISTICAL ESTIMATION RESULTS (STATSMODELS)
+================================================================================
+                               SARIMAX Results                                
+==============================================================================
+Dep. Variable:                  value   No. Observations:                  163
+Model:                 ARIMA(1, 1, 1)   Log Likelihood                -288.234
+Date:                Tue, 17 Nov 2026   AIC                            582.467
+Time:                        22:47:02   BIC                            591.730
+Sample:                    07-01-1991   HQIC                           586.228
+                         - 01-01-2005                                         
+Covariance Type:                  opg                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+ar.L1          0.3322      0.237      1.404      0.160      -0.132       0.796
+ma.L1         -0.8059      0.134     -6.017      0.000      -1.068      -0.543
+sigma2         2.0487      0.187     10.957      0.000       1.682       2.415
+===================================================================================
+Ljung-Box (L1) (Q):                   0.38   Jarque-Bera (JB):               117.88
+Prob(Q):                              0.54   Prob(JB):                         0.00
+Heteroskedasticity (H):               5.46   Skew:                            -1.02
+Prob(H) (two-sided):                  0.00   Kurtosis:                         6.65
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+================================================================================
+CHẨN ĐOÁN HỘI TỤ, TÍNH DỪNG & KHẢ NGHỊCH (STABILITY & INVERTIBILITY):
+ • Thuật toán tối ưu (MLE) : HỘI TỤ THÀNH CÔNG (Số vòng lặp: -1)
+ • Nghiệm AR (Min Modulus) : 3.0098 (> 1.0 -> DỪNG (Stationary))
+ • Nghiệm MA (Min Modulus) : 1.2408 (> 1.0 -> KHẢ NGHỊCH (Invertible))
+ • Tham số có ý nghĩa (p < 0.05)    : ma.L1 (p=0.0000), sigma2 (p=0.0000)
+ • Tham số không có ý nghĩa (p >= 0.05): ar.L1 (p=0.1603)
+================================================================================
+[2026-11-17 22:47:02] [INFO] [forecaster.py:12] - Generating out-of-sample forecast for 41 future steps...
+[2026-11-17 22:47:02] [INFO] [evaluator.py:47] - Test Evaluation: MAE=3.6667, RMSE=4.6243, MAPE=18.04%, max_error=12.13 at 2008-01-01 (actual=29.67, pred=17.54)
+[2026-11-17 22:47:02] [INFO] [evaluator.py:71] - Residual Properties: N=163, Mean=0.3181, Std=1.4228, Skew=-0.955, Kurtosis=3.630
+[2026-11-17 22:47:02] [INFO] [evaluator.py:72] - Jarque-Bera Normality Test: stat=106.68, p_value=6.8409e-24 -> NON-NORMAL (Fat tails)
+[2026-11-17 22:47:02] [INFO] [evaluator.py:82] -    Ljung-Box at Lag 10: p-value=0.3857 >= 0.05 -> White noise behavior at this lag.
+[2026-11-17 22:47:02] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 12: p-value=7.0712e-22 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-17 22:47:02] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 24: p-value=2.9888e-35 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-17 22:47:03] [INFO] [evaluator.py:161] - Residual diagnostics plot saved (overwritten): path=lab2/artifacts/figures/a10_arima_baseline_residuals.png
+[2026-11-17 22:47:03] [INFO] [forecaster.py:84] - Forecast evaluation plot saved (overwritten): path=lab2/artifacts/figures/a10_arima_baseline_forecast.png
+[2026-11-17 22:47:03] [INFO] [main.py:156] - 🏆 [CHAMPION PROMOTED] Chưa có mô hình tiền nhiệm. Mô hình mới tự động được xác lập làm Champion đầu tiên.
+[2026-11-17 22:47:03] [INFO] [tracker.py:46] - [AUDIT TRAIL] Recorded immutable run entry | run_id=355618ec | data_md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-17 22:47:03] [INFO] [main.py:177] - ================================================================================
+[2026-11-17 22:47:03] [INFO] [main.py:178] - PIPELINE EXECUTION COMPLETED! Result: INITIAL_CHAMPION
+[2026-11-17 22:47:03] [INFO] [main.py:179] - Audit Run ID   : 355618ec
+[2026-11-17 22:47:03] [INFO] [main.py:180] - Gate Verdict   : PROMOTED
+[2026-11-17 22:47:03] [INFO] [main.py:181] - Gate Reason    : Chưa có mô hình tiền nhiệm. Mô hình mới tự động được xác lập làm Champion đầu tiên.
+[2026-11-17 22:47:03] [INFO] [main.py:182] - Active Model   : lab2/artifacts/models/a10_arima_baseline_champion.joblib
+[2026-11-17 22:47:03] [INFO] [main.py:183] - Active Metrics : lab2/artifacts/metrics/a10_arima_baseline_champion.json
+[2026-11-17 22:47:03] [INFO] [main.py:184] - EDA Plots      : 1) lab2/artifacts/figures/a10_arima_baseline_eda_01_raw.png
+[2026-11-17 22:47:03] [INFO] [main.py:185] -                  2) lab2/artifacts/figures/a10_arima_baseline_eda_02_differenced.png
+[2026-11-17 22:47:03] [INFO] [main.py:186] -                  3) lab2/artifacts/figures/a10_arima_baseline_eda_03_acf_pacf.png
+[2026-11-17 22:47:03] [INFO] [main.py:187] - Eval Plots     : 1) lab2/artifacts/figures/a10_arima_baseline_residuals.png
+[2026-11-17 22:47:03] [INFO] [main.py:188] -                  2) lab2/artifacts/figures/a10_arima_baseline_forecast.png
+[2026-11-17 22:47:03] [INFO] [main.py:189] - Execution Time : Total=2.896s (Load=0.008s, Prep=0.004s, Stat=0.007s, Train=0.034s, Eval=1.355s)
+[2026-11-17 22:47:03] [INFO] [main.py:193] - ================================================================================
+
+[2026-11-17 22:47:16] [INFO] [main.py:36] - ================================================================================
+[2026-11-17 22:47:16] [INFO] [main.py:37] - STARTING TIME SERIES PIPELINE: a10_arima_baseline
+[2026-11-17 22:47:16] [INFO] [main.py:38] - Config: lab2/configs/arima_a10_bad_test.yaml | DryRun=False
+[2026-11-17 22:47:16] [INFO] [main.py:39] - ================================================================================
+[2026-11-17 22:47:16] [INFO] [data_loader.py:15] - Ingesting raw dataset: path=lab2/data/raw/a10.csv, md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-17 22:47:16] [INFO] [data_loader.py:18] - Dataset loaded: rows=204, columns=['date', 'value']
+[2026-11-17 22:47:16] [INFO] [data_loader.py:48] - Data Validation: time_span=1991-07 to 2008-06, monotonic=True, freq=MS, missing_gaps=0, nulls=0, min=2.81, max=29.67, has_negatives=False
+[2026-11-17 22:47:16] [INFO] [preprocessor.py:34] - Train/Test split: total=204, train=163 (1991-07 -> 2005-01), test=41 (2005-02 -> 2008-06)
+[2026-11-17 22:47:16] [INFO] [eda.py:57] - EDA Raw series plot saved (overwritten): path=lab2/artifacts/figures/a10_arima_baseline_eda_01_raw.png
+[2026-11-17 22:47:16] [INFO] [stationarity.py:22] - --- ADF Test [a10_arima_baseline (Train Raw)] Autolag Evaluation (Criterion: AIC) ---
+[2026-11-17 22:47:16] [INFO] [stationarity.py:29] -    Candidate Lag  0: AIC=  568.2089
+[2026-11-17 22:47:16] [INFO] [stationarity.py:29] -    Candidate Lag  1: AIC=  556.8780
+[2026-11-17 22:47:16] [INFO] [stationarity.py:29] -    Candidate Lag  2: AIC=  553.3574
+[2026-11-17 22:47:16] [INFO] [stationarity.py:29] -    Candidate Lag  3: AIC=  552.7783
+[2026-11-17 22:47:16] [INFO] [stationarity.py:29] -    Candidate Lag  4: AIC=  551.5923
+[2026-11-17 22:47:16] [INFO] [stationarity.py:29] -    Candidate Lag  5: AIC=  549.0680
+[2026-11-17 22:47:16] [INFO] [stationarity.py:29] -    Candidate Lag  6: AIC=  550.9243
+[2026-11-17 22:47:16] [INFO] [stationarity.py:29] -    Candidate Lag  7: AIC=  551.1322
+[2026-11-17 22:47:16] [INFO] [stationarity.py:29] -    Candidate Lag  8: AIC=  550.7333
+[2026-11-17 22:47:16] [INFO] [stationarity.py:29] -    Candidate Lag  9: AIC=  547.6864
+[2026-11-17 22:47:16] [INFO] [stationarity.py:29] -    Candidate Lag 10: AIC=  533.0005
+[2026-11-17 22:47:16] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC=  289.9872
+[2026-11-17 22:47:16] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC=  285.7654
+[2026-11-17 22:47:16] [INFO] [stationarity.py:29] -    Candidate Lag 13: AIC=  273.9349
+[2026-11-17 22:47:16] [INFO] [stationarity.py:29] -    Candidate Lag 14: AIC=  262.0001 [MINIMUM AIC - SELECTED]
+[2026-11-17 22:47:16] [INFO] [stationarity.py:34] - ADF Result [a10_arima_baseline (Train Raw)]: stat=2.2309, p_value=9.9891e-01, used_lag=14/14, nobs=148, crit_5%=-2.8813 -> NON-STATIONARY (Chưa đủ bằng chứng bác bỏ H0)
+[2026-11-17 22:47:16] [INFO] [stationarity.py:55] - Evaluating Differencing Orders & Over-differencing Safeguard...
+[2026-11-17 22:47:16] [INFO] [stationarity.py:78] -    Order d=0 (Original): Variance=15.5181, Std=3.9393, Lag1_ACF=0.9159
+[2026-11-17 22:47:16] [INFO] [stationarity.py:82] -    Order d=1: Variance=2.5445 (-83.60%), Std=1.5951, Lag1_ACF=-0.3204
+[2026-11-17 22:47:16] [INFO] [stationarity.py:82] -    Order d=2: Variance=6.7327 (+164.60%), Std=2.5947, Lag1_ACF=-0.5917
+[2026-11-17 22:47:16] [WARNING] [stationarity.py:89] - [OVER-DIFFERENCING DETECTED at d=2] Variance increased by +164.6% and Lag-1 Autocorrelation -0.5917 < -0.5! Model should NOT use d=2.
+[2026-11-17 22:47:17] [INFO] [eda.py:113] - EDA Differenced series plot saved (overwritten): path=lab2/artifacts/figures/a10_arima_baseline_eda_02_differenced.png
+[2026-11-17 22:47:17] [INFO] [eda.py:152] - EDA ACF/PACF plot saved (overwritten): path=lab2/artifacts/figures/a10_arima_baseline_eda_03_acf_pacf.png
+[2026-11-17 22:47:17] [INFO] [trainer.py:101] - Training Model: type=ARIMA, order=(0, 0, 1), seasonal_order=None
+[2026-11-17 22:47:17] [INFO] [trainer.py:95] - 
+================================================================================
+ARIMA MODEL ESTIMATION SUMMARY — A10_ARIMA_BASELINE
+================================================================================
+Data                   : a10_drug_sales
+Date range             : 1991-07-01 00:00:00 to 2005-01-01 00:00:00
+Number of observations : 163
+AR order (p)           : 0
+Differencing order (d) : 0
+MA order (q)           : 1
+Model Specification    : ARIMA(0, 0, 1)
+================================================================================
+STATISTICAL ESTIMATION RESULTS (STATSMODELS)
+================================================================================
+                               SARIMAX Results                                
+==============================================================================
+Dep. Variable:                  value   No. Observations:                  163
+Model:                 ARIMA(0, 0, 1)   Log Likelihood                -392.836
+Date:                Tue, 17 Nov 2026   AIC                            791.672
+Time:                        22:47:17   BIC                            800.953
+Sample:                    07-01-1991   HQIC                           795.440
+                         - 01-01-2005                                         
+Covariance Type:                  opg                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          8.4989      0.431     19.728      0.000       7.655       9.343
+ma.L1          0.6909      0.058     11.991      0.000       0.578       0.804
+sigma2         7.2298      1.073      6.740      0.000       5.127       9.332
+===================================================================================
+Ljung-Box (L1) (Q):                  40.04   Jarque-Bera (JB):                15.08
+Prob(Q):                              0.00   Prob(JB):                         0.00
+Heteroskedasticity (H):               2.25   Skew:                             0.72
+Prob(H) (two-sided):                  0.00   Kurtosis:                         2.64
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+================================================================================
+CHẨN ĐOÁN HỘI TỤ, TÍNH DỪNG & KHẢ NGHỊCH (STABILITY & INVERTIBILITY):
+ • Thuật toán tối ưu (MLE) : HỘI TỤ THÀNH CÔNG (Số vòng lặp: -1)
+ • Nghiệm MA (Min Modulus) : 1.4474 (> 1.0 -> KHẢ NGHỊCH (Invertible))
+ • Tham số có ý nghĩa (p < 0.05)    : const (p=0.0000), ma.L1 (p=0.0000), sigma2 (p=0.0000)
+================================================================================
+[2026-11-17 22:47:17] [INFO] [forecaster.py:12] - Generating out-of-sample forecast for 41 future steps...
+[2026-11-17 22:47:17] [INFO] [evaluator.py:47] - Test Evaluation: MAE=10.9696, RMSE=11.7526, MAPE=54.05%, max_error=21.17 at 2008-01-01 (actual=29.67, pred=8.50)
+[2026-11-17 22:47:17] [INFO] [evaluator.py:71] - Residual Properties: N=163, Mean=0.0009, Std=2.7089, Skew=0.708, Kurtosis=-0.330
+[2026-11-17 22:47:17] [INFO] [evaluator.py:72] - Jarque-Bera Normality Test: stat=14.23, p_value=8.1253e-04 -> NON-NORMAL (Fat tails)
+[2026-11-17 22:47:17] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 10: p-value=6.6965e-113 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-17 22:47:17] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 12: p-value=8.6419e-139 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-17 22:47:17] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 24: p-value=2.5846e-216 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-17 22:47:17] [INFO] [model_comparator.py:110] - 
+================================================================================
+CHAMPION VS CHALLENGER MODEL EVALUATION GATE (MLOps Time Series Gate)
+================================================================================
+Tiêu chí so sánh           | Champion     | Challenger   | Chênh lệch      | Đánh giá
+--------------------------------------------------------------------------------
+Test RMSE (Tiêu chí chính) | 4.6243       | 11.7526      |  +154.15%       | CHAMPION TỐT HƠN
+Test MAE                   | 3.6667       | 10.9696      |  +199.17%       | CHAMPION TỐT HƠN
+Test MAPE (%)              | 18.04        | 54.05        |   +36.01% pts   | CHAMPION TỐT HƠN
+AIC (Mức độ tối giản)      | 582.47       | 791.67       |  +209.20 pts     | CHAMPION GỌN HƠN
+BIC (Phạt số tham số)      | 591.73       | 800.95       |  +209.22 pts     | CHAMPION GỌN HƠN
+--------------------------------------------------------------------------------
+KẾT QUẢ PHÂN XỬ : TỪ CHỐI (REJECTED)
+LÝ DO CHI TIẾT  : Challenger kém hơn Champion: Test RMSE tăng +154.15% (từ 4.6243 lên 11.7526).
+================================================================================
+[2026-11-17 22:47:17] [WARNING] [main.py:159] - 🛑 [CHALLENGER REJECTED] Challenger kém hơn Champion: Test RMSE tăng +154.15% (từ 4.6243 lên 11.7526).
+[2026-11-17 22:47:17] [WARNING] [main.py:160] -    Current Champion artifacts preserved. Model and Figures NOT overwritten.
+[2026-11-17 22:47:17] [INFO] [tracker.py:46] - [AUDIT TRAIL] Recorded immutable run entry | run_id=f0886cc9 | data_md5=66f06c62d8be4aea653eab499fb42b23
+[2026-11-17 22:47:17] [INFO] [main.py:177] - ================================================================================
+[2026-11-17 22:47:17] [INFO] [main.py:178] - PIPELINE EXECUTION COMPLETED! Result: REJECTED_INFERIOR_ACCURACY
+[2026-11-17 22:47:17] [INFO] [main.py:179] - Audit Run ID   : f0886cc9
+[2026-11-17 22:47:17] [INFO] [main.py:180] - Gate Verdict   : REJECTED
+[2026-11-17 22:47:17] [INFO] [main.py:181] - Gate Reason    : Challenger kém hơn Champion: Test RMSE tăng +154.15% (từ 4.6243 lên 11.7526).
+[2026-11-17 22:47:17] [INFO] [main.py:182] - Active Model   : lab2/artifacts/models/a10_arima_baseline_champion.joblib
+[2026-11-17 22:47:17] [INFO] [main.py:183] - Active Metrics : lab2/artifacts/metrics/a10_arima_baseline_champion.json
+[2026-11-17 22:47:17] [INFO] [main.py:184] - EDA Plots      : 1) lab2/artifacts/figures/a10_arima_baseline_eda_01_raw.png
+[2026-11-17 22:47:17] [INFO] [main.py:185] -                  2) lab2/artifacts/figures/a10_arima_baseline_eda_02_differenced.png
+[2026-11-17 22:47:17] [INFO] [main.py:186] -                  3) lab2/artifacts/figures/a10_arima_baseline_eda_03_acf_pacf.png
+[2026-11-17 22:47:17] [INFO] [main.py:187] - Eval Plots     : 1) lab2/artifacts/figures/a10_arima_baseline_residuals.png
+[2026-11-17 22:47:17] [INFO] [main.py:188] -                  2) lab2/artifacts/figures/a10_arima_baseline_forecast.png
+[2026-11-17 22:47:17] [INFO] [main.py:189] - Execution Time : Total=1.512s (Load=0.005s, Prep=0.002s, Stat=0.007s, Train=0.037s, Eval=0.027s)
+[2026-11-17 22:47:17] [INFO] [main.py:193] - ================================================================================
+
+[2026-11-17 22:47:27] [INFO] [main.py:36] - ================================================================================
+[2026-11-17 22:47:27] [INFO] [main.py:37] - STARTING TIME SERIES PIPELINE: airpassengers_sarima
+[2026-11-17 22:47:27] [INFO] [main.py:38] - Config: lab2/configs/sarima_airpassengers.yaml | DryRun=False
+[2026-11-17 22:47:27] [INFO] [main.py:39] - ================================================================================
+[2026-11-17 22:47:27] [INFO] [data_loader.py:15] - Ingesting raw dataset: path=lab2/data/raw/AirPassengers.csv, md5=558a08bfda3955c8506436677352f7b8
+[2026-11-17 22:47:27] [INFO] [data_loader.py:18] - Dataset loaded: rows=144, columns=['Month', 'Passengers']
+[2026-11-17 22:47:27] [INFO] [data_loader.py:48] - Data Validation: time_span=1949-01 to 1960-12, monotonic=True, freq=MS, missing_gaps=0, nulls=0, min=104.00, max=622.00, has_negatives=False
+[2026-11-17 22:47:27] [INFO] [preprocessor.py:18] - Applying natural logarithm transform: y_log = ln(y) to stabilize variance (Heteroskedasticity fix)
+[2026-11-17 22:47:27] [INFO] [preprocessor.py:34] - Train/Test split: total=144, train=115 (1949-01 -> 1958-07), test=29 (1958-08 -> 1960-12)
+[2026-11-17 22:47:28] [INFO] [eda.py:57] - EDA Raw series plot saved (overwritten): path=lab2/artifacts/figures/airpassengers_sarima_eda_01_raw.png
+[2026-11-17 22:47:28] [INFO] [stationarity.py:22] - --- ADF Test [airpassengers_sarima (Train Raw)] Autolag Evaluation (Criterion: AIC) ---
+[2026-11-17 22:47:28] [INFO] [stationarity.py:29] -    Candidate Lag  0: AIC= -166.8594
+[2026-11-17 22:47:28] [INFO] [stationarity.py:29] -    Candidate Lag  1: AIC= -168.7751
+[2026-11-17 22:47:28] [INFO] [stationarity.py:29] -    Candidate Lag  2: AIC= -169.5240
+[2026-11-17 22:47:28] [INFO] [stationarity.py:29] -    Candidate Lag  3: AIC= -167.5285
+[2026-11-17 22:47:28] [INFO] [stationarity.py:29] -    Candidate Lag  4: AIC= -177.9177
+[2026-11-17 22:47:28] [INFO] [stationarity.py:29] -    Candidate Lag  5: AIC= -175.9843
+[2026-11-17 22:47:28] [INFO] [stationarity.py:29] -    Candidate Lag  6: AIC= -173.9957
+[2026-11-17 22:47:28] [INFO] [stationarity.py:29] -    Candidate Lag  7: AIC= -176.6211
+[2026-11-17 22:47:28] [INFO] [stationarity.py:29] -    Candidate Lag  8: AIC= -208.8507
+[2026-11-17 22:47:28] [INFO] [stationarity.py:29] -    Candidate Lag  9: AIC= -212.6071
+[2026-11-17 22:47:28] [INFO] [stationarity.py:29] -    Candidate Lag 10: AIC= -260.4437
+[2026-11-17 22:47:28] [INFO] [stationarity.py:29] -    Candidate Lag 11: AIC= -294.4990
+[2026-11-17 22:47:28] [INFO] [stationarity.py:29] -    Candidate Lag 12: AIC= -333.9298
+[2026-11-17 22:47:28] [INFO] [stationarity.py:29] -    Candidate Lag 13: AIC= -339.6529 [MINIMUM AIC - SELECTED]
+[2026-11-17 22:47:28] [INFO] [stationarity.py:34] - ADF Result [airpassengers_sarima (Train Raw)]: stat=-1.5740, p_value=4.9663e-01, used_lag=13/13, nobs=101, crit_5%=-2.8906 -> NON-STATIONARY (Chưa đủ bằng chứng bác bỏ H0)
+[2026-11-17 22:47:28] [INFO] [stationarity.py:55] - Evaluating Differencing Orders & Over-differencing Safeguard...
+[2026-11-17 22:47:28] [INFO] [stationarity.py:78] -    Order d=0 (Original): Variance=0.1473, Std=0.3838, Lag1_ACF=0.9625
+[2026-11-17 22:47:28] [INFO] [stationarity.py:82] -    Order d=1: Variance=0.0108 (-92.67%), Std=0.1039, Lag1_ACF=0.1696
+[2026-11-17 22:47:28] [INFO] [stationarity.py:82] -    Order d=2: Variance=0.0180 (+66.64%), Std=0.1341, Lag1_ACF=-0.3161
+[2026-11-17 22:47:28] [INFO] [eda.py:113] - EDA Differenced series plot saved (overwritten): path=lab2/artifacts/figures/airpassengers_sarima_eda_02_differenced.png
+[2026-11-17 22:47:29] [INFO] [eda.py:152] - EDA ACF/PACF plot saved (overwritten): path=lab2/artifacts/figures/airpassengers_sarima_eda_03_acf_pacf.png
+[2026-11-17 22:47:29] [INFO] [trainer.py:101] - Training Model: type=SARIMAX, order=(0, 1, 1), seasonal_order=(0, 1, 1, 12)
+[2026-11-17 22:47:29] [INFO] [trainer.py:95] - 
+================================================================================
+SARIMAX MODEL ESTIMATION SUMMARY — AIRPASSENGERS_SARIMA
+================================================================================
+Data                   : international_airline_passengers
+Date range             : 1949-01-01 00:00:00 to 1958-07-01 00:00:00
+Number of observations : 115
+AR order (p)           : 0
+Differencing order (d) : 1
+MA order (q)           : 1
+Seasonal AR order (P)  : 0
+Seasonal diff (D)      : 1
+Seasonal MA order (Q)  : 1
+Seasonal period (s)    : 12
+Model Specification    : SARIMAX(0, 1, 1) x (0, 1, 1)[12]
+================================================================================
+STATISTICAL ESTIMATION RESULTS (STATSMODELS)
+================================================================================
+                                     SARIMAX Results                                      
+==========================================================================================
+Dep. Variable:                         Passengers   No. Observations:                  115
+Model:             SARIMAX(0, 1, 1)x(0, 1, 1, 12)   Log Likelihood                 164.875
+Date:                            Tue, 17 Nov 2026   AIC                           -323.749
+Time:                                    22:47:29   BIC                           -316.317
+Sample:                                01-01-1949   HQIC                          -320.755
+                                     - 07-01-1958                                         
+Covariance Type:                              opg                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+ma.L1         -0.3528      0.096     -3.680      0.000      -0.541      -0.165
+ma.S.L12      -0.5582      0.109     -5.123      0.000      -0.772      -0.345
+sigma2         0.0014      0.000      7.632      0.000       0.001       0.002
+===================================================================================
+Ljung-Box (L1) (Q):                   0.02   Jarque-Bera (JB):                 2.69
+Prob(Q):                              0.90   Prob(JB):                         0.26
+Heteroskedasticity (H):               0.25   Skew:                             0.16
+Prob(H) (two-sided):                  0.00   Kurtosis:                         3.80
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+================================================================================
+CHẨN ĐOÁN HỘI TỤ, TÍNH DỪNG & KHẢ NGHỊCH (STABILITY & INVERTIBILITY):
+ • Thuật toán tối ưu (MLE) : HỘI TỤ THÀNH CÔNG (Số vòng lặp: -1)
+ • Nghiệm MA (Min Modulus) : 1.0498 (> 1.0 -> KHẢ NGHỊCH (Invertible))
+ • Tham số có ý nghĩa (p < 0.05)    : ma.L1 (p=0.0002), ma.S.L12 (p=0.0000), sigma2 (p=0.0000)
+================================================================================
+[2026-11-17 22:47:29] [INFO] [forecaster.py:12] - Generating out-of-sample forecast for 29 future steps...
+[2026-11-17 22:47:29] [INFO] [forecaster.py:18] - Inverting log transformation: actual = exp(y_log), forecast = exp(fc_log)
+[2026-11-17 22:47:29] [INFO] [evaluator.py:47] - Test Evaluation: MAE=12.9540, RMSE=16.1601, MAPE=2.89%, max_error=32.15 at 1960-07-01 (actual=622.00, pred=589.85)
+[2026-11-17 22:47:29] [INFO] [evaluator.py:71] - Residual Properties: N=115, Mean=0.0147, Std=0.5343, Skew=4.197, Kurtosis=64.142
+[2026-11-17 22:47:29] [INFO] [evaluator.py:72] - Jarque-Bera Normality Test: stat=18355.42, p_value=0.0000e+00 -> NON-NORMAL (Fat tails)
+[2026-11-17 22:47:29] [INFO] [evaluator.py:82] -    Ljung-Box at Lag 10: p-value=1.0000 >= 0.05 -> White noise behavior at this lag.
+[2026-11-17 22:47:29] [WARNING] [evaluator.py:80] -    [AUTOCORRELATION DETECTED] Ljung-Box at Lag 12: p-value=4.3991e-03 < 0.05 -> Residuals contain unmodeled correlation!
+[2026-11-17 22:47:29] [INFO] [evaluator.py:82] -    Ljung-Box at Lag 24: p-value=0.2262 >= 0.05 -> White noise behavior at this lag.
+[2026-11-17 22:47:30] [INFO] [evaluator.py:161] - Residual diagnostics plot saved (overwritten): path=lab2/artifacts/figures/airpassengers_sarima_residuals.png
+[2026-11-17 22:47:31] [INFO] [forecaster.py:84] - Forecast evaluation plot saved (overwritten): path=lab2/artifacts/figures/airpassengers_sarima_forecast.png
+[2026-11-17 22:47:31] [INFO] [main.py:156] - 🏆 [CHAMPION PROMOTED] Chưa có mô hình tiền nhiệm. Mô hình mới tự động được xác lập làm Champion đầu tiên.
+[2026-11-17 22:47:31] [INFO] [tracker.py:46] - [AUDIT TRAIL] Recorded immutable run entry | run_id=e9afe708 | data_md5=558a08bfda3955c8506436677352f7b8
+[2026-11-17 22:47:31] [INFO] [main.py:177] - ================================================================================
+[2026-11-17 22:47:31] [INFO] [main.py:178] - PIPELINE EXECUTION COMPLETED! Result: INITIAL_CHAMPION
+[2026-11-17 22:47:31] [INFO] [main.py:179] - Audit Run ID   : e9afe708
+[2026-11-17 22:47:31] [INFO] [main.py:180] - Gate Verdict   : PROMOTED
+[2026-11-17 22:47:31] [INFO] [main.py:181] - Gate Reason    : Chưa có mô hình tiền nhiệm. Mô hình mới tự động được xác lập làm Champion đầu tiên.
+[2026-11-17 22:47:31] [INFO] [main.py:182] - Active Model   : lab2/artifacts/models/airpassengers_sarima_champion.joblib
+[2026-11-17 22:47:31] [INFO] [main.py:183] - Active Metrics : lab2/artifacts/metrics/airpassengers_sarima_champion.json
+[2026-11-17 22:47:31] [INFO] [main.py:184] - EDA Plots      : 1) lab2/artifacts/figures/airpassengers_sarima_eda_01_raw.png
+[2026-11-17 22:47:31] [INFO] [main.py:185] -                  2) lab2/artifacts/figures/airpassengers_sarima_eda_02_differenced.png
+[2026-11-17 22:47:31] [INFO] [main.py:186] -                  3) lab2/artifacts/figures/airpassengers_sarima_eda_03_acf_pacf.png
+[2026-11-17 22:47:31] [INFO] [main.py:187] - Eval Plots     : 1) lab2/artifacts/figures/airpassengers_sarima_residuals.png
+[2026-11-17 22:47:31] [INFO] [main.py:188] -                  2) lab2/artifacts/figures/airpassengers_sarima_forecast.png
+[2026-11-17 22:47:31] [INFO] [main.py:189] - Execution Time : Total=3.080s (Load=0.005s, Prep=0.002s, Stat=0.006s, Train=0.257s, Eval=1.351s)
+[2026-11-17 22:47:31] [INFO] [main.py:193] - ================================================================================
+

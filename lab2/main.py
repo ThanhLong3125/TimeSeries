@@ -3,20 +3,22 @@ import argparse
 import time
 import yaml
 import os
+import json
+import joblib
 from src.logger import logger
 from src.data_loader import load_and_validate_data
 from src.preprocessor import preprocess_time_series, split_train_test
 from src.stationarity import run_adf_with_autolag_logging, analyze_differencing_orders
-from src.trainer import train_time_series_model, save_model_artifact
+from src.trainer import train_time_series_model
 from src.evaluator import (
     evaluate_test_performance,
     run_residual_diagnostics,
-    export_metrics_json,
     plot_residual_diagnostics
 )
 from src.forecaster import generate_forecasts, plot_forecast_vs_actual
 from src.tracker import record_audit_entry
 from src.eda import plot_eda_raw_series, plot_eda_differencing, plot_eda_acf_pacf
+from src.model_comparator import compare_champion_challenger
 
 def run_pipeline(config_path, dry_run=False):
     t_start = time.time()
@@ -62,8 +64,8 @@ def run_pipeline(config_path, dry_run=False):
     )
     time_prep = time.time() - t0
     
-    # 3. EDA Visualizations (Tự động xuất bản biểu đồ EDA)
-    eda_raw_plot = plot_eda_raw_series(series, cfg, temp_run_id)
+    # 3. EDA Visualizations (Ghi đè cố định lên ảnh cũ)
+    eda_raw_plot = plot_eda_raw_series(series, cfg, run_id=None)
     
     # 4. Stationarity & Differencing Analysis
     t0 = time.time()
@@ -79,23 +81,24 @@ def run_pipeline(config_path, dry_run=False):
     )
     time_stat = time.time() - t0
     
-    # Xuất bản biểu đồ EDA sai phân & ACF/PACF
-    eda_diff_plot = plot_eda_differencing(diff_analysis, cfg, temp_run_id)
-    eda_acf_plot = plot_eda_acf_pacf(diff_analysis[1]["series"], cfg, temp_run_id)
+    # Xuất bản biểu đồ EDA sai phân & ACF/PACF (Ghi đè cố định lên ảnh cũ)
+    eda_diff_plot = plot_eda_differencing(diff_analysis, cfg, run_id=None)
+    eda_acf_plot = plot_eda_acf_pacf(diff_analysis[1]["series"], cfg, run_id=None)
     
     if dry_run:
         logger.info("[DRY-RUN MODE] Data ingestion, validation, and EDA completed successfully. Halting before training.")
         return
         
-    # 5. Model Training & Serialization
+    # 5. Model Training (Challenger)
     t0 = time.time()
     model = train_time_series_model(
         train_series=train_series,
         model_type=cfg["model"]["type"],
         order=tuple(cfg["model"]["order"]),
-        seasonal_order=tuple(cfg["model"]["seasonal_order"]) if cfg["model"].get("seasonal_order") else None
+        seasonal_order=tuple(cfg["model"]["seasonal_order"]) if cfg["model"].get("seasonal_order") else None,
+        dataset_name=cfg.get("dataset_name", exp_name),
+        experiment_name=exp_name
     )
-    model_path = save_model_artifact(model, exp_name, temp_run_id)
     time_train = time.time() - t0
     
     # 6. Out-of-sample Forecast & Evaluation
@@ -111,7 +114,17 @@ def run_pipeline(config_path, dry_run=False):
         diagnostic_lags=cfg.get("evaluation", {}).get("diagnostic_lags", [10, 12, 24])
     )
     
-    # 7. Export Artifacts (Metrics JSON & Figures)
+    # 7. Model Evaluation Gate: Champion vs Challenger Comparison
+    models_dir = "lab2/artifacts/models"
+    metrics_dir = "lab2/artifacts/metrics"
+    figures_dir = "lab2/artifacts/figures"
+    os.makedirs(models_dir, exist_ok=True)
+    os.makedirs(metrics_dir, exist_ok=True)
+    os.makedirs(figures_dir, exist_ok=True)
+    
+    champ_model_path = os.path.join(models_dir, f"{exp_name}_champion.joblib")
+    champ_metrics_path = os.path.join(metrics_dir, f"{exp_name}_champion.json")
+    
     full_metrics = {
         "experiment": exp_name,
         "model": cfg["model"],
@@ -124,47 +137,55 @@ def run_pipeline(config_path, dry_run=False):
         }
     }
     
-    metrics_path = export_metrics_json(full_metrics, exp_name, temp_run_id)
-    residuals_plot_path = plot_residual_diagnostics(model.resid, exp_name, temp_run_id)
-    forecast_plot_path = plot_forecast_vs_actual(train_series, actual_test, forecast_test, test_metrics, cfg, temp_run_id)
-    time_eval = time.time() - t0
+    gate_result = compare_champion_challenger(
+        new_metrics=full_metrics,
+        champion_metrics_path=champ_metrics_path
+    )
     
+    is_promoted = gate_result["is_promoted"]
+    
+    if is_promoted:
+        # THĂNG HẠNG: Ghi đè file model, metrics và toàn bộ biểu đồ Champion
+        joblib.dump(model, champ_model_path)
+        full_metrics["champion_gate"] = gate_result
+        with open(champ_metrics_path, "w", encoding="utf-8") as f:
+            json.dump(full_metrics, f, indent=2, ensure_ascii=False)
+            
+        residuals_plot_path = plot_residual_diagnostics(model.resid, exp_name, run_id=None)
+        forecast_plot_path = plot_forecast_vs_actual(train_series, actual_test, forecast_test, test_metrics, cfg, run_id=None)
+        logger.info(f"🏆 [CHAMPION PROMOTED] {gate_result['reason']}")
+    else:
+        # TỪ CHỐI: Giữ nguyên Champion cũ, không ghi đè model và biểu đồ
+        logger.warning(f"🛑 [CHALLENGER REJECTED] {gate_result['reason']}")
+        logger.warning(f"   Current Champion artifacts preserved. Model and Figures NOT overwritten.")
+        residuals_plot_path = os.path.join(figures_dir, f"{exp_name}_residuals.png")
+        forecast_plot_path = os.path.join(figures_dir, f"{exp_name}_forecast.png")
+        
+    time_eval = time.time() - t0
     total_time = time.time() - t_start
     
-    # 8. Record Immutable Audit Trail
+    # 8. Record Immutable Audit Trail (Ghi nhận toàn bộ lần chạy kèm kết quả phân xử Gate)
     audit_run_id = record_audit_entry(
         config=cfg,
         metrics=test_metrics,
-        model_path=model_path,
-        execution_time_sec=total_time
+        model_path=champ_model_path if is_promoted else f"rejected_{temp_run_id}",
+        execution_time_sec=total_time,
+        gate_decision=gate_result["verdict"],
+        gate_reason=gate_result["reason"]
     )
     
-    # Đồng bộ đổi tên toàn bộ artifacts (cả EDA, Model, Metrics, Plots) với audit_run_id chính thức
-    final_artifacts = {}
-    for label, old_path in [
-        ("Model", model_path),
-        ("Metrics", metrics_path),
-        ("EDA_Raw", eda_raw_plot),
-        ("EDA_Diff", eda_diff_plot),
-        ("EDA_ACF", eda_acf_plot),
-        ("Residual_Plot", residuals_plot_path),
-        ("Forecast_Plot", forecast_plot_path)
-    ]:
-        new_path = old_path.replace(temp_run_id, audit_run_id)
-        if os.path.exists(old_path):
-            os.rename(old_path, new_path)
-        final_artifacts[label] = new_path
-    
     logger.info(f"================================================================================")
-    logger.info(f"PIPELINE EXECUTION COMPLETED SUCCESSFULLY!")
+    logger.info(f"PIPELINE EXECUTION COMPLETED! Result: {gate_result['verdict']}")
     logger.info(f"Audit Run ID   : {audit_run_id}")
-    logger.info(f"Model Artifact : {final_artifacts['Model']}")
-    logger.info(f"Metrics JSON   : {final_artifacts['Metrics']}")
-    logger.info(f"EDA Plots      : 1) {final_artifacts['EDA_Raw']}")
-    logger.info(f"                 2) {final_artifacts['EDA_Diff']}")
-    logger.info(f"                 3) {final_artifacts['EDA_ACF']}")
-    logger.info(f"Eval Plots     : 1) {final_artifacts['Residual_Plot']}")
-    logger.info(f"                 2) {final_artifacts['Forecast_Plot']}")
+    logger.info(f"Gate Verdict   : {'PROMOTED' if is_promoted else 'REJECTED'}")
+    logger.info(f"Gate Reason    : {gate_result['reason']}")
+    logger.info(f"Active Model   : {champ_model_path}")
+    logger.info(f"Active Metrics : {champ_metrics_path}")
+    logger.info(f"EDA Plots      : 1) {eda_raw_plot}")
+    logger.info(f"                 2) {eda_diff_plot}")
+    logger.info(f"                 3) {eda_acf_plot}")
+    logger.info(f"Eval Plots     : 1) {residuals_plot_path}")
+    logger.info(f"                 2) {forecast_plot_path}")
     logger.info(
         f"Execution Time : Total={total_time:.3f}s (Load={time_load:.3f}s, Prep={time_prep:.3f}s, "
         f"Stat={time_stat:.3f}s, Train={time_train:.3f}s, Eval={time_eval:.3f}s)"

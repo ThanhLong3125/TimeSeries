@@ -65,5 +65,12 @@
       "ic_best": -339.6528774152817,
       "is_stationary": false
     }
+  },
+  "champion_gate": {
+    "is_promoted": true,
+    "verdict": "INITIAL_CHAMPION",
+    "reason": "Chưa có mô hình tiền nhiệm. Mô hình mới tự động được xác lập làm Champion đầu tiên.",
+    "champion_exists": false,
+    "metrics_diff": {}
   }
 }

@@ -200,15 +200,28 @@ Hệ thống phân định rạch ròi vai trò của hai định dạng này:
 
 # 4. CƠ CHẾ CỔNG KIỂM ĐỊNH MÔ HÌNH (CHAMPION VS. CHALLENGER GATE)
 
-Đây là điểm sáng tạo chuẩn MLOps của hệ thống nhằm giải quyết 2 bài toán thực tế:
-1. **Chống phình to ổ cứng:** Không lưu rác hàng chục file `.joblib` nặng 16MB sau mỗi lần thử nghiệm. Thư mục `artifacts/` luôn giữ đúng **MỘT BẢN DUY NHẤT**.
-2. **Bảo vệ mô hình tối ưu:** Không ghi đè mù quáng làm mất mô hình tốt nhất trước đó.
+Đây là điểm sáng tạo chuẩn MLOps của hệ thống nhằm giải quyết 3 bài toán thực tế:
+1. **Chống phình to ổ cứng ($O(1)$ File Space):** Không lưu rác hàng chục file `.joblib` nặng 16MB sau mỗi lần thử nghiệm. Thư mục `artifacts/` luôn duy trì số lượng file cố định.
+2. **Bảo vệ mô hình tối ưu (Safe Deployment):** Không ghi đè mù quáng làm mất mô hình Champion tốt nhất trước đó khi thử nghiệm thất bại.
+3. **Cung cấp Biểu đồ Chẩn đoán Thách đấu (Challenger Visual Staging):** Dù mô hình mới thắng hay thua, hệ thống **luôn xuất bản biểu đồ của Challenger** (`_forecast_challenger.png`, `_residuals_challenger.png`). Nhờ đó, Data Scientist có thể đặt 2 bức ảnh Champion và Challenger cạnh nhau để trực tiếp soi xét đường cong dự báo bị lệch ở đỉnh/đáy nào, phần dư bị vi phạm ở lag nào để tiếp tục tối ưu bộ tham số.
 
 ### Bốn Tiêu Chí Phân Xử của Cổng:
 1. **Test RMSE (Tiêu chí chính - 50%):** Phạt nặng sai số tại các đỉnh/đáy mùa vụ. Mô hình mới bắt buộc phải có xu hướng giảm RMSE.
 2. **Test MAE & MAPE (25%):** Đảm bảo sai số trung bình thực tế và tỷ lệ % sai lệch không bị suy thoái.
 3. **AIC / BIC (Nguyên lý Tối giản Box-Jenkins - 15%):** Nếu hai mô hình có Test RMSE xấp xỉ nhau (chênh lệch $\le 1\%$), mô hình nào có ít tham số hơn (AIC/BIC nhỏ hơn) sẽ được ưu tiên thăng hạng nhằm chống bẫy Overfitting.
 4. **Residual White Noise (10%):** Ưu tiên mô hình triệt tiêu sạch tự tương quan trong phần dư.
+
+### Cấu Trúc Thư Mục Tài Sản Độc Lập (Artifacts Hierarchy):
+* **Tài sản Biểu đồ (`figures/`):**
+  - `lab2/artifacts/figures/eda/` : Chứa các biểu đồ EDA (`_eda_01_raw.png`, `_eda_02_differenced.png`, `_eda_03_acf_pacf.png`).
+  - `lab2/artifacts/figures/champions/` : Chứa biểu đồ dự báo & phần dư của mô hình Vô địch (`_forecast.png`, `_residuals.png`).
+  - `lab2/artifacts/figures/challengers/` : Chứa biểu đồ dự báo & phần dư của mô hình Thách đấu (`_forecast.png`, `_residuals.png`).
+* **Tài sản Mô hình (`models/`):**
+  - `lab2/artifacts/models/champions/` : Lưu checkpoint mô hình Vô địch (`_champion.joblib`).
+  - `lab2/artifacts/models/challengers/` : Lưu checkpoint mô hình Thách đấu (`_challenger.joblib`).
+* **Tài sản Chỉ số (`metrics/`):**
+  - `lab2/artifacts/metrics/champions/` : Báo cáo JSON chi tiết mô hình Vô địch (`_champion.json`).
+  - `lab2/artifacts/metrics/challengers/` : Báo cáo JSON chi tiết mô hình Thách đấu (`_challenger.json`).
 
 ### Bảng Phân Xử Mẫu Xuất Bản Trong Log:
 ```text

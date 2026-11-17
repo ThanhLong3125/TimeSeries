@@ -16,9 +16,20 @@ Nếu áp dụng cơ chế **ghi đè mù quáng (Blind Overwrite)**:
 Ngược lại, nếu lưu **mọi phiên bản vào từng file riêng biệt**:
 - Ổ đĩa sẽ nhanh chóng bị phình to bởi các file nhị phân mô hình (`.joblib` nặng từ vài trăm KB đến 16MB/file) và hàng chục bức ảnh đồ thị dư thừa.
 
-👉 **Giải pháp tối ưu chuẩn MLOps:** Cơ chế **Champion vs. Challenger (Mô hình Đương nhiệm vs. Kẻ thách đấu)**:
-- Thư mục `artifacts/` luôn luôn giữ đúng **MỘT BỘ DUY NHẤT** là mô hình Champion tốt nhất.
-- Khi một mô hình mới (Challenger) được huấn luyện, hệ thống đưa vào **Cổng kiểm duyệt thống kê (Evaluation Gate)**. Chỉ khi Challenger chứng minh được sự vượt trội theo các tiêu chí khoa học của môn học Time Series, nó mới được **thăng hạng (Promote)** và ghi đè lên Champion.
+👉 **Giải pháp tối ưu chuẩn MLOps: Cơ chế Phân Tách Thư Mục Champions & Challengers ($O(1)$ File Space)**:
+- **Cấu trúc lưu trữ phân cấp rõ ràng**:
+  - `artifacts/figures/eda/` : Chứa toàn bộ ảnh phân tích thăm dò ban đầu.
+  - `artifacts/figures/champions/` vs `artifacts/figures/challengers/`
+  - `artifacts/models/champions/` vs `artifacts/models/challengers/`
+  - `artifacts/metrics/champions/` vs `artifacts/metrics/challengers/`
+- **Quy trình hoạt động**:
+  1. Khi một cấu hình mới được chạy, hệ thống **luôn luôn xuất bản tài sản của lần chạy đó vào các thư mục `challengers/`** (ghi đè lên Challenger cũ).
+  2. Cổng kiểm duyệt thống kê (**Model Evaluation Gate**) so sánh Challenger với Champion:
+     - **Nếu Challenger THẮNG (PROMOTED)**: Thăng hạng làm Champion mới, cập nhật sang các thư mục `champions/`.
+     - **Nếu Challenger THUA (REJECTED)**: Giữ nguyên vẹn tài sản trong `champions/`, nhưng **VẪN GIỮ NGUYÊN TÀI SẢN TRONG `challengers/`**.
+  3. **Lợi ích thực tế cho Data Scientist**:
+     - Bạn chỉ cần mở đồng thời 2 folder `figures/champions/` và `figures/challengers/` cạnh nhau để so sánh trực quan (*Side-by-side Visual Inspection*), xem mô hình mới dự báo lệch ở đỉnh nào, hụt ở đáy nào để biết hướng tinh chỉnh tham số tiếp theo.
+     - Thư mục tuyệt đối ngăn nắp, không bị lẫn lộn giữa ảnh EDA, mô hình cũ và mô hình mới; tổng số lượng file luôn cố định ($O(1)$).
 - Mọi lịch sử thử nghiệm (kể cả thất bại) vẫn được lưu vết bất biến trong `pipeline.log` và `audit_trail.jsonl`.
 
 ---

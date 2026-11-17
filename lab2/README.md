@@ -63,11 +63,23 @@ lab2/
 │   ├── ds2_03_acf_pacf_sarima.png       # Biểu đồ 8: Đồ thị ACF & PACF xác định tham số SARIMA
 │   └── ds2_04_sarima_vs_arima.png       # Biểu đồ 9: Đồ thị so sánh đối chuẩn dự báo SARIMA vs ARIMA thuần
 │
-├── reports/                             # Tài liệu nghiên cứu và cẩm nang diễn giải
+├── reports/                             # Tài liệu nghiên cứu, kiến trúc và kịch bản thuyết trình
 │   ├── BAO_CAO_LAB2_ARIMA_SARIMA.md     # Báo cáo khoa học đầy đủ lý thuyết, phân tích và câu trả lời
-│   ├── CO_SO_LY_THUYET_CAC_MO_HINH_CHIEU_SAU.md # Cơ sở lý thuyết toàn diện về AR, MA, ARMA, ARIMA, SARIMA, SARIMAX
-│   ├── HUONG_DAN_DOC_HIEU_BIEU_DO.md    # Cẩm nang chuyên sâu giải thích chi tiết 9 biểu đồ thực nghiệm
+│   ├── CHI_TIET_KIEN_TRUC_PIPELINE_VA_CODE_CORE.md # Cẩm nang giải phẫu toàn diện mã nguồn & luồng dữ liệu Pipeline
+│   ├── KICH_BAN_THUYET_TRINH_TOAN_DIEN_LAB2.md     # Kịch bản thuyết trình 15 phút nguyên nhân - hệ quả từ EDA đến MLOps
+│   ├── TIEU_CHI_SO_SANH_VA_QUAN_LY_MO_HINH.md      # Bộ tiêu chí phân định Champion vs Challenger Gatekeeper
+│   ├── CO_SO_LY_THUYET_CAC_MO_HINH_CHIEU_SAU.md   # Cơ sở lý thuyết toàn diện về AR, MA, ARMA, ARIMA, SARIMA, SARIMAX
+│   ├── HUONG_DAN_DOC_HIEU_BIEU_DO.md    # Cẩm nang chuyên sâu giải thích chi tiết biểu đồ thực nghiệm
 │   └── HUONG_DAN_DIEN_GIAI_CHI_SO.md    # Bảng tra cứu ý nghĩa các chỉ số thống kê
+│
+├── configs/                             # Cấu hình declarative YAML (base, arima_a10, sarima_airpassengers)
+├── src/                                 # 9 Module sản xuất chuẩn MLOps (Data Loader -> Comparator -> Forecaster)
+├── artifacts/                           # Tài sản phân cấp chuyên biệt Champions & Challengers ($O(1)$)
+│   ├── figures/                         # figures/eda/, figures/champions/, figures/challengers/
+│   ├── models/                          # models/champions/ & models/challengers/
+│   └── metrics/                         # metrics/champions/ & metrics/challengers/
+├── tests/                               # Bộ unit test tự động (test_pipeline.py)
+├── main.py                              # CLI Entry Point điều phối toàn bộ Pipeline
 │
 ├── excercise_stats_models.pdf           # Đề bài thực hành gốc
 ├── excercise_ML_models.pdf              # Đề bài thực hành Machine Learning (tham khảo)

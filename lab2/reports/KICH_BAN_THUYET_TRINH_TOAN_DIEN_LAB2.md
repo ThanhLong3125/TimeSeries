@@ -55,7 +55,7 @@ flowchart TD
 
 ## 🎙️ BƯỚC 1: Khám phá Dữ liệu Thô (EDA) — Đặt Nghi Vấn Tính Dừng (01:30 – 03:30)
 
-*(Hành động: Chiếu tệp biểu đồ [a10_arima_baseline_eda_01_raw.png](file:///home/thanhlong/Documents/TimeSeries/lab2/artifacts/figures/a10_arima_baseline_eda_01_raw.png))*
+*(Hành động: Chiếu tệp biểu đồ [a10_arima_baseline_eda_01_raw.png](file:///home/thanhlong/Documents/TimeSeries/lab2/artifacts/figures/eda/a10_arima_baseline_eda_01_raw.png))*
 
 > **Lời thoại:**  
 > "Mắt xích đầu tiên bắt đầu từ việc khám phá hiện trạng dữ liệu gốc **Doanh số bán lẻ dược phẩm trị tiểu đường tại Úc (`a10.csv`)** gồm 204 tháng (từ 07/1991 đến 06/2008).  
@@ -107,7 +107,7 @@ flowchart TD
 
 ## 🎙️ BƯỚC 3: Sai phân & Kiểm soát Quá sai phân — Tìm ra Tham số $d$ (05:00 – 07:00)
 
-*(Hành động: Chiếu biểu đồ sai phân [a10_arima_baseline_eda_02_differenced.png](file:///home/thanhlong/Documents/TimeSeries/lab2/artifacts/figures/a10_arima_baseline_eda_02_differenced.png))*
+*(Hành động: Chiếu biểu đồ sai phân [a10_arima_baseline_eda_02_differenced.png](file:///home/thanhlong/Documents/TimeSeries/lab2/artifacts/figures/eda/a10_arima_baseline_eda_02_differenced.png))*
 
 > **Lời thoại:**  
 > "Để giải quyết bài toán không dừng ở Bước 2, chúng em thực hiện sai phân bậc 1: $\Delta y_t = y_t - y_{t-1}$.
@@ -131,7 +131,7 @@ flowchart TD
 
 ## 🎙️ BƯỚC 4: Phân tích ACF & PACF — Tìm ra Tham số $(p, q)$ (07:00 – 08:30)
 
-*(Hành động: Chiếu biểu đồ [a10_arima_baseline_eda_03_acf_pacf.png](file:///home/thanhlong/Documents/TimeSeries/lab2/artifacts/figures/a10_arima_baseline_eda_03_acf_pacf.png))*
+*(Hành động: Chiếu biểu đồ [a10_arima_baseline_eda_03_acf_pacf.png](file:///home/thanhlong/Documents/TimeSeries/lab2/artifacts/figures/eda/a10_arima_baseline_eda_03_acf_pacf.png))*
 
 > **Lời thoại:**  
 > "Sau khi đã chốt $d=1$ ở Bước 3, pipeline tự động tính toán và vẽ hai đồ thị Box-Jenkins trên chuỗi $\Delta y_t$:
@@ -191,7 +191,7 @@ CHẨN ĐOÁN HỘI TỤ, TÍNH DỪNG & KHẢ NGHỊCH:
 
 ## 🎙️ BƯỚC 6: Chẩn đoán Phần dư & Dự báo Test Set — Phát Hiện Điểm Yếu Của ARIMA (10:00 – 12:00)
 
-*(Hành động: Chiếu biểu đồ 4 góc chẩn đoán phần dư [a10_arima_baseline_residuals.png](file:///home/thanhlong/Documents/TimeSeries/lab2/artifacts/figures/a10_arima_baseline_residuals.png))*
+*(Hành động: Chiếu biểu đồ 4 góc chẩn đoán phần dư [a10_arima_baseline_residuals.png](file:///home/thanhlong/Documents/TimeSeries/lab2/artifacts/figures/champions/a10_arima_baseline_residuals.png))*
 
 > **Lời thoại:**  
 > "Để trả lời cho câu hỏi ở Bước 5, chúng em soi chiếu phần dư qua bộ 4 đồ thị chẩn đoán:
@@ -204,7 +204,7 @@ CHẨN ĐOÁN HỘI TỤ, TÍNH DỪNG & KHẢ NGHỊCH:
 >    - Tại các lag ngắn hạn (Lag 1 đến 10), phần dư hoàn toàn nằm trong dải tin cậy 95%, kiểm định Ljung-Box tại Lag 10 có $p\text{-value} = 0.3857 > 0.05 \implies$ **Phần dư là White Noise ngắn hạn**.  
 >    - **TUY NHIÊN**, tại đúng **Lag 12 và Lag 24**, hai đỉnh nhọn màu đỏ vọt hẳn ra ngoài dải tin cậy, khiến kiểm định Ljung-Box tại Lag 12 có $p < 0.001$. Điều này chứng minh rằng: **Mô hình ARIMA phi mùa vụ đã bỏ sót toàn bộ cấu trúc tự tương quan chu kỳ 12 tháng!**"
 
-*(Hành động: Chiếu biểu đồ đối chiếu dự báo ngoài mẫu [a10_arima_baseline_forecast.png](file:///home/thanhlong/Documents/TimeSeries/lab2/artifacts/figures/a10_arima_baseline_forecast.png))*
+*(Hành động: Chiếu biểu đồ đối chiếu dự báo ngoài mẫu [a10_arima_baseline_forecast.png](file:///home/thanhlong/Documents/TimeSeries/lab2/artifacts/figures/champions/a10_arima_baseline_forecast.png))*
 
 > "Hậu quả của việc bỏ sót mùa vụ thể hiện rõ ràng trên tập kiểm thử ngoài mẫu Test Set (41 tháng, từ 2005 đến 2008):
 > 
@@ -224,7 +224,7 @@ CHẨN ĐOÁN HỘI TỤ, TÍNH DỪNG & KHẢ NGHỊCH:
 
 ## 🎙️ BƯỚC 7: Bài tập Nâng cao SARIMA — Đánh Bại ARIMA Thuần (12:00 – 13:30)
 
-*(Hành động: Chiếu biểu đồ dự báo SARIMA [airpassengers_sarima_forecast.png](file:///home/thanhlong/Documents/TimeSeries/lab2/artifacts/figures/airpassengers_sarima_forecast.png))*
+*(Hành động: Chiếu biểu đồ dự báo SARIMA [airpassengers_sarima_forecast.png](file:///home/thanhlong/Documents/TimeSeries/lab2/artifacts/figures/champions/airpassengers_sarima_forecast.png))*
 
 > **Lời thoại:**  
 > "Để hiện thực hóa bài học từ Bước 6, nhóm em triển khai mô hình **SARIMA trên tập dữ liệu số lượng hành khách hàng không `AirPassengers` (144 tháng)**:
@@ -284,7 +284,9 @@ LÝ DO CHI TIẾT  : Challenger kém hơn Champion: Test RMSE tăng +154.15% (t�
 > Nhóm em đã thực nghiệm cố tình chạy một mô hình Challenger tồi là $\text{ARIMA}(0, 0, 1)$ trên tập `a10`:
 > - Test RMSE của Challenger vọt lên $11.75$ (kém hơn Champion tới $+154\%$).
 > - AIC của Challenger lên tới $791$ (kém hơn 209 điểm).  
-> $\implies$ Cổng kiểm định lập tức ra phán quyết: `🛑 REJECTED`. Toàn bộ file model và 5 hình ảnh của Champion cũ được **bảo toàn nguyên vẹn 100%**. Đồng thời, lần thử nghiệm thất bại này vẫn được ghi nhận minh bạch vào file [audit_trail.jsonl](file:///home/thanhlong/Documents/TimeSeries/lab2/logs/audit_trail.jsonl).
+> $\implies$ Cổng kiểm định lập tức ra phán quyết: `🛑 REJECTED`. Toàn bộ file model và các hình ảnh của Champion cũ được **bảo toàn nguyên vẹn 100%**. 
+>
+> **Đặc biệt, hệ thống giải quyết trọn vẹn bài toán quan sát:** Mô hình Challenger dù bị từ chối nhưng biểu đồ của nó vẫn được lưu tại file cố định `_forecast_challenger.png` và `_residuals_challenger.png`. Nhờ đó, người làm dữ liệu có thể mở 2 bức ảnh Champion và Challenger cạnh nhau để trực quan hóa xem mô hình mới dự báo lệch ở đỉnh đáy nào, từ đó biết cách tinh chỉnh tiếp trong file config mà không làm phình to dung lượng ổ cứng ($O(1)$ file space). Mọi lịch sử thử nghiệm thất bại vẫn được ghi nhận minh bạch vào file [audit_trail.jsonl](file:///home/thanhlong/Documents/TimeSeries/lab2/logs/audit_trail.jsonl).
 >
 > **TỔNG KẾT BÀI BÁO CÁO:**  
 > Quy trình 8 bước của nhóm em đã chứng minh trọn vẹn: Từ việc nhận diện dữ liệu thô, kiểm định toán học, sai phân có kiểm soát, nhận diện bậc, huấn luyện mô hình, phát hiện điểm yếu để nâng cấp SARIMA, cho đến việc tự động hóa quản trị mô hình bằng cổng kiểm định MLOps.

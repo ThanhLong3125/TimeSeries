@@ -26,10 +26,17 @@ lab2/
 ├── logs/                         # Tầng nhật ký
 │   ├── pipeline.log              # Raw log thời gian thực xoay vòng (tối đa 5MB)
 │   └── audit_trail.jsonl         # Lịch sử truy vết từng lần chạy (JSON Lines)
-├── artifacts/                    # Tầng tài sản đầu ra
+├── artifacts/                    # Tầng tài sản đầu ra phân cấp rõ ràng ($O(1)$)
+│   ├── figures/                  # Biểu đồ chẩn đoán và dự báo ngoài mẫu (.png)
+│   │   ├── eda/                  # Ảnh phân tích khám phá chuỗi (raw, diff, acf/pacf)
+│   │   ├── champions/            # Biểu đồ mô hình Vô địch (forecast, residuals)
+│   │   └── challengers/          # Biểu đồ mô hình Thách đấu (forecast, residuals)
 │   ├── models/                   # File mô hình nhị phân (.joblib)
-│   ├── metrics/                  # Kết quả kiểm thử (.json)
-│   └── figures/                  # Biểu đồ chẩn đoán và dự báo ngoài mẫu (.png)
+│   │   ├── champions/            # Checkpoint mô hình Vô địch
+│   │   └── challengers/          # Checkpoint mô hình Thách đấu
+│   └── metrics/                  # Kết quả kiểm thử định lượng (.json)
+│       ├── champions/            # JSON chỉ số mô hình Vô địch
+│       └── challengers/          # JSON chỉ số mô hình Thách đấu
 └── main.py                       # CLI Entry Point
 ```
 
@@ -66,7 +73,12 @@ PYTHONPATH=lab2 python3 lab2/main.py --config lab2/configs/sarima_airpassengers.
 2. **Bẫy tự động chặn Quá sai phân (Over-differencing Safeguard):**
    * Tự động đo phương sai $\sigma^2(d=0) \rightarrow \sigma^2(d=1) \rightarrow \sigma^2(d=2)$.
    * Nếu phương sai tại $d=2$ tăng vọt và hệ số tự tương quan $r_1 < -0.5$, hệ thống tự động bắn cảnh báo `[WARNING]` vào log.
-3. **Cơ chế Audit Trail bất biến (`logs/audit_trail.jsonl`):**
-   * Tự động sinh `run_id` duy nhất và tính mã băm MD5 của file CSV đầu vào, đảm bảo tính toàn vẹn dữ liệu và khả năng tái lập 100%.
-4. **Biểu đồ Senior Data Analyst:**
+3. **Cơ chế Quản lý Mô hình Champion vs. Challenger Staging ($O(1)$ File Space):**
+   * **Bảo vệ Champion:** Mô hình và biểu đồ tốt nhất từ trước đến nay được lưu tại `_champion.joblib`, `_champion.json`, `_forecast.png`, `_residuals.png`.
+   * **Lưu vết Challenger phục vụ phân tích (Visual Diagnostics):** Mỗi lần chạy thử nghiệm mới, hệ thống **luôn xuất bản và ghi đè** vào `_challenger.joblib`, `_challenger.json`, `_forecast_challenger.png`, `_residuals_challenger.png`.
+   * **So sánh trực quan song song (Side-by-side Inspection):** Dù mô hình mới thắng hay thua, Data Scientist vẫn luôn có đầy đủ biểu đồ của Challenger để mở cạnh Champion, trực tiếp soi xét đường cong dự báo bị lệch ở đâu nhằm tiếp tục tối ưu bộ tham số.
+   * **Chống phình to dung lượng:** Số lượng file luôn là hằng số cố định, không sinh thêm file rác theo thời gian.
+4. **Cơ chế Audit Trail bất biến (`logs/audit_trail.jsonl`):**
+   * Tự động sinh `run_id` duy nhất và tính mã băm MD5 của file CSV đầu vào, lưu lại phán quyết của Gatekeeper (PROMOTED / REJECTED) cùng lý do chi tiết, đảm bảo tính toàn vẹn dữ liệu và khả năng tái lập 100%.
+5. **Biểu đồ Senior Data Analyst:**
    * Không bị chồng chéo chữ (no chart junk), tích hợp chỉ số lên subheader và KPI banner tinh tế, xuất bản độ phân giải cao 300 DPI.

@@ -47,7 +47,7 @@
   * **Cơ chế chống Sai phân quá mức (Over-differencing Safeguard)**: Phân tích phương sai và hệ số tự tương quan bậc 1 ($ACF_1 < -0.5$) để tránh làm tăng phương sai khi lấy sai phân bậc cao ($d=2$).
   * **Mô hình hóa Box-Jenkins**: Triển khai mô hình ARIMA($p, d, q$) cho chuỗi đơn biến và SARIMA($p, d, q$)($P, D, Q$)$_s$ cho chuỗi có mùa vụ mạnh.
   * **Chẩn đoán phần dư chuẩn hóa**: Kiểm định Ljung-Box (độc lập thống kê), Jarque-Bera & D'Agostino-Pearson (phân phối chuẩn), Heteroskedasticity (phương sai đồng nhất).
-  * **Kiến trúc Pipeline**: Tách biệt rõ ràng các module (`data_loader`, `preprocessor`, `stationarity`, `trainer`, `evaluator`, `forecaster`), quản lý siêu tham số bằng YAML (`configs/`), tích hợp Audit Trail JSONL và Unit tests.
+  * **Kiến trúc Pipeline & Cổng thẩm định Champion vs. Challenger ($O(1)$)**: Tách biệt rõ ràng các module (`data_loader`, `preprocessor`, `stationarity`, `trainer`, `evaluator`, `forecaster`, `model_comparator`), quản lý siêu tham số bằng YAML (`configs/`), cơ chế Staging lưu song song tài sản Champion & Challenger phục vụ đối chiếu trực quan mà không gây phình to ổ đĩa, tích hợp Audit Trail JSONL và Unit tests tự động.
 * 👉 Chi tiết: [lab2/README.md](lab2/README.md) | [lab2/README_PIPELINE.md](lab2/README_PIPELINE.md)
 
 ---

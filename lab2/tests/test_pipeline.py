@@ -6,6 +6,7 @@ from src.data_loader import load_and_validate_data
 from src.preprocessor import preprocess_time_series, split_train_test
 from src.stationarity import run_adf_with_autolag_logging, analyze_differencing_orders
 from src.tracker import calculate_file_md5, record_audit_entry
+from src.model_comparator import compare_champion_challenger
 
 class TestTimeSeriesPipeline(unittest.TestCase):
 
@@ -52,6 +53,45 @@ class TestTimeSeriesPipeline(unittest.TestCase):
         md5_hash = calculate_file_md5("lab2/data/raw/a10.csv")
         self.assertIsNotNone(md5_hash)
         self.assertEqual(len(md5_hash), 32)
+
+    def test_model_comparator_gate(self):
+        # 1. Test Initial Champion
+        metrics_new = {
+            "test_performance": {"RMSE": 4.5, "MAE": 3.5, "MAPE": 15.0},
+            "aic": 500.0, "bic": 510.0
+        }
+        res_init = compare_champion_challenger(metrics_new, "lab2/artifacts/metrics/non_existent.json")
+        self.assertTrue(res_init["is_promoted"])
+        self.assertEqual(res_init["verdict"], "INITIAL_CHAMPION")
+
+        # 2. Test Superior Challenger
+        import tempfile
+        import json
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as tmp:
+            champ_data = {
+                "test_performance": {"RMSE": 5.0, "MAE": 4.0, "MAPE": 18.0},
+                "aic": 520.0, "bic": 530.0
+            }
+            json.dump(champ_data, tmp)
+            tmp_path = tmp.name
+
+        try:
+            # Challenger tốt hơn (RMSE 4.5 < 5.0)
+            res_better = compare_champion_challenger(metrics_new, tmp_path)
+            self.assertTrue(res_better["is_promoted"])
+            self.assertEqual(res_better["verdict"], "PROMOTED_SUPERIOR_FORECAST")
+
+            # Challenger kém hơn (RMSE 6.0 > 5.0)
+            metrics_worse = {
+                "test_performance": {"RMSE": 6.0, "MAE": 5.0, "MAPE": 22.0},
+                "aic": 550.0, "bic": 560.0
+            }
+            res_worse = compare_champion_challenger(metrics_worse, tmp_path)
+            self.assertFalse(res_worse["is_promoted"])
+            self.assertEqual(res_worse["verdict"], "REJECTED_INFERIOR_ACCURACY")
+        finally:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
 
 if __name__ == "__main__":
     unittest.main()

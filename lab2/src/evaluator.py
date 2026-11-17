@@ -99,10 +99,10 @@ def export_metrics_json(metrics, experiment_name, run_id, output_dir="lab2/artif
     logger.info(f"Metrics JSON persisted: path={filepath}")
     return filepath
 
-def plot_residual_diagnostics(residuals, experiment_name, run_id=None, output_dir="lab2/artifacts/figures"):
+def plot_residual_diagnostics(residuals, experiment_name, suffix=None, output_dir="lab2/artifacts/figures"):
     """
     Xuất bản bộ 4 đồ thị chẩn đoán phần dư theo chuẩn Senior Data Analyst.
-    Ghi đè trực tiếp lên ảnh cũ nếu không truyền run_id.
+    Hỗ trợ suffix='challenger' hoặc 'champion'. Nếu suffix=None thì lưu tên chuẩn.
     """
     os.makedirs(output_dir, exist_ok=True)
     clean_resid = residuals.dropna()
@@ -118,7 +118,8 @@ def plot_residual_diagnostics(residuals, experiment_name, run_id=None, output_di
     axes[0, 0].plot(clean_resid.index, clean_resid, color="#2C3E50", lw=1.0, alpha=0.85, label="Residual $e_t$")
     axes[0, 0].axhline(0, color="black", lw=0.8, linestyle="-", alpha=0.5)
     axes[0, 0].axhline(mean_val, color="#E74C3C", lw=1.2, linestyle="--", label=f"Mean ({mean_val:.2f})")
-    axes[0, 0].set_title(f"Residuals vs Time  |  Mean: {mean_val:.2f}, Std: {std_val:.2f}", fontsize=11, fontweight="bold", pad=8)
+    tag_str = f" [{suffix.upper()}]" if suffix else ""
+    axes[0, 0].set_title(f"Residuals vs Time{tag_str}  |  Mean: {mean_val:.2f}, Std: {std_val:.2f}", fontsize=11, fontweight="bold", pad=8)
     axes[0, 0].set_ylabel("Residual", fontsize=10)
     axes[0, 0].grid(True, linestyle="--", alpha=0.35)
     axes[0, 0].legend(loc="lower left", frameon=True, framealpha=0.9, fontsize=9)
@@ -154,7 +155,7 @@ def plot_residual_diagnostics(residuals, experiment_name, run_id=None, output_di
     axes[1, 1].grid(True, linestyle="--", alpha=0.35)
     
     plt.tight_layout()
-    filename = f"{experiment_name}_residuals_{run_id}.png" if run_id else f"{experiment_name}_residuals.png"
+    filename = f"{experiment_name}_residuals_{suffix}.png" if suffix else f"{experiment_name}_residuals.png"
     filepath = os.path.join(output_dir, filename)
     plt.savefig(filepath, dpi=300)
     plt.close()

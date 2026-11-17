@@ -64,8 +64,10 @@ def run_pipeline(config_path, dry_run=False):
     )
     time_prep = time.time() - t0
     
-    # 3. EDA Visualizations (Ghi đè cố định lên ảnh cũ)
-    eda_raw_plot = plot_eda_raw_series(series, cfg, run_id=None)
+    # 3. EDA Visualizations (Lưu vào figures/eda)
+    eda_fig_dir = "lab2/artifacts/figures/eda"
+    os.makedirs(eda_fig_dir, exist_ok=True)
+    eda_raw_plot = plot_eda_raw_series(series, cfg, run_id=None, output_dir=eda_fig_dir)
     
     # 4. Stationarity & Differencing Analysis
     t0 = time.time()
@@ -81,9 +83,9 @@ def run_pipeline(config_path, dry_run=False):
     )
     time_stat = time.time() - t0
     
-    # Xuất bản biểu đồ EDA sai phân & ACF/PACF (Ghi đè cố định lên ảnh cũ)
-    eda_diff_plot = plot_eda_differencing(diff_analysis, cfg, run_id=None)
-    eda_acf_plot = plot_eda_acf_pacf(diff_analysis[1]["series"], cfg, run_id=None)
+    # Xuất bản biểu đồ EDA sai phân & ACF/PACF (Lưu vào figures/eda)
+    eda_diff_plot = plot_eda_differencing(diff_analysis, cfg, run_id=None, output_dir=eda_fig_dir)
+    eda_acf_plot = plot_eda_acf_pacf(diff_analysis[1]["series"], cfg, run_id=None, output_dir=eda_fig_dir)
     
     if dry_run:
         logger.info("[DRY-RUN MODE] Data ingestion, validation, and EDA completed successfully. Halting before training.")
@@ -115,15 +117,28 @@ def run_pipeline(config_path, dry_run=False):
     )
     
     # 7. Model Evaluation Gate: Champion vs Challenger Comparison
-    models_dir = "lab2/artifacts/models"
-    metrics_dir = "lab2/artifacts/metrics"
-    figures_dir = "lab2/artifacts/figures"
-    os.makedirs(models_dir, exist_ok=True)
-    os.makedirs(metrics_dir, exist_ok=True)
-    os.makedirs(figures_dir, exist_ok=True)
+    champ_models_dir = "lab2/artifacts/models/champions"
+    chal_models_dir = "lab2/artifacts/models/challengers"
+    champ_metrics_dir = "lab2/artifacts/metrics/champions"
+    chal_metrics_dir = "lab2/artifacts/metrics/challengers"
+    champ_fig_dir = "lab2/artifacts/figures/champions"
+    chal_fig_dir = "lab2/artifacts/figures/challengers"
     
-    champ_model_path = os.path.join(models_dir, f"{exp_name}_champion.joblib")
-    champ_metrics_path = os.path.join(metrics_dir, f"{exp_name}_champion.json")
+    for d in [champ_models_dir, chal_models_dir, champ_metrics_dir, chal_metrics_dir, champ_fig_dir, chal_fig_dir]:
+        os.makedirs(d, exist_ok=True)
+    
+    champ_model_path = os.path.join(champ_models_dir, f"{exp_name}_champion.joblib")
+    champ_metrics_path = os.path.join(champ_metrics_dir, f"{exp_name}_champion.json")
+    champ_residuals_path = os.path.join(champ_fig_dir, f"{exp_name}_residuals.png")
+    champ_forecast_path = os.path.join(champ_fig_dir, f"{exp_name}_forecast.png")
+
+    chal_model_path = os.path.join(chal_models_dir, f"{exp_name}_challenger.joblib")
+    chal_metrics_path = os.path.join(chal_metrics_dir, f"{exp_name}_challenger.json")
+    
+    # LUÔN XUẤT BẢN TÀI SẢN CHALLENGER: Lưu model và biểu đồ vào thư mục challengers/
+    joblib.dump(model, chal_model_path)
+    chal_residuals_path = plot_residual_diagnostics(model.resid, exp_name, suffix=None, output_dir=chal_fig_dir)
+    chal_forecast_path = plot_forecast_vs_actual(train_series, actual_test, forecast_test, test_metrics, cfg, suffix=None, output_dir=chal_fig_dir)
     
     full_metrics = {
         "experiment": exp_name,
@@ -137,29 +152,41 @@ def run_pipeline(config_path, dry_run=False):
         }
     }
     
+    # Đưa vào Cổng kiểm duyệt thống kê Champion vs Challenger
     gate_result = compare_champion_challenger(
         new_metrics=full_metrics,
         champion_metrics_path=champ_metrics_path
     )
     
     is_promoted = gate_result["is_promoted"]
+    full_metrics["champion_gate"] = gate_result
+    
+    with open(chal_metrics_path, "w", encoding="utf-8") as f:
+        json.dump(full_metrics, f, indent=2, ensure_ascii=False)
     
     if is_promoted:
-        # THĂNG HẠNG: Ghi đè file model, metrics và toàn bộ biểu đồ Champion
+        # THĂNG HẠNG: Thăng cấp Challenger làm Champion (ghi đè vào thư mục champions/)
         joblib.dump(model, champ_model_path)
-        full_metrics["champion_gate"] = gate_result
         with open(champ_metrics_path, "w", encoding="utf-8") as f:
             json.dump(full_metrics, f, indent=2, ensure_ascii=False)
             
-        residuals_plot_path = plot_residual_diagnostics(model.resid, exp_name, run_id=None)
-        forecast_plot_path = plot_forecast_vs_actual(train_series, actual_test, forecast_test, test_metrics, cfg, run_id=None)
+        plot_residual_diagnostics(model.resid, exp_name, suffix=None, output_dir=champ_fig_dir)
+        plot_forecast_vs_actual(train_series, actual_test, forecast_test, test_metrics, cfg, suffix=None, output_dir=champ_fig_dir)
+        
+        residuals_plot_path = champ_residuals_path
+        forecast_plot_path = champ_forecast_path
         logger.info(f"🏆 [CHAMPION PROMOTED] {gate_result['reason']}")
+        logger.info(f"   Champion assets updated in: {champ_fig_dir}, {champ_models_dir}, {champ_metrics_dir}")
     else:
-        # TỪ CHỐI: Giữ nguyên Champion cũ, không ghi đè model và biểu đồ
+        # TỪ CHỐI: Giữ nguyên Champion cũ, Challenger plots vẫn sẵn sàng trong thư mục challengers/
         logger.warning(f"🛑 [CHALLENGER REJECTED] {gate_result['reason']}")
-        logger.warning(f"   Current Champion artifacts preserved. Model and Figures NOT overwritten.")
-        residuals_plot_path = os.path.join(figures_dir, f"{exp_name}_residuals.png")
-        forecast_plot_path = os.path.join(figures_dir, f"{exp_name}_forecast.png")
+        logger.warning(f"   Current Champion artifacts preserved in: {champ_fig_dir}")
+        logger.info(f"💡 [CHALLENGER DIAGNOSTICS READY] Challenger plots saved in: {chal_fig_dir}")
+        logger.info(f"   - Forecast Plot : {chal_forecast_path}")
+        logger.info(f"   - Residuals Plot: {chal_residuals_path}")
+        logger.info(f"   👉 Hãy mở 2 thư mục champions/ và challengers/ để trực tiếp so sánh và tinh chỉnh!")
+        residuals_plot_path = champ_residuals_path
+        forecast_plot_path = champ_forecast_path
         
     time_eval = time.time() - t0
     total_time = time.time() - t_start

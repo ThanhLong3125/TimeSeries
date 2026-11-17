@@ -22,16 +22,17 @@ def generate_forecasts(fitted_model, test_series, apply_log=False):
     else:
         return test_series, forecast_series
 
-def plot_forecast_vs_actual(train_series, actual_test, forecast_series, metrics, config, run_id=None, output_dir="lab2/artifacts/figures"):
+def plot_forecast_vs_actual(train_series, actual_test, forecast_series, metrics, config, suffix=None, output_dir="lab2/artifacts/figures"):
     """
     Vẽ biểu đồ đối chiếu ngoài mẫu (Forecast vs Actuals) theo chuẩn Senior Data Analyst.
-    Ghi đè trực tiếp lên ảnh cũ nếu không truyền run_id.
+    Hỗ trợ suffix='challenger' hoặc 'champion'. Nếu suffix=None thì lưu tên chuẩn.
     """
     os.makedirs(output_dir, exist_ok=True)
     exp_name = config.get("experiment_name", "model")
     model_type = config["model"]["type"]
     order = config["model"]["order"]
     s_order = config["model"].get("seasonal_order")
+    tag_str = f" [{suffix.upper()}]" if suffix else ""
     model_label = f"{model_type}{order}" if not s_order else f"{model_type}{order}x{s_order}"
     unit = config.get("evaluation", {}).get("unit", "Value")
     
@@ -66,18 +67,19 @@ def plot_forecast_vs_actual(train_series, actual_test, forecast_series, metrics,
     mae = metrics["MAE"]
     rmse = metrics["RMSE"]
     mape = metrics["MAPE"]
-    kpi_banner = f"{model_label} Evaluation  —  MAE: {mae:.2f}  |  RMSE: {rmse:.2f}  |  MAPE: {mape:.1f}%"
+    kpi_banner = f"{model_label}{tag_str} Evaluation  —  MAE: {mae:.2f}  |  RMSE: {rmse:.2f}  |  MAPE: {mape:.1f}%"
     ax.text(0.02, 0.94, kpi_banner, transform=ax.transAxes, fontsize=10, fontweight="bold",
             color="#1F3A60", bbox=dict(boxstyle="square,pad=0.5", facecolor="#EAEDED", edgecolor="#BDC3C7", lw=1.0))
             
-    ax.set_title(config.get("evaluation", {}).get("plot_title", f"{exp_name} Forecast"), fontsize=13, fontweight="bold", pad=12)
+    base_title = config.get("evaluation", {}).get("plot_title", f"{exp_name} Forecast")
+    ax.set_title(f"{base_title}{tag_str}", fontsize=13, fontweight="bold", pad=12)
     ax.set_xlabel("Time", fontsize=11)
     ax.set_ylabel(unit, fontsize=11)
     ax.grid(True, linestyle="--", alpha=0.35)
     ax.legend(loc="center left", bbox_to_anchor=(0.02, 0.76), frameon=True, framealpha=0.9, fontsize=9.5)
     
     plt.tight_layout()
-    filename = f"{exp_name}_forecast_{run_id}.png" if run_id else f"{exp_name}_forecast.png"
+    filename = f"{exp_name}_forecast_{suffix}.png" if suffix else f"{exp_name}_forecast.png"
     filepath = os.path.join(output_dir, filename)
     plt.savefig(filepath, dpi=300)
     plt.close()

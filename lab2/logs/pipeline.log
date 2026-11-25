@@ -2262,12 +2262,12 @@ LÝ DO CHI TIẾT  : Challenger kém hơn Champion: Test RMSE tăng +20.00% (t�
 [2026-11-17 23:44:35] [INFO] [stationarity.py:34] - ADF Result [Synthetic Noise]: stat=-10.0844, p_value=1.1655e-17, used_lag=0/12, nobs=99, crit_5%=-2.8912 -> STATIONARY (Bác bỏ H0)
 [2026-11-18 06:57:07] [INFO] [main.py:239] - 
 ================================================================================
-[2026-11-18 06:57:07] [INFO] [main.py:240] - >>> 🌟 KHỞI CHẠY TOÀN BỘ LAB 2: 1. ARIMA (a10) TRƯỚC  ->  2. SARIMA (AirPassengers) SAU <<<
+[2026-11-18 06:57:07] [INFO] [main.py:240] - >>> KHỞI CHẠY TOÀN BỘ LAB 2: 1. ARIMA (a10) TRƯỚC  ->  2. SARIMA (AirPassengers) SAU <<<
 [2026-11-18 06:57:07] [INFO] [main.py:241] - ================================================================================
 
 [2026-11-18 06:57:07] [INFO] [main.py:42] - 
 ################################################################################
-[2026-11-18 06:57:07] [INFO] [main.py:43] - # 🚀 [BÀI TOÁN 1/2]: MÔ HÌNH HÓA ARIMA — DOANH SỐ THUỐC ÚC (A10)
+[2026-11-18 06:57:07] [INFO] [main.py:43] - # [BÀI TOÁN 1/2]: MÔ HÌNH HÓA ARIMA — DOANH SỐ THUỐC ÚC (A10)
 [2026-11-18 06:57:07] [INFO] [main.py:44] - # • Loại mô hình    : ARIMA[1, 1, 1] [Phi mùa vụ]
 [2026-11-18 06:57:07] [INFO] [main.py:45] - # • File cấu hình   : lab2/configs/arima_a10.yaml
 [2026-11-18 06:57:07] [INFO] [main.py:46] - # • File dữ liệu thô: lab2/data/raw/a10.csv
@@ -2374,16 +2374,16 @@ BIC (Phạt số tham số)      | 591.73       | 591.73       |    +0.00 pts   
 KẾT QUẢ PHÂN XỬ : TỪ CHỐI (REJECTED)
 LÝ DO CHI TIẾT  : Sai số ngoại mẫu tương đương, nhưng Champion tối giản hơn (AIC Champion thấp hơn 0.00).
 ================================================================================
-[2026-11-18 06:57:09] [WARNING] [main.py:191] - 🛑 [CHALLENGER REJECTED] Sai số ngoại mẫu tương đương, nhưng Champion tối giản hơn (AIC Champion thấp hơn 0.00).
+[2026-11-18 06:57:09] [WARNING] [main.py:191] - [CHALLENGER REJECTED] Sai số ngoại mẫu tương đương, nhưng Champion tối giản hơn (AIC Champion thấp hơn 0.00).
 [2026-11-18 06:57:09] [WARNING] [main.py:192] -    Current Champion artifacts preserved in: lab2/artifacts/figures/champions
-[2026-11-18 06:57:09] [INFO] [main.py:193] - 💡 [CHALLENGER DIAGNOSTICS READY] Challenger plots saved in: lab2/artifacts/figures/challengers
+[2026-11-18 06:57:09] [INFO] [main.py:193] - [CHALLENGER DIAGNOSTICS READY] Challenger plots saved in: lab2/artifacts/figures/challengers
 [2026-11-18 06:57:09] [INFO] [main.py:194] -    - Forecast Plot : lab2/artifacts/figures/challengers/a10_arima_baseline_forecast.png
 [2026-11-18 06:57:09] [INFO] [main.py:195] -    - Residuals Plot: lab2/artifacts/figures/challengers/a10_arima_baseline_residuals.png
-[2026-11-18 06:57:09] [INFO] [main.py:196] -    👉 Hãy mở 2 thư mục champions/ và challengers/ để trực tiếp so sánh và tinh chỉnh!
+[2026-11-18 06:57:09] [INFO] [main.py:196] -    Hãy mở 2 thư mục champions/ và challengers/ để trực tiếp so sánh và tinh chỉnh!
 [2026-11-18 06:57:09] [INFO] [tracker.py:46] - [AUDIT TRAIL] Recorded immutable run entry | run_id=55651602 | data_md5=66f06c62d8be4aea653eab499fb42b23
 [2026-11-18 06:57:09] [INFO] [main.py:213] - 
 ################################################################################
-[2026-11-18 06:57:09] [INFO] [main.py:214] - # ✅ [HOÀN TẤT THỰC THI ARIMA]: DOANH SỐ THUỐC ÚC (A10)
+[2026-11-18 06:57:09] [INFO] [main.py:214] - #  [HOÀN TẤT THỰC THI ARIMA]: DOANH SỐ THUỐC ÚC (A10)
 [2026-11-18 06:57:09] [INFO] [main.py:215] - # • Kết quả Gate    : REJECTED_PARSIMONY (TỪ CHỐI CHALLENGER)
 [2026-11-18 06:57:09] [INFO] [main.py:216] - # • Lý do chi tiết  : Sai số ngoại mẫu tương đương, nhưng Champion tối giản hơn (AIC Champion thấp hơn 0.00).
 [2026-11-18 06:57:09] [INFO] [main.py:217] - # • Audit Run ID    : 55651602
@@ -2399,7 +2399,7 @@ LÝ DO CHI TIẾT  : Sai số ngoại mẫu tương đương, nhưng Champion t�
 
 [2026-11-18 06:57:09] [INFO] [main.py:42] - 
 ################################################################################
-[2026-11-18 06:57:09] [INFO] [main.py:43] - # 🚀 [BÀI TOÁN 2/2]: MÔ HÌNH HÓA SARIMA — LƯỢNG HÀNH KHÁCH HÀNG KHÔNG (AIRPASSENGERS)
+[2026-11-18 06:57:09] [INFO] [main.py:43] - # [BÀI TOÁN 2/2]: MÔ HÌNH HÓA SARIMA — LƯỢNG HÀNH KHÁCH HÀNG KHÔNG (AIRPASSENGERS)
 [2026-11-18 06:57:09] [INFO] [main.py:44] - # • Loại mô hình    : SARIMAX[0, 1, 1] [0, 1, 1, 12]
 [2026-11-18 06:57:09] [INFO] [main.py:45] - # • File cấu hình   : lab2/configs/sarima_airpassengers.yaml
 [2026-11-18 06:57:09] [INFO] [main.py:46] - # • File dữ liệu thô: lab2/data/raw/AirPassengers.csv
@@ -2508,16 +2508,16 @@ BIC (Phạt số tham số)      | -316.32      | -316.32      |    +0.00 pts   
 KẾT QUẢ PHÂN XỬ : TỪ CHỐI (REJECTED)
 LÝ DO CHI TIẾT  : Sai số ngoại mẫu tương đương, nhưng Champion tối giản hơn (AIC Champion thấp hơn 0.00).
 ================================================================================
-[2026-11-18 06:57:13] [WARNING] [main.py:191] - 🛑 [CHALLENGER REJECTED] Sai số ngoại mẫu tương đương, nhưng Champion tối giản hơn (AIC Champion thấp hơn 0.00).
+[2026-11-18 06:57:13] [WARNING] [main.py:191] - [CHALLENGER REJECTED] Sai số ngoại mẫu tương đương, nhưng Champion tối giản hơn (AIC Champion thấp hơn 0.00).
 [2026-11-18 06:57:13] [WARNING] [main.py:192] -    Current Champion artifacts preserved in: lab2/artifacts/figures/champions
-[2026-11-18 06:57:13] [INFO] [main.py:193] - 💡 [CHALLENGER DIAGNOSTICS READY] Challenger plots saved in: lab2/artifacts/figures/challengers
+[2026-11-18 06:57:13] [INFO] [main.py:193] - [CHALLENGER DIAGNOSTICS READY] Challenger plots saved in: lab2/artifacts/figures/challengers
 [2026-11-18 06:57:13] [INFO] [main.py:194] -    - Forecast Plot : lab2/artifacts/figures/challengers/airpassengers_sarima_forecast.png
 [2026-11-18 06:57:13] [INFO] [main.py:195] -    - Residuals Plot: lab2/artifacts/figures/challengers/airpassengers_sarima_residuals.png
-[2026-11-18 06:57:13] [INFO] [main.py:196] -    👉 Hãy mở 2 thư mục champions/ và challengers/ để trực tiếp so sánh và tinh chỉnh!
+[2026-11-18 06:57:13] [INFO] [main.py:196] -    Hãy mở 2 thư mục champions/ và challengers/ để trực tiếp so sánh và tinh chỉnh!
 [2026-11-18 06:57:13] [INFO] [tracker.py:46] - [AUDIT TRAIL] Recorded immutable run entry | run_id=7ed2d2b2 | data_md5=558a08bfda3955c8506436677352f7b8
 [2026-11-18 06:57:13] [INFO] [main.py:213] - 
 ################################################################################
-[2026-11-18 06:57:13] [INFO] [main.py:214] - # ✅ [HOÀN TẤT THỰC THI SARIMA]: LƯỢNG HÀNH KHÁCH HÀNG KHÔNG (AIRPASSENGERS)
+[2026-11-18 06:57:13] [INFO] [main.py:214] - # [HOÀN TẤT THỰC THI SARIMA]: LƯỢNG HÀNH KHÁCH HÀNG KHÔNG (AIRPASSENGERS)
 [2026-11-18 06:57:13] [INFO] [main.py:215] - # • Kết quả Gate    : REJECTED_PARSIMONY (TỪ CHỐI CHALLENGER)
 [2026-11-18 06:57:13] [INFO] [main.py:216] - # • Lý do chi tiết  : Sai số ngoại mẫu tương đương, nhưng Champion tối giản hơn (AIC Champion thấp hơn 0.00).
 [2026-11-18 06:57:13] [INFO] [main.py:217] - # • Audit Run ID    : 7ed2d2b2

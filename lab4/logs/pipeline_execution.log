@@ -1,0 +1,118 @@
+2026-11-25 14:17:42 [INFO] [Multivariate_TS_Pipeline] ===========================================================================
+2026-11-25 14:17:42 [INFO] [Multivariate_TS_Pipeline] BẮT ĐẦU CHẠY PIPELINE LAB 4: DỰ BÁO CHUỖI THỜI GIAN ĐA BIẾN (LOAD + WEATHER)
+2026-11-25 14:17:42 [INFO] [Multivariate_TS_Pipeline] ===========================================================================
+2026-11-25 14:17:42 [INFO] [Multivariate_TS_Pipeline] Checksum dữ liệu gốc (MD5): fc6b37d06386090c51bef91ba1cc4dd0
+2026-11-25 14:17:42 [INFO] [Multivariate_TS_Pipeline] Bắt đầu đọc dữ liệu từ: lab4/data/raw/electricity_weather_hourly.csv
+2026-11-25 14:17:42 [INFO] [Multivariate_TS_Pipeline] Dữ liệu hoàn toàn sạch, không có mốc khuyết (0 missing values).
+2026-11-25 14:17:42 [INFO] [Multivariate_TS_Pipeline] Đã lưu dữ liệu tiền xử lý tại: lab4/data/processed/electricity_weather_clean.csv
+2026-11-25 14:17:42 [INFO] [Multivariate_TS_Pipeline] Kích thước dữ liệu đa biến: 8,736 dòng, 4 cột
+2026-11-25 14:17:42 [INFO] [Multivariate_TS_Pipeline] Tạo và lưu biểu đồ EDA vào: lab4/artifacts/figures
+2026-11-25 14:17:43 [INFO] [Multivariate_TS_Pipeline] Phân chia thời gian (Không shuffle):
+2026-11-25 14:17:43 [INFO] [Multivariate_TS_Pipeline]  - Train      : 6,115 dòng (2017-01-01 00:00:00 -> 2017-09-12 18:00:00)
+2026-11-25 14:17:43 [INFO] [Multivariate_TS_Pipeline]  - Validation : 1,310 dòng (2017-09-12 19:00:00 -> 2017-11-06 08:00:00)
+2026-11-25 14:17:43 [INFO] [Multivariate_TS_Pipeline]  - Test       : 1,311 dòng (2017-11-06 09:00:00 -> 2017-12-30 23:00:00)
+2026-11-25 14:17:43 [INFO] [Multivariate_TS_Pipeline] Chuẩn hóa toàn bộ 4 biến bằng StandardScaler (fit trên tập Train)...
+2026-11-25 14:17:43 [INFO] [Multivariate_TS_Pipeline] Trích xuất đặc trưng cho XGBoost (Cửa sổ trễ L=24, 96 lags + rolling)...
+2026-11-25 14:17:43 [INFO] [Multivariate_TS_Pipeline] Đóng gói Tensor 3D cho LSTM: (N, 24, 4)...
+2026-11-25 14:17:43 [INFO] [Multivariate_TS_Pipeline] --------------------------------------------------
+2026-11-25 14:17:43 [INFO] [Multivariate_TS_Pipeline] HUẤN LUYỆN MÔ HÌNH 1: VAR (Vector Autoregression)...
+2026-11-25 14:17:43 [INFO] [Multivariate_TS_Pipeline] ADF test [load]: ADF=-4.8271, p-value=4.8244e-05 -> DỪNG
+2026-11-25 14:17:44 [INFO] [Multivariate_TS_Pipeline] ADF test [temperature]: ADF=-2.4740, p-value=1.2194e-01 -> KHÔNG DỪNG
+2026-11-25 14:17:44 [INFO] [Multivariate_TS_Pipeline] ADF test [humidity]: ADF=-8.3883, p-value=2.4047e-13 -> DỪNG
+2026-11-25 14:17:44 [INFO] [Multivariate_TS_Pipeline] ADF test [wind_speed]: ADF=-5.4006, p-value=3.3782e-06 -> DỪNG
+2026-11-25 14:17:44 [INFO] [Multivariate_TS_Pipeline] Chuỗi không dừng -> Tiến hành lấy sai phân bậc 1 (d=1) cho mô hình VAR.
+2026-11-25 14:17:45 [INFO] [Multivariate_TS_Pipeline] Bậc trễ tối ưu được chọn theo AIC: p = 24
+2026-11-25 14:18:21 [INFO] [Multivariate_TS_Pipeline] ===========================================================================
+2026-11-25 14:18:21 [INFO] [Multivariate_TS_Pipeline] BẮT ĐẦU CHẠY PIPELINE LAB 4: DỰ BÁO CHUỖI THỜI GIAN ĐA BIẾN (LOAD + WEATHER)
+2026-11-25 14:18:21 [INFO] [Multivariate_TS_Pipeline] ===========================================================================
+2026-11-25 14:18:21 [INFO] [Multivariate_TS_Pipeline] Checksum dữ liệu gốc (MD5): fc6b37d06386090c51bef91ba1cc4dd0
+2026-11-25 14:18:21 [INFO] [Multivariate_TS_Pipeline] Bắt đầu đọc dữ liệu từ: lab4/data/raw/electricity_weather_hourly.csv
+2026-11-25 14:18:21 [INFO] [Multivariate_TS_Pipeline] Dữ liệu hoàn toàn sạch, không có mốc khuyết (0 missing values).
+2026-11-25 14:18:21 [INFO] [Multivariate_TS_Pipeline] Đã lưu dữ liệu tiền xử lý tại: lab4/data/processed/electricity_weather_clean.csv
+2026-11-25 14:18:21 [INFO] [Multivariate_TS_Pipeline] Kích thước dữ liệu đa biến: 8,736 dòng, 4 cột
+2026-11-25 14:18:21 [INFO] [Multivariate_TS_Pipeline] Tạo và lưu biểu đồ EDA vào: lab4/artifacts/figures
+2026-11-25 14:18:22 [INFO] [Multivariate_TS_Pipeline] Phân chia thời gian (Không shuffle):
+2026-11-25 14:18:22 [INFO] [Multivariate_TS_Pipeline]  - Train      : 6,115 dòng (2017-01-01 00:00:00 -> 2017-09-12 18:00:00)
+2026-11-25 14:18:22 [INFO] [Multivariate_TS_Pipeline]  - Validation : 1,310 dòng (2017-09-12 19:00:00 -> 2017-11-06 08:00:00)
+2026-11-25 14:18:22 [INFO] [Multivariate_TS_Pipeline]  - Test       : 1,311 dòng (2017-11-06 09:00:00 -> 2017-12-30 23:00:00)
+2026-11-25 14:18:22 [INFO] [Multivariate_TS_Pipeline] Chuẩn hóa toàn bộ 4 biến bằng StandardScaler (fit trên tập Train)...
+2026-11-25 14:18:22 [INFO] [Multivariate_TS_Pipeline] Trích xuất đặc trưng cho XGBoost (Cửa sổ trễ L=24, 96 lags + rolling)...
+2026-11-25 14:18:22 [INFO] [Multivariate_TS_Pipeline] Đóng gói Tensor 3D cho LSTM: (N, 24, 4)...
+2026-11-25 14:18:22 [INFO] [Multivariate_TS_Pipeline] --------------------------------------------------
+2026-11-25 14:18:22 [INFO] [Multivariate_TS_Pipeline] HUẤN LUYỆN MÔ HÌNH 1: VAR (Vector Autoregression)...
+2026-11-25 14:18:22 [INFO] [Multivariate_TS_Pipeline] ADF test [load]: ADF=-4.8271, p-value=4.8244e-05 -> DỪNG
+2026-11-25 14:18:23 [INFO] [Multivariate_TS_Pipeline] ADF test [temperature]: ADF=-2.4740, p-value=1.2194e-01 -> KHÔNG DỪNG
+2026-11-25 14:18:23 [INFO] [Multivariate_TS_Pipeline] ADF test [humidity]: ADF=-8.3883, p-value=2.4047e-13 -> DỪNG
+2026-11-25 14:18:23 [INFO] [Multivariate_TS_Pipeline] ADF test [wind_speed]: ADF=-5.4006, p-value=3.3782e-06 -> DỪNG
+2026-11-25 14:18:23 [INFO] [Multivariate_TS_Pipeline] Chuỗi không dừng -> Tiến hành lấy sai phân bậc 1 (d=1) cho mô hình VAR.
+2026-11-25 14:18:24 [INFO] [Multivariate_TS_Pipeline] Bậc trễ tối ưu được chọn theo AIC: p = 24
+2026-11-25 14:18:24 [INFO] [Multivariate_TS_Pipeline] --------------------------------------------------
+2026-11-25 14:18:24 [INFO] [Multivariate_TS_Pipeline] HUẤN LUYỆN MÔ HÌNH 2: XGBoost Regressor...
+2026-11-25 14:18:24 [INFO] [Multivariate_TS_Pipeline] Bắt đầu huấn luyện XGBoost (6,091 mẫu Train, 1,286 mẫu Val, 99 đặc trưng)...
+2026-11-25 14:18:27 [INFO] [Multivariate_TS_Pipeline] Hoàn thành huấn luyện XGBoost. Best iteration: 252
+2026-11-25 14:18:27 [INFO] [Multivariate_TS_Pipeline] --------------------------------------------------
+2026-11-25 14:18:27 [INFO] [Multivariate_TS_Pipeline] HUẤN LUYỆN MÔ HÌNH 3: LSTM Deep Learning...
+2026-11-25 14:18:28 [INFO] [Multivariate_TS_Pipeline] Bắt đầu huấn luyện LSTM trên cpu (Arch: LSTM(64)->LSTM(32)->Dense(1))...
+2026-11-25 14:18:28 [INFO] [Multivariate_TS_Pipeline] Epoch  1/50 - Train MSE: 0.37317 | Val MSE: 0.18588
+2026-11-25 14:18:31 [INFO] [Multivariate_TS_Pipeline] Epoch  5/50 - Train MSE: 0.08531 | Val MSE: 0.06259
+2026-11-25 14:18:34 [INFO] [Multivariate_TS_Pipeline] Epoch 10/50 - Train MSE: 0.02726 | Val MSE: 0.02416
+2026-11-25 14:18:37 [INFO] [Multivariate_TS_Pipeline] Epoch 15/50 - Train MSE: 0.02250 | Val MSE: 0.02232
+2026-11-25 14:18:40 [INFO] [Multivariate_TS_Pipeline] Epoch 20/50 - Train MSE: 0.02013 | Val MSE: 0.02229
+2026-11-25 14:18:42 [INFO] [Multivariate_TS_Pipeline] Epoch 25/50 - Train MSE: 0.01914 | Val MSE: 0.02436
+2026-11-25 14:18:44 [INFO] [Multivariate_TS_Pipeline] Early stopping kích hoạt tại epoch 28. Best Val Loss: 0.02177
+2026-11-25 14:18:44 [INFO] [Multivariate_TS_Pipeline] =======================================================
+2026-11-25 14:18:44 [INFO] [Multivariate_TS_Pipeline] TIẾN HÀNH ĐÁNH GIÁ VÀ SO CHUẨN TRÊN TẬP TEST:
+2026-11-25 14:18:44 [INFO] [Multivariate_TS_Pipeline] =======================================================
+2026-11-25 14:18:44 [INFO] [Multivariate_TS_Pipeline] Kết quả kiểm thử [VAR (Statistical)]: RMSE=641.15 kW, MAE=443.01 kW, MAPE=1.57%
+2026-11-25 14:18:44 [INFO] [Multivariate_TS_Pipeline] Kết quả kiểm thử [XGBoost (ML)]: RMSE=970.12 kW, MAE=683.33 kW, MAPE=2.40%
+2026-11-25 14:18:44 [INFO] [Multivariate_TS_Pipeline] Kết quả kiểm thử [LSTM (Deep Learning)]: RMSE=1356.93 kW, MAE=961.10 kW, MAPE=3.59%
+2026-11-25 14:18:44 [INFO] [Multivariate_TS_Pipeline] 
+=================================================================
+2026-11-25 14:18:44 [INFO] [Multivariate_TS_Pipeline] BẢNG SO CHUẨN HIỆU NĂNG 3 MÔ HÌNH TRÊN TẬP TEST (Thang đo kW):
+2026-11-25 14:18:44 [INFO] [Multivariate_TS_Pipeline] =================================================================
+2026-11-25 14:18:44 [INFO] [Multivariate_TS_Pipeline]  -> VAR (Statistical)      | RMSE:   641.15 kW | MAE:   443.01 kW | MAPE:  1.57%
+2026-11-25 14:18:44 [INFO] [Multivariate_TS_Pipeline]  -> XGBoost (ML)           | RMSE:   970.12 kW | MAE:   683.33 kW | MAPE:  2.40%
+2026-11-25 14:18:44 [INFO] [Multivariate_TS_Pipeline]  -> LSTM (Deep Learning)   | RMSE:  1356.93 kW | MAE:   961.10 kW | MAPE:  3.59%
+2026-11-25 14:18:44 [INFO] [Multivariate_TS_Pipeline] =================================================================
+2026-11-25 14:18:44 [INFO] [Multivariate_TS_Pipeline] Đã lưu kết quả đánh giá tại: lab4/artifacts/metrics/benchmark_metrics.json
+2026-11-25 14:18:44 [INFO] [Multivariate_TS_Pipeline] Tạo các biểu đồ so sánh kết quả và phân tích...
+2026-11-25 14:18:46 [INFO] [Multivariate_TS_Pipeline] ===========================================================================
+2026-11-25 14:18:46 [INFO] [Multivariate_TS_Pipeline] PIPELINE LAB 4 HOÀN TẤT THÀNH CÔNG VÀ CHUẨN XÁC!
+2026-11-25 14:18:46 [INFO] [Multivariate_TS_Pipeline] ===========================================================================
+2026-11-25 14:21:32 [INFO] [Multivariate_TS_Pipeline] ===========================================================================
+2026-11-25 14:21:32 [INFO] [Multivariate_TS_Pipeline] BẮT ĐẦU CHẠY PIPELINE LAB 4: DỰ BÁO CHUỖI THỜI GIAN ĐA BIẾN (LOAD + WEATHER)
+2026-11-25 14:21:32 [INFO] [Multivariate_TS_Pipeline] ===========================================================================
+2026-11-25 14:21:32 [INFO] [Multivariate_TS_Pipeline] Checksum dữ liệu gốc (MD5): fc6b37d06386090c51bef91ba1cc4dd0
+2026-11-25 14:21:32 [INFO] [Multivariate_TS_Pipeline] Bắt đầu đọc dữ liệu từ: lab4/data/raw/electricity_weather_hourly.csv
+2026-11-25 14:21:32 [INFO] [Multivariate_TS_Pipeline] Dữ liệu hoàn toàn sạch, không có mốc khuyết (0 missing values).
+2026-11-25 14:21:32 [INFO] [Multivariate_TS_Pipeline] Đã lưu dữ liệu tiền xử lý tại: lab4/data/processed/electricity_weather_clean.csv
+2026-11-25 14:21:32 [INFO] [Multivariate_TS_Pipeline] Kích thước dữ liệu đa biến: 8,736 dòng, 4 cột
+2026-11-25 14:21:32 [INFO] [Multivariate_TS_Pipeline] Tạo và lưu biểu đồ EDA vào: lab4/artifacts/figures
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline] Phân chia thời gian (Không shuffle):
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline]  - Train      : 6,115 dòng (2017-01-01 00:00:00 -> 2017-09-12 18:00:00)
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline]  - Validation : 1,310 dòng (2017-09-12 19:00:00 -> 2017-11-06 08:00:00)
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline]  - Test       : 1,311 dòng (2017-11-06 09:00:00 -> 2017-12-30 23:00:00)
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline] Chuẩn hóa toàn bộ 4 biến bằng StandardScaler (fit trên tập Train)...
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline] Trích xuất đặc trưng cho XGBoost (Cửa sổ trễ L=24, 96 lags + rolling)...
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline] Đóng gói Tensor 3D cho LSTM: (N, 24, 4)...
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline] Chế độ --skip-train kích hoạt. Nạp mô hình từ artifacts...
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline] Đã nạp thành công 3 checkpoint mô hình!
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline] =======================================================
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline] TIẾN HÀNH ĐÁNH GIÁ VÀ SO CHUẨN TRÊN TẬP TEST:
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline] =======================================================
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline] Kết quả kiểm thử [VAR (Statistical)]: RMSE=641.15 kW, MAE=443.01 kW, MAPE=1.57%
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline] Kết quả kiểm thử [XGBoost (ML)]: RMSE=970.12 kW, MAE=683.33 kW, MAPE=2.40%
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline] Kết quả kiểm thử [LSTM (Deep Learning)]: RMSE=1356.93 kW, MAE=961.10 kW, MAPE=3.59%
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline] 
+=================================================================
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline] BẢNG SO CHUẨN HIỆU NĂNG 3 MÔ HÌNH TRÊN TẬP TEST (Thang đo kW):
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline] =================================================================
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline]  -> VAR (Statistical)      | RMSE:   641.15 kW | MAE:   443.01 kW | MAPE:  1.57%
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline]  -> XGBoost (ML)           | RMSE:   970.12 kW | MAE:   683.33 kW | MAPE:  2.40%
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline]  -> LSTM (Deep Learning)   | RMSE:  1356.93 kW | MAE:   961.10 kW | MAPE:  3.59%
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline] =================================================================
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline] Đã lưu kết quả đánh giá tại: lab4/artifacts/metrics/benchmark_metrics.json
+2026-11-25 14:21:33 [INFO] [Multivariate_TS_Pipeline] Tạo các biểu đồ so sánh kết quả và phân tích...
+2026-11-25 14:21:34 [INFO] [Multivariate_TS_Pipeline] ===========================================================================
+2026-11-25 14:21:34 [INFO] [Multivariate_TS_Pipeline] PIPELINE LAB 4 HOÀN TẤT THÀNH CÔNG VÀ CHUẨN XÁC!
+2026-11-25 14:21:34 [INFO] [Multivariate_TS_Pipeline] ===========================================================================

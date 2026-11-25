@@ -1,0 +1,56 @@
+project:
+  name: "lab4_multivariate_forecasting"
+  version: "1.0.0"
+  description: "Multivariate Time Series Forecasting: Electricity Load + Weather (VAR, XGBoost, LSTM)"
+
+data:
+  raw_path: "lab4/data/raw/electricity_weather_hourly.csv"
+  processed_path: "lab4/data/processed/electricity_weather_clean.csv"
+  target_column: "load"
+  feature_columns:
+    - "load"
+    - "temperature"
+    - "humidity"
+    - "wind_speed"
+  freq: "1h"
+
+split:
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+  shuffle: false
+
+feature_engineering:
+  lag_window: 24
+  rolling_mean_window: 6
+  rolling_std_window: 24
+
+models:
+  var:
+    maxlags: 24
+    ic: "aic"
+  xgboost:
+    n_estimators: 300
+    learning_rate: 0.03
+    max_depth: 6
+    subsample: 0.8
+    colsample_bytree: 0.8
+    early_stopping_rounds: 30
+    random_state: 42
+  lstm:
+    input_size: 4
+    hidden_dim1: 64
+    hidden_dim2: 32
+    output_dim: 1
+    num_epochs: 50
+    batch_size: 32
+    learning_rate: 0.001
+    early_stopping_patience: 10
+    random_state: 42
+
+outputs:
+  models_dir: "lab4/artifacts/models"
+  metrics_dir: "lab4/artifacts/metrics"
+  figures_dir: "lab4/artifacts/figures"
+  logs_dir: "lab4/logs"
+  audit_file: "lab4/logs/audit_trail.jsonl"

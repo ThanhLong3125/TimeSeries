@@ -102,8 +102,33 @@
 
 ---
 
-## 🎙️ PHẦN 4: KHÁM PHÁ QUÁ TRÌNH CỦA CẢ 3 MÔ HÌNH TRƯỚC KHI ĐÁNH GIÁ (07:00 – 10:00)
+## 🎙️ PHẦN 4: TỔNG QUÁT Ý NGHĨA CỦA 3 MÔ HÌNH ĐƯỢC CHỌN & KHÁM PHÁ QUÁ TRÌNH HUẤN LUYỆN (07:00 – 10:30)
 *(Trình chiếu lần lượt **Mục 6 (VAR)**, **Mục 7 (XGBoost)** và **Mục 8 (LSTM)** trên Notebook)*
+
+### 4.0. Tổng quát Ý nghĩa & Lý do lựa chọn bộ 3 Mô hình (VAR vs XGBoost vs LSTM)
+> "Trước khi đi vào từng mô hình cụ thể ở Mục 6, 7 và 8, em xin trình bày **ý nghĩa tổng quát tại sao bài thực hành này lại chọn đúng bộ 3 mô hình VAR, XGBoost và LSTM**:
+>
+> Bộ 3 mô hình này không được chọn ngẫu nhiên, mà chúng đại diện cho **3 trường phái (3 hệ tư tưởng) tiến hóa kế tiếp nhau** trong lịch sử dự báo chuỗi thời gian đa biến:
+>
+> 1. **Trường phái Thống kê Kinh tế lượng — VAR (Vector Autoregression):**
+>    - **Ý nghĩa cốt lõi:** Là mô hình **chuẩn cơ sở tuyến tính (Linear Statistical Baseline)**. VAR không phân biệt cứng nhắc đâu là biến đầu vào, đâu là biến đầu ra, mà coi cả 4 biến $[load, temp, humidity, wind]$ là một **hệ thống tương tác hai chiều đồng thời**, nơi mỗi biến ở hiện tại là tổ hợp tuyến tính của chính nó và các biến khác trong $p$ giờ quá khứ: $X_t = c + \sum_{i=1}^p A_i X_{t-i} + \varepsilon_t$.
+>    - **Vai trò trong bài toán:** Dùng để kiểm chứng xem **chỉ với giả định tương quan tuyến tính và tính dừng toán học**, mô hình thống kê cổ điển có thể giải quyết bài toán phụ tải điện tốt đến mức nào.
+>
+> 2. **Trường phái Học máy Dạng bảng — XGBoost (Extreme Gradient Boosting Trees):**
+>    - **Ý nghĩa cốt lõi:** Đại diện cho đỉnh cao của **Machine Learning phi tuyến dựa trên cây quyết định (Tree-based Ensemble)**. XGBoost chuyển hóa bài toán chuỗi thời gian thành bài toán **Hồi quy có giám sát trên bảng dữ liệu phẳng 2D** ($99$ đặc trưng), sử dụng hàng trăm cây quyết định nối tiếp nhau để học phần dư sai số.
+>    - **Vai trò trong bài toán:** Khắc phục điểm yếu tuyến tính của VAR bằng cách tự động tìm ra các **ngưỡng chia phi tuyến (Threshold Rules)** — ví dụ ngưỡng nhiệt độ bật điều hòa — và học sự **tương tác chéo đa biến** (nhiệt độ $\times$ độ ẩm $\times$ xu hướng tải) mà không cần giả định dữ liệu phải dừng.
+>
+> 3. **Trường phái Học sâu Tuần tự — LSTM (Long Short-Term Memory Neural Network):**
+>    - **Ý nghĩa cốt lõi:** Đại diện cho **Deep Learning biểu diễn chuỗi tuần tự (Sequential Representation Learning)**. Thay vì đập phẳng thời gian thành các cột rời rạc như XGBoost, LSTM giữ nguyên khối **Tensor 3D $(N, 24, 4)$** và dùng cơ chế **3 cổng nhớ (Forget, Input, Output Gate)** cùng đường truyền trạng thái tế bào $c_t$ để cho thông tin chảy liên tục từ giờ $t-24$ đến giờ $t-1$.
+>    - **Vai trò trong bài toán:** Tự động trích xuất đặc trưng động học và hình thái chu kỳ ngày-đêm (End-to-End) trực tiếp từ dữ liệu thô mà không cần con người phải thiết kế các biến `rolling mean`, `std` hay `trend` thủ công.
+>
+> | Trường phái | Mô hình đại diện | Bản chất toán học & Cơ chế học | Yêu cầu dữ liệu đầu vào | Điểm mạnh đặc trưng |
+> | :--- | :---: | :--- | :---: | :--- |
+> | **1. Thống kê (Statistical)** | **VAR** | Hệ phương trình tự hồi quy tuyến tính đa biến trên chuỗi sai phân dừng | Ma trận chuỗi dừng 4 biến $\Delta X_t \in \mathbb{R}^{T \times 4}$ | Cực nhanh, tối ưu cho dự báo tuyến tính 1 bước ngắn hạn ($t+1$) |
+> | **2. Học máy (Machine Learning)** | **XGBoost** | Quần thể cây quyết định tăng cường Gradient Boosting cắt ngưỡng phi tuyến | Bảng phẳng 2D $(N, 99)$ kèm Feature Engineering thủ công | Bắt đỉnh nhọn & ngưỡng thời tiết phi tuyến xuất sắc, giải thích được Feature Importance |
+> | **3. Học sâu (Deep Learning)** | **LSTM** | Mạng nơ-ron hồi quy có cổng nhớ lưu giữ trạng thái dài-ngắn hạn qua thời gian | Khối Tensor 3D $(N, 24, 4)$ giữ nguyên thứ tự thời gian | Học tự động (End-to-End) quy luật sóng chu kỳ mượt mà, dễ mở rộng lên bài toán đồ thị lớn |
+>
+> Sau đây, em xin đi vào quá trình huấn luyện và biểu đồ chẩn đoán của từng mô hình."
 
 ### 4.1. Quá trình của Mô hình 1 – VAR (Statistical Baseline — Mục 6)
 > "*(Chỉ vào bảng ADF và 2 biểu đồ của **Mục 6**)*  
